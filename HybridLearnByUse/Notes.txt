@@ -1,0 +1,23 @@
+Hybrid Learn By Use - Action Skills 7DTD XML mod.
+JoeSloeMoe
+
+1.0.1  11th Feb 2024
+
+Hybrid Learn By Use Action Skills. Increase half of all Perk Damage, Stamina, Harvesting etc. values by using tools and weapons. Upgrade the other half of the stats increases using the Perk Tree as normal. 
+Receive a bonus skill point when each Perk Skill maxes at level 50.
+Recommend starting a new game.
+
+Currently applies to the tools and weapons for the following Perks:
+Perception: DeadEye, SpearMaster, Salvage
+Strength: Boomstick, PummelPete, SkullCrusher, Miner69r/Motherload.
+Fortitude: Brawler, MachineGunner
+Agility: Archery, Gunslinger, DeapCuts
+Intellect: Electrocutioner, Robotics
+
+This modlet comes from the Survival No Trader mod. https://community.7daystodie.com/topic/34585-survival-no-trader/ 
+
+The code is free to use license. It is based on the Action Skill levelling algorithm from Khaine in the Darkness Falls mod://community.7daystodie.com/topic/4941-darkness-falls-they-mostly-come-out-at-night/ 
+Please acknowledge Khaine's work if you reuse the code.
+
+
+//// end 1.0.1 /////
