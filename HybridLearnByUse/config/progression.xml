@@ -379,7 +379,7 @@
 			<effect_group>
 				<requirement name="HoldingItemHasTags" tags="perkMiner69r,perkMotherLode"/>
 				<requirement name="ProgressionLevel" progression_name="lbu_Miner69er" operation="LT" value="50"/>
-					<triggered_effect trigger="onSelfHarvestBlock" action="ModifyCVar" cvar="lbu_Miner69er_XP" operation="add" value="5"/> 
+					<triggered_effect trigger="onSelfHarvestBlock" action="ModifyCVar" cvar="lbu_Miner69er_XP" operation="add" value="4"/> 
 					<!-- add additional damage for destruction-->
 					<triggered_effect trigger="onSelfDestroyedBlock" action="ModifyCVar" cvar="lbu_Miner69er_XP" operation="add" value="10"/> 
 			</effect_group>
