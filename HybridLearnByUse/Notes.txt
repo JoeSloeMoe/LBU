@@ -22,5 +22,5 @@ Please acknowledge Khaine's work if you reuse the code.
 
 //// end 1.0.1 /////
 
-1.1.1 19th Feb 2024
+1.0.2 19th Feb 2024
 - Fixed Learn By Use damage progression bug for Gunslinger.
