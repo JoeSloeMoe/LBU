@@ -586,10 +586,10 @@
 			<!--apply current effect as per level-->
 			<effect_group>
 				<requirement name="HoldingItemHasTags" tags="perkGunslinger"/>
-					<passive_effect name="BlockDamage" operation="perc_add" value="0.1,0.5" level="1,50" tags="perkGunslinger"/>
-					<passive_effect name="EntityDamage" operation="perc_add" value="0.1,.25" level="1,50" tags="perkGunslinger"/>
-					<passive_effect name="RoundsPerMinute" operation="perc_add" value="0.1,0.12" level="1,50" tags="perkGunslinger"/>
-					<passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.1,0.15" level="1,50" tags="perkGunslinger"/>
+					<passive_effect name="BlockDamage" operation="perc_add" value="0.01,0.5" level="1,50" tags="perkGunslinger"/>
+					<passive_effect name="EntityDamage" operation="perc_add" value="0.01,0.25" level="1,50" tags="perkGunslinger"/>
+					<passive_effect name="RoundsPerMinute" operation="perc_add" value="0.01,0.12" level="1,50" tags="perkGunslinger"/>
+					<passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.01,0.15" level="1,50" tags="perkGunslinger"/>
 			</effect_group>
 	
 			<!--apply any level xp gain for damage or kill triggers-->
