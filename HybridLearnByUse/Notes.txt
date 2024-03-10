@@ -1,0 +1,44 @@
+Hybrid Learn By Use - Action Skills 7DTD XML mod.
+JoeSloeMoe
+
+1.0.1  11th Feb 2024
+
+Hybrid Learn By Use Action Skills. Increase half of all Perk Damage, Stamina, Harvesting etc. values by using tools and weapons. Upgrade the other half of the stats increases using the Perk Tree as normal. 
+Receive a bonus skill point when each Perk Skill maxes at level 50.
+Recommend starting a new game.
+
+Currently applies to the tools and weapons for the following Perks:
+Perception: DeadEye, SpearMaster, Salvage
+Strength: Boomstick, PummelPete, SkullCrusher, Miner69r/Motherload.
+Fortitude: Brawler, MachineGunner
+Agility: Archery, Gunslinger, DeapCuts
+Intellect: Electrocutioner, Robotics
+
+This modlet comes from the Survival No Trader mod. https://community.7daystodie.com/topic/34585-survival-no-trader/ 
+
+The code is free to use license. It is based on the Action Skill levelling algorithm from Khaine in the Darkness Falls mod://community.7daystodie.com/topic/4941-darkness-falls-they-mostly-come-out-at-night/ 
+Please acknowledge Khaine's work if you reuse the code.
+
+
+//// end 1.0.1 /////
+
+1.0.2 19th Feb 2024
+- Fixed Learn By Use damage progression bug for Gunslinger.
+
+//// end 1.0.2 /////
+
+
+1.0.3 10th March 2024
+- Fixed syntax error in Localisation file.
+
+- Added Global Config variables so player can easily control the Learn-By-Use leveling curve for all Perks. 
+  See progression.xml, look for the line: "<!--change the values below to change the levelling curve...." for information 
+
+- Added Demolitions Expert to the Learn By Use tree. Molotovs & Timed Charges are slow at increasing level.
+  The best way to increase the Demolitions LBU perk is using grenades/rockets on large groups of zombies.
+
+- Fixed Learn By Use progress error after using Grandpa's Fergit'n Elixir. 
+  After using the Elixir, use any tool or weapon and a buff will restore all Learn By Use Perks' progress over a short period.
+  Progress Level will also be restored when there are any other Perk Level changes e.g. infection side effects. 
+  If you install this version over an existing install/game, you will see a message indicating the progress level is being verified, 
+  this is just your local variables being updated to the latest version.
