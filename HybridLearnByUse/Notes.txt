@@ -24,11 +24,12 @@ Please acknowledge Khaine's work if you reuse the code.
 
 1.0.2 19th Feb 2024
 - Fixed Learn By Use damage progression bug for Gunslinger.
-
+1.0.3 22nd Feb 2024
+- - Fixed: gameevents.xml file was missing from the release package. 
 //// end 1.0.2 /////
 
 
-1.0.3 10th March 2024
+1.0.4 10th March 2024
 - Fixed syntax error in Localisation file.
 
 - Added Global Config variables so player can easily control the Learn-By-Use leveling curve for all Perks. 
