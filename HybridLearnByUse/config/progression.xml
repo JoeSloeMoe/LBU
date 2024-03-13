@@ -558,6 +558,7 @@
 				<requirement name="CVarCompare" cvar="lbu_Miner69er_Lvl" operation="LTE" value="0"/>
 				<requirement name="ProgressionLevel" progression_name="lbu_Miner69er" operation="LTE" value="0"/> 
 					<triggered_effect trigger="onSelfHarvestBlock" action="ModifyCVar" cvar="lbu_Miner69er_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
+					<triggered_effect trigger="onSelfDestroyedBlock" action="ModifyCVar" cvar="lbu_Miner69er_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 			</effect_group>
 			
 			<!--BCK verify ProgressionLevel, backup var should always be equal to ProgessionLevel-->
