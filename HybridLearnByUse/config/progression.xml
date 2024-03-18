@@ -1,7 +1,7 @@
 
 <configs>
 
-	<!-- Everything below this line is Learn-By-Use code -see also Xui/windows.xml, gamevents.xml and localization text-->
+	<!-- Everything below this line is Learn-By-Use code -see also Xui/windows.xml, gamevents.xml, buffs.xml and localization text-->
 	<!--begin Learn by use ALL code-->
 	
 	<insertBefore xpath="/progression/attributes/attribute[@name='attPerception']">
@@ -55,7 +55,7 @@
 			  and the code will restore the ProgressionLevel to the proper value. 
 			  This also means that the player wont see the Perks restored value until they use the Perks weapon or tool etc. 
 			  Code that deals with the backup and restore is marked with BCK in the comments of the code-->
-			  -->
+
 	<append xpath="/progression/perks">
 
 		<!-- begin DeadEye Learn By Use (lbu)-->
@@ -64,10 +64,7 @@
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkDeadEye"/>
-				<requirement name="CVarCompare" cvar="lbu_DeadEye_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_DeadEye_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_DeadEye" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_DeadEye_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_DeadEye_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 			</effect_group>
 			
@@ -90,10 +87,10 @@
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkDeadEye"/>
 				<requirement name="ProgressionLevel" progression_name="lbu_DeadEye" operation="LT" value="50"/>
-					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_DeadEye_XP" operation="add" value="10">
+					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_DeadEye_XP" operation="add" value="8">
 						<requirement name="StatCompareCurrent" target="other" stat="health" operation="GT" value="0"/>
 					</triggered_effect>
-					<triggered_effect trigger="onSelfKilledOther" action="ModifyCVar" cvar="lbu_DeadEye_XP" operation="add" value="24"/> 
+					<triggered_effect trigger="onSelfKilledOther" action="ModifyCVar" cvar="lbu_DeadEye_XP" operation="add" value="20"/> 
 			</effect_group>
 			
 			<!--Increase ProgressLevel if xp greater than value for next level-->
@@ -119,7 +116,7 @@
 		<!-- end begin DeadEye Learn By Use (lbu)-->
 		
 		<!-- begin Demolitions Learn By Use (lbu)-->
-		<!--Note that demolition has to have code for both timed charges/molotovs and grenades/rockets.
+		<!--Note that demolition has to have code for both timed charges and grenades/rockets.
 			They use different triggers so some of the code is repeated twice, once for each trigger ( onSelfExplosionMissEntity, onSelfExplosionDamagedOther).
 			Had to use onSelfExplosionMissEntity as the trigger for timed charges as no other trigger worked. So any use of explosives gives some exp whether it hits a zombie or not
 			*Molotovs WONT continue to trigger the effect (perk level xp gain due to damaging zombies) when a zombie is burning. 
@@ -131,10 +128,7 @@
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkDemolitionsExpert"/>
-				<requirement name="CVarCompare" cvar="lbu_Demolition_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_Demolition_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_Demolition" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_Demolition_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<!--cater for both timed charges and grenades. Only one of these will ever run -->
 					<triggered_effect trigger="onSelfExplosionMissEntity" action="ModifyCVar" cvar="lbu_Demolition_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfExplosionDamagedOther" action="ModifyCVar" cvar="lbu_Demolition_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
@@ -224,10 +218,7 @@
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkJavelinMaster"/>
-				<requirement name="CVarCompare" cvar="lbu_SpearMaster_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_SpearMaster_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_SpearMaster" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_SpearMaster_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_SpearMaster_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 			</effect_group>
 			
@@ -287,12 +278,8 @@
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkSalvageOperations"/>
-				<requirement name="CVarCompare" cvar="lbu_Salvage_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_Salvage_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_Salvage" operation="LTE" value="0"/> 
-					<triggered_effect trigger="onSelfDamagedBlock" action="ModifyCVar" cvar="lbu_Salvage_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>				
-					<requirement name="CVarCompare" cvar="lbu_Salvage_XP" operation="LTE" value="0"/>
+				<requirement name="CVarCompare" cvar="lbu_Salvage_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+						<triggered_effect trigger="onSelfDamagedBlock" action="ModifyCVar" cvar="lbu_Salvage_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>				
 			</effect_group>
 			
 			<!--BCK verify ProgressionLevel, backup var should always be equal to ProgessionLevel-->
@@ -352,10 +339,7 @@
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkBoomstick"/>
-				<requirement name="CVarCompare" cvar="lbu_Boomstick_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_Boomstick_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_Boomstick" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_Boomstick_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Boomstick_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 			</effect_group>
 			
@@ -379,10 +363,10 @@
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkBoomstick"/>
 				<requirement name="ProgressionLevel" progression_name="lbu_Boomstick" operation="LT" value="50"/>
-					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Boomstick_XP" operation="add" value="6">
+					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Boomstick_XP" operation="add" value="5">
 						<requirement name="StatCompareCurrent" target="other" stat="health" operation="GT" value="0"/>
 					</triggered_effect>
-					<triggered_effect trigger="onSelfKilledOther" action="ModifyCVar" cvar="lbu_Boomstick_XP" operation="add" value="14"/> 
+					<triggered_effect trigger="onSelfKilledOther" action="ModifyCVar" cvar="lbu_Boomstick_XP" operation="add" value="12"/> 
 			</effect_group>
 			
 			<!--Increase ProgressLevel if xp greater than value for next level-->
@@ -413,10 +397,7 @@
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkPummelPete"/>
-				<requirement name="CVarCompare" cvar="lbu_PummelPete_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_PummelPete_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_PummelPete" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_PummelPete_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_PummelPete_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_PP_StamIncrement" operation="set" value="0.3"/>
 			</effect_group>
@@ -485,10 +466,7 @@
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkSkullCrusher"/>
-				<requirement name="CVarCompare" cvar="lbu_SkullCrusher_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_SkullCrusher_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_SkullCrusher" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_SkullCrusher_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_SkullCrusher_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_SC_StamIncrement" operation="set" value="0.3"/>
 			</effect_group>
@@ -553,10 +531,7 @@
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkMiner69r,perkMotherLode"/>
-				<requirement name="CVarCompare" cvar="lbu_Miner69er_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_Miner69er_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_Miner69er" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_Miner69er_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfHarvestBlock" action="ModifyCVar" cvar="lbu_Miner69er_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDestroyedBlock" action="ModifyCVar" cvar="lbu_Miner69er_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 			</effect_group>
@@ -571,9 +546,9 @@
 			<!--apply current effect as per level-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkMiner69r,perkMotherLode"/>
-					<passive_effect name="BlockDamage" operation="perc_add" value="0.01,0.75" level="1,50" />
-					<passive_effect name="EntityDamage" operation="perc_add" value="0.01,0.25" level="1,50" />
-					<passive_effect name="HarvestCount" operation="perc_add" value="0.01,0.5" level="1,50" />
+					<passive_effect name="BlockDamage" operation="perc_add" value="0.01,0.75" level="1,50" tags="perkMiner69r"/>
+					<passive_effect name="EntityDamage" operation="perc_add" value="0.01,0.25" level="1,50" tags="perkMiner69r"/>
+					<passive_effect name="HarvestCount" operation="perc_add" value="0.01,0.5" level="1,50" tags="oreWoodHarvest" />
 					<passive_effect name="StaminaLoss" operation="perc_add" value="-.01,-.125" level="1,50"  tags="primary"/>/>
 					<passive_effect name="StaminaLoss" operation="perc_add" value="-.01,-.25" level="1,50" tags="secondary"/>
 			</effect_group>
@@ -618,10 +593,7 @@
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkBrawler"/>
 				<requirement name="!ItemHasTags" tags="perkTurrets"/>
-				<requirement name="CVarCompare" cvar="lbu_Brawler_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_Brawler_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_Brawler" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_Brawler_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Brawler_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Brawler_StamIncrement" operation="set" value="0.3"/>
 			</effect_group>
@@ -691,10 +663,7 @@
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkMachineGunner"/>
-				<requirement name="CVarCompare" cvar="lbu_MachineGunner_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_MachineGunner_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_MachineGunner" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_MachineGunner_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_MachineGunner_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 			</effect_group>
 			
@@ -754,10 +723,7 @@
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkArchery"/>
-				<requirement name="CVarCompare" cvar="lbu_Archery_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_Archery_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_Archery" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_Archery_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Archery_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 			</effect_group>
 			
@@ -817,10 +783,7 @@
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkGunslinger"/>
-				<requirement name="CVarCompare" cvar="lbu_Gunslinger_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_Gunslinger_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_Gunslinger" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_Gunslinger_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Gunslinger_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 			</effect_group>
 			
@@ -879,10 +842,7 @@
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkDeepCuts"/>
-				<requirement name="CVarCompare" cvar="lbu_DeepCuts_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_DeepCuts_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_DeepCuts" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_DeepCuts_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_DeepCuts_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_DCuts_StamIncrement" operation="set" value="0.3"/>
 			</effect_group>
@@ -942,16 +902,46 @@
 		</perk>
 		<!-- end Deap Cuts Learn By Use (lbu)-->
 		
+		
+		<!-- begin HiddenStrike Learn By Use (lbu)-->
+		<perk name="lbu_HiddenStrike" max_level="50" parent="lbu_AgilitySkills" base_skill_point_cost="0" name_key="lbu_HiddenStrikeName" desc_key="lbu_HiddenStrikeDesc" long_desc_key="lbu_HiddenStrikeDesc" icon="ui_game_symbol_sneak_attack">
+
+			<!--initialise if first time-->
+			<effect_group>
+				<requirement name="CVarCompare" cvar="lbu_HiddenStrike_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_HiddenStrike_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
+			</effect_group>
+			
+			<!--BCK verify ProgressionLevel, backup var should always be equal to ProgessionLevel-->
+			<effect_group>
+				<requirement name="!HasBuff" buff="buffVerifyLBU_ProgressLevels"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_HiddenStrike" operation="NotEquals" value="@lbu_HiddenStrike_Lvl"/> 
+					<triggered_effect trigger="onSelfDamagedOther" action="AddBuff" buff="buffVerifyLBU_ProgressLevels"/>				
+			</effect_group>
+			
+			<!--apply current effect as per level-->
+			<effect_group>					
+				<requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1"/>
+				<requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other"/>
+				<requirement name="!ItemHasTags" tags="perkSkullCrusher"/>
+					<passive_effect name="DamageBonus" operation="base_add" value="0.01,2" level="0,50" /> 
+					<passive_effect name="EntityDamage" operation="perc_add" value="0.01,1.5" level="0,50" />
+					
+					<triggered_effect trigger="onSelfDamagedOther" action="AddBuff" buff="buffHiddenStrikeAction"/>
+					<triggered_effect trigger="onSelfKilledOther" action="AddBuff" buff="buffHiddenStrikeAction"/>
+						
+			</effect_group>
+		</perk>
+		<!-- end HiddenStrike Learn By Use (lbu)-->
+		
+	
 		<!-- begin Electrocutioner Learn By Use (lbu)-->
 		<perk name="lbu_Electrocutioner" max_level="50" parent="lbu_IntellectSkills" base_skill_point_cost="0" name_key="lbu_ElectrocutionerName" desc_key="lbu_ElectrocutionerDesc" long_desc_key="lbu_ElectrocutionerDesc" icon="ui_game_symbol_electric_power">
 
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkElectrocutioner"/>
-				<requirement name="CVarCompare" cvar="lbu_Electrocutioner_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_Electrocutioner_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_Electrocutioner" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_Electrocutioner_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Electrocutioner_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Elec_StamIncrement" operation="set" value="0.3"/>
 			</effect_group>
@@ -1017,12 +1007,8 @@
 			<!--initialise if first time-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkTurrets"/>
-				<requirement name="CVarCompare" cvar="lbu_Robotics_XP" operation="LTE" value="0"/>
-				<!--BCK var must be 0 in order to set the initial defaults-->
-				<requirement name="CVarCompare" cvar="lbu_Robotics_Lvl" operation="LTE" value="0"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_Robotics" operation="LTE" value="0"/> 
+				<requirement name="CVarCompare" cvar="lbu_Robotics_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Robotics_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
-					<!--<triggered_effect trigger="onSelfDamagedOther" action="ShowToolbeltMessage" message="Setup Robotics"/>-->
 			</effect_group>
 			
 			<!--BCK verify ProgressionLevel, backup var should always be equal to ProgessionLevel-->
@@ -2199,8 +2185,49 @@
 					<triggered_effect trigger="onSelfSecondaryActionRayHit" action="AddBuff" target="other" buff="buffInjuryBleeding"/>
 			</effect_group>
 		</perk>
-	</insertBefore>
+	</insertBefore>	
 	
+	<insertBefore xpath="/progression/perks/perk[@name='perkFromTheShadows']">	
+		<!-- *** HIDDEN_STRIKE -->
+		<perk name="perkHiddenStrike" parent="skillAgilityStealth" name_key="perkHiddenStrikeName" desc_key="perkHiddenStrikeDesc" icon="ui_game_symbol_sneak_attack">
+			<level_requirements level="1"><requirement name="ProgressionLevel" progression_name="attAgility" operation="GTE" value="1" desc_key="reqAgilityLevel01"/></level_requirements>
+			<level_requirements level="2"><requirement name="ProgressionLevel" progression_name="attAgility" operation="GTE" value="3" desc_key="reqAgilityLevel03"/></level_requirements>
+			<level_requirements level="3"><requirement name="ProgressionLevel" progression_name="attAgility" operation="GTE" value="5" desc_key="reqAgilityLevel05"/></level_requirements>
+			<level_requirements level="4"><requirement name="ProgressionLevel" progression_name="attAgility" operation="GTE" value="7" desc_key="reqAgilityLevel07"/></level_requirements>
+			<level_requirements level="5"><requirement name="ProgressionLevel" progression_name="attAgility" operation="GTE" value="10" desc_key="reqAgilityLevel10"/></level_requirements>
+
+			<effect_group name="regular weapons, sledgehammer"> <!-- blades, bows have item bonuses -->
+				<requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1"/>
+				<requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other"/>
+				<requirement name="!ItemHasTags" tags="perkSkullCrusher"/>
+					<passive_effect name="DamageBonus" operation="base_add" level="0,1,2,3,4,5" value="0.75,1,1.25,1.5,1.75,2"/> <!--For UI-->
+					<passive_effect name="EntityDamage" operation="perc_add" level="0,1,2,3,4,5" value="0.25,0.5,0.75,1,1.25,1.5"/>
+					<!--<passive_effect name="DamageBonus" operation="base_add" level="0,1,2,3,4,5" value="1.5,2,2.5,3,3.5,4"/> --><!--For UI-->
+					<!--<passive_effect name="EntityDamage" operation="perc_add" level="0,1,2,3,4,5" value=".5,1,1.5,2,2.5,3"/>-->
+
+				<effect_description level="1" desc_key="perkHiddenStrikeRank1Desc" long_desc_key="perkHiddenStrikeRank1LongDesc"/>
+				<effect_description level="2" desc_key="perkHiddenStrikeRank2Desc" long_desc_key="perkHiddenStrikeRank2LongDesc"/>
+				<effect_description level="3" desc_key="perkHiddenStrikeRank3Desc" long_desc_key="perkHiddenStrikeRank3LongDesc"/>
+				<effect_description level="4" desc_key="perkHiddenStrikeRank4Desc" long_desc_key="perkHiddenStrikeRank4LongDesc"/>
+				<effect_description level="5" desc_key="perkHiddenStrikeRank5Desc" long_desc_key="perkHiddenStrikeRank5LongDesc"/>
+			</effect_group>
+
+			<effect_group>
+				<!-- Increase the chance to find Urban Combat books until each book is read -->
+				<passive_effect name="LootProb" operation="perc_add" level="1,5" value="2,10" tags="urbanProb">
+					<requirement name="ProgressionLevel" progression_name="perkUrbanCombatComplete" operation="LT" value="1"/>
+				</passive_effect>
+
+				<!-- When all Urban Combat books have been read, set the probability bonus of finding them to 0 -->
+				<passive_effect name="LootProb" operation="perc_add" level="1,5" value="1,1" tags="urbanProb">
+					<requirement name="ProgressionLevel" progression_name="perkUrbanCombatComplete" operation="Equals" value="1"/>
+				</passive_effect>
+			</effect_group>
+		</perk>
+	</insertBefore>
+	<!--END Modify existing Agility perks - halving stat increases per level-->
+
+
 	<!--Modify existing Agility perks - halving stat increases per level-->
 	<insertBefore xpath="/progression/perks/perk[@name='perkFlurryOfIntellect']">
 		<!-- *** ELECTROCUTIONER -->
@@ -2328,6 +2355,7 @@
 		
 
 	<!--end Learn-By-Use ALL code -->
+	
 	
 	</append>
 </configs>

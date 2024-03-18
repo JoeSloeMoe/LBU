@@ -1,12 +1,12 @@
-<configs>	
-	<!--this buff verifies that the players ProgressionLevel is the same as the backup progress level (for each Learn By Use Perk)
-		If a player drinks the forgetin Elixer it resets all Perks. A backup is kept to use this buff to restore after 
-		elixer consumption. To be safe the code verifies they are exactly the same-->
-	<!--Cant read a variable's value into SetProgressionLevel-<lbu_perk_name> (its a 'level' not a 'value') and also
-	    Cant write ProgressionLevel-<lbu_perk_name> to a variable.
-		Because of this a buff is used so that if any ProgressionLevels are different than the backup copy;
-		The buff will iterate over the value until they are equal-->
+<configs>
 	<append xpath="/buffs">
+		<!--this buff verifies that the players ProgressionLevel is the same as the backup progress level (for each Learn By Use Perk)
+			If a player drinks the forgetin Elixer it resets all Perks. A backup is kept to use this buff to restore after 
+			elixer consumption. To be safe the code verifies they are exactly the same-->
+		<!--Cant read a variable's value into SetProgressionLevel-<lbu_perk_name> (its a 'level' not a 'value') and also
+			Cant write ProgressionLevel-<lbu_perk_name> to a variable.
+			Because of this a buff is used so that if any ProgressionLevels are different than the backup copy;
+			The buff will iterate over the value until they are equal-->			
 		<buff name="buffVerifyLBU_ProgressLevels" hidden="true" >
 			<stack_type value="ignore"/>
 			<duration value="0"/>
@@ -33,6 +33,14 @@
 			
 			<!--AGILITY-->
 			<effect_group>			
+			
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="lbu_HiddenStrike" level="1">
+					<requirement name="ProgressionLevel" progression_name="lbu_HiddenStrike" operation="LT" value="@lbu_HiddenStrike_Lvl"/> 
+				</triggered_effect>	
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_HiddenStrike_Lvl" operation="add" value="1">
+					<requirement name="ProgressionLevel" progression_name="lbu_HiddenStrike" operation="GT" value="@lbu_HiddenStrike_Lvl"/> 
+				</triggered_effect>		
+		
 				<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="lbu_DeepCuts" level="1">
 					<requirement name="ProgressionLevel" progression_name="lbu_DeepCuts" operation="LT" value="@lbu_DeepCuts_Lvl"/> 
 				</triggered_effect>	
@@ -149,10 +157,51 @@
 				<requirement name="ProgressionLevel" progression_name="lbu_Archery" operation="EQ" value="@lbu_Archery_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_Gunslinger" operation="EQ" value="@lbu_Gunslinger_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_DeepCuts" operation="EQ" value="@lbu_DeepCuts_Lvl"/> 
+				<requirement name="ProgressionLevel" progression_name="lbu_HiddenStrike" operation="EQ" value="@lbu_HiddenStrike_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_Electrocutioner" operation="EQ" value="@lbu_Electrocutioner_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_Robotics" operation="EQ" value="@lbu_Robotics_Lvl"/> 
 					<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffVerifyLBU_ProgressLevels"/>
 					<triggered_effect trigger="onSelfBuffUpdate" action="ShowToolbeltMessage" message="LEARN BY USE: Progress levels verified!"/>
+			</effect_group>
+		</buff>
+		
+		
+		<!--this buff performs the effects for the Hidden Strike LBU Perk - see progressions.xml
+			The code is different from other Perks because Hidden Strike applies to a more than one weapon/perk (e.g. sneak damage with any range weapon)
+		    The code doesnt differentiate between damage and a kill as the 'stealth kill' trigger only happens once.-->
+		<buff name="buffHiddenStrikeAction" hidden="true" >
+			<stack_type value="ignore"/>
+			<duration value="0"/>
+			
+			<effect_group>
+				<!--apply any level xp gain for damage or kill triggers-->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_HiddenStrike_XP" operation="add" value="6">
+					<requirement name="StatCompareCurrent" target="other" stat="health" operation="GT" value="0"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfKilledOther" action="ModifyCVar" cvar="lbu_HiddenStrike_XP" operation="add" value="16"/> 
+				<!--<triggered_effect trigger="onSelfKilledOther" action="ShowToolbeltMessage" message="Hidden Strike onSelfKilledOther"/>-->
+			</effect_group>
+			
+			<effect_group>
+				<!--Increase ProgressLevel if xp greater than value for next level-->
+				<requirement name="CVarCompare" cvar="lbu_HiddenStrike_XP" operation="GTE" value="@lbu_HiddenStrike_XPIncrement"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_HiddenStrike" operation="LT" value="50"/>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_HiddenStrike_XPIncrement" operation="multiply" value="@lbu_DefaultIncrementIncrease"> 
+						<!--taper off level xp increase at level 47 (xxx_XPIncrement about 4000). xxx_XPIncrement will grow to 4700  without the cap-->
+						<requirement name="ProgressionLevel" progression_name="lbu_HiddenStrike" operation="LTE" value="@lbu_DefaultLevelCap"/>
+					</triggered_effect>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_HiddenStrike_XP" operation="set" value="0"/>
+					<triggered_effect trigger="onSelfBuffStart" action="AddProgressionLevel" progression_name="lbu_HiddenStrike" level="1"/>
+					<!--Upadate BCK var in line with ProgressionLevel progress-->
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_HiddenStrike_Lvl" operation="add" value="1"/> 
+					<triggered_effect trigger="onSelfBuffStart" action="ShowToolbeltMessage" message="Hidden Strike Skill Increased!"/>
+					<!--if max level then give free Skill Point-->
+					<triggered_effect trigger="onSelfBuffStart" action="CallGameEvent" event="lbu_action_give_points">
+						<requirement name="ProgressionLevel" progression_name="lbu_HiddenStrike" operation="EQ" value="50"/>
+					</triggered_effect>
+			</effect_group>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffHiddenStrikeAction"/>
 			</effect_group>
 		</buff>
 	</append>
