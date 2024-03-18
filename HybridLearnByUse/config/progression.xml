@@ -904,6 +904,8 @@
 		
 		
 		<!-- begin HiddenStrike Learn By Use (lbu)-->
+		<!-- Hidden Strike has different code than regular Perks. It applies to all ranged weapons across multiple perks
+			 The main trigger code is only ever trigerred once so a buff is used to wrap all of the confitional code-->
 		<perk name="lbu_HiddenStrike" max_level="50" parent="lbu_AgilitySkills" base_skill_point_cost="0" name_key="lbu_HiddenStrikeName" desc_key="lbu_HiddenStrikeDesc" long_desc_key="lbu_HiddenStrikeDesc" icon="ui_game_symbol_sneak_attack">
 
 			<!--initialise if first time-->
@@ -927,6 +929,8 @@
 					<passive_effect name="DamageBonus" operation="base_add" value="0.01,2" level="0,50" /> 
 					<passive_effect name="EntityDamage" operation="perc_add" value="0.01,1.5" level="0,50" />
 					
+					<!--the above trigger is only every trigerred once where _notAlerted works
+						Use a buff to make sure that all code is run on this single trigger conditional-->
 					<triggered_effect trigger="onSelfDamagedOther" action="AddBuff" buff="buffHiddenStrikeAction"/>
 					<triggered_effect trigger="onSelfKilledOther" action="AddBuff" buff="buffHiddenStrikeAction"/>
 						
