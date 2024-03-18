@@ -168,7 +168,7 @@
 		
 		<!--this buff performs the effects for the Hidden Strike LBU Perk - see progressions.xml
 			The code is different from other Perks because Hidden Strike applies to a more than one weapon/perk (e.g. sneak damage with any range weapon)
-		    The code doesnt differentiate between damage and a kill as the 'stealth kill' trigger only happens once.-->
+		   -->
 		<buff name="buffHiddenStrikeAction" hidden="true" >
 			<stack_type value="ignore"/>
 			<duration value="0"/>
