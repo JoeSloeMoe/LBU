@@ -929,8 +929,14 @@
 					<passive_effect name="DamageBonus" operation="base_add" value="0.01,2" level="0,50" /> 
 					<passive_effect name="EntityDamage" operation="perc_add" value="0.01,1.5" level="0,50" />
 					
-					<!--the above trigger is only every trigerred once where _notAlerted works
-						Use a buff to make sure that all code is run on this single trigger conditional-->
+					<!--the above trigger (_crouching & _notalerted combo) is only ever properly trigerred once. 
+						'_notAlerted' can stay true even after the zombiue is alert. I think this may be because after you have 
+						killed a zombie there may be other zombies that may not altered to you. So if you wound
+						a zombie (getting the 'not alerted' Hidden Strike bonus) and it attacks you while you are still crouching - you will
+						continue getting the 'not alerted' bonus even though the zombie is alerted. 
+						
+						All the code to deal with the HiddenStrike variables is now in a buff so that it all uses The
+						same correct trigger -->
 					<triggered_effect trigger="onSelfDamagedOther" action="AddBuff" buff="buffHiddenStrikeAction"/>
 					<triggered_effect trigger="onSelfKilledOther" action="AddBuff" buff="buffHiddenStrikeAction"/>
 						
