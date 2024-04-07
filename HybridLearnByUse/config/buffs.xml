@@ -1,5 +1,33 @@
 <configs>
 	<append xpath="/buffs">
+		
+		<!--this buff gives out an extra Skill Point if  LearnByUse:lbu_DefaultGiveSkillPoint > 0.
+			If LearnByUse:lbu_DefaultGiveSkillPoint == 0) just play a sound and display 'level max' msg.
+			lbu_DefaultGiveSkillPoint is set in progression.xml and 
+			this buff is called from each Perk when the Perk Level reaches max-->
+		<buff name="buffLBU_GiveProgressSkillPoint" hidden="true" >
+			<stack_type value="ignore"/>
+			<duration value="0"/>
+			<effect_group>
+				<!--if (lbu_DefaultGiveSkillPoint >=0) give free Skill Point-->
+				<triggered_effect trigger="onSelfBuffStart" action="CallGameEvent" event="lbu_action_give_points">
+					<requirement name="CVarCompare" cvar="lbu_DefaultGiveSkillPoint" operation="GTE" value="1"/>
+				</triggered_effect>
+			</effect_group>
+			<effect_group>
+				<!--if (lbu_DefaultGiveSkillPoint ==0) display msg and play sound without skill point-->
+				<triggered_effect trigger="onSelfBuffStart" action="CallGameEvent" event="lbu_action_max_level">
+					<requirement name="CVarCompare" cvar="lbu_DefaultGiveSkillPoint" operation="EQ" value="0"/>
+				</triggered_effect>
+			</effect_group>
+		
+			<effect_group>
+				<!--remove the buff-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffLBU_GiveProgressSkillPoint"/>
+			</effect_group>
+		</buff>
+		
+					
 		<!--this buff verifies that the players ProgressionLevel is the same as the backup progress level (for each Learn By Use Perk)
 			If a player drinks the forgetin Elixer it resets all Perks. A backup is kept to use this buff to restore after 
 			elixer consumption. To be safe the code verifies they are exactly the same-->
@@ -167,19 +195,18 @@
 		
 		
 		<!--this buff performs the effects for the Hidden Strike LBU Perk - see progressions.xml
-			The code is different from other Perks because Hidden Strike applies to a more than one weapon/perk (e.g. sneak damage with any range weapon)
-		   -->
+			The code is different from other Perks because Hidden Strike applies to more than one weapon/perk (e.g. sneak damage with any range weapon)
+		    -->
 		<buff name="buffHiddenStrikeAction" hidden="true" >
 			<stack_type value="ignore"/>
 			<duration value="0"/>
 			
 			<effect_group>
 				<!--apply any level xp gain for damage or kill triggers-->
-				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_HiddenStrike_XP" operation="add" value="6">
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_HiddenStrike_XP" operation="add" value="14">
 					<requirement name="StatCompareCurrent" target="other" stat="health" operation="GT" value="0"/>
 				</triggered_effect>
-				<triggered_effect trigger="onSelfKilledOther" action="ModifyCVar" cvar="lbu_HiddenStrike_XP" operation="add" value="16"/> 
-				<!--<triggered_effect trigger="onSelfKilledOther" action="ShowToolbeltMessage" message="Hidden Strike onSelfKilledOther"/>-->
+				<triggered_effect trigger="onSelfKilledOther" action="ModifyCVar" cvar="lbu_HiddenStrike_XP" operation="add" value="26"/> 
 			</effect_group>
 			
 			<effect_group>

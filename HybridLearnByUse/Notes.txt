@@ -1,17 +1,15 @@
 Hybrid Learn By Use - Action Skills 7DTD XML mod.
 JoeSloeMoe
 
-1.0.1  11th Feb 2024
-
 Hybrid Learn By Use Action Skills. Increase half of all Perk Damage, Stamina, Harvesting etc. values by using tools and weapons. Upgrade the other half of the stats increases using the Perk Tree as normal. 
 Receive a bonus skill point when each Perk Skill maxes at level 50.
 Recommend starting a new game.
 
 Currently applies to the tools and weapons for the following Perks:
-Perception: DeadEye, SpearMaster, Salvage
+Perception: DeadEye, Demolition Expert, SpearMaster, Salvage
 Strength: Boomstick, PummelPete, SkullCrusher, Miner69r/Motherload.
 Fortitude: Brawler, MachineGunner
-Agility: Archery, Gunslinger, DeapCuts
+Agility: Archery, Gunslinger, DeapCuts, Hidden Strike
 Intellect: Electrocutioner, Robotics
 
 This modlet comes from the Survival No Trader mod. https://community.7daystodie.com/topic/34585-survival-no-trader/ 
@@ -20,7 +18,6 @@ The code is free to use license. It is based on the Action Skill levelling algor
 Please acknowledge Khaine's work if you reuse the code.
 
 
-//// end 1.0.1 /////
 
 1.0.2 19th Feb 2024
 - Fixed Learn By Use damage progression bug for Gunslinger.
@@ -28,7 +25,6 @@ Please acknowledge Khaine's work if you reuse the code.
 1.0.3 22nd Feb 2024
 - - Fixed: gameevents.xml file was missing from the release package. 
 
-//// end 1.0.3 /////
 
 
 1.0.4 10th March 2024
@@ -46,6 +42,7 @@ Please acknowledge Khaine's work if you reuse the code.
   If you install this version over an existing install/game, you will see a message indicating the progress level is being verified, 
   this is just your local variables being updated to the latest version.
 
+
 1.0.5 17th March 2024
    - Optimised the Learn By Use Perks initialisation code. Initialisation now only depends on a single variable 
 	  rather than the synchronisation of 3 different variables.
@@ -53,3 +50,13 @@ Please acknowledge Khaine's work if you reuse the code.
    - Fixed issue where the Miner69r/Motherload Perk allowed the harvesting rate to be applied to plants/farming 
      (e.g. shovels could get extra food when used on farm plot plants)
    - Slightly reduced Learn By Use Boomstick xp gain per target hit (shotty can hit multiple targets with a single shell).
+
+
+1.0.6 7th April 2024
+   - Added config setting to turn off giving a free skill point when each Perk's Progress is maxed. (On by default)
+   - Changes to perk level progression speeds:
+			Increased Hidden Strike progression speed. 
+			Increased Dead Eye progression speed. 
+			Slightly increased Archery progression speed. 
+			Slightly decreased Miner69r progression speed. 
+			Decreased for Boomstick as each pellet adds experience.  
