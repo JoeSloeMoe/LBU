@@ -60,3 +60,6 @@ Please acknowledge Khaine's work if you reuse the code.
 			Slightly increased Archery progression speed. 
 			Slightly decreased Miner69r progression speed. 
 			Decreased for Boomstick as each pellet adds experience.  
+			
+1.0.7 13th April 2024
+   - Potential fix for Multiplayer progression 
