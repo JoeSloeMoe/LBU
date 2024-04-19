@@ -63,3 +63,5 @@ Please acknowledge Khaine's work if you reuse the code.
 			
 1.0.7 13th April 2024
    - Potential fix for Multiplayer progression 
+1.0.8 18th April 2024
+   - Linux pathing compatability fix

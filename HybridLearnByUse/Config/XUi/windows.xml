@@ -1,0 +1,32 @@
+<configs>
+	
+	<!--Learn-by-use code -->
+	<!--modify the window that displays the per level increment information - this changes the size for Perk Info a little as well-->
+	<set xpath="/windows/window[@name='windowSkillPerkInfo']/@hidden_entries_with_paging">0</set> <!--otherwise the 5th row wont show when the paging is showing-->
+	<set xpath="/windows/window[@name='windowSkillPerkInfo']/rect/rect[@name='pagerBox']/@pos">3,-686</set> <!--was 639-->
+	<set xpath="/windows/window[@name='windowSkillPerkInfo']/rect/rect[@name='tableBox']">
+		<!--no changes unless marked-->
+		<sprite depth="1" name="background" color="[darkGrey]" type="sliced"/>
+		<sprite depth="5" pos="0,1" width="647" height="451" name="backgroundMain" sprite="menu_empty3px" color="[black]" type="sliced" fillcenter="false" />
+
+		<rect name="tableHeader" pos="0,0" width="644" height="43">
+			<sprite depth="1" name="background" color="[lightGrey]" type="sliced"/>
+			<rect depth="1" pos="0,0" width="75" height="40">
+				<sprite depth="0" name="backgroundMain" sprite="menu_empty3px" height="46" color="[black]" type="sliced" fillcenter="false" />
+				<label depth="1" pos="5,-23" text_key="xuiSkillLevel" pivot="left" justify="center" width="65" />
+			</rect>
+			<rect depth="1" pos="72,0" width="503" height="40">
+				<sprite depth="0" name="backgroundMain" sprite="menu_empty3px" height="46" color="[black]" type="sliced" fillcenter="false" />
+				<label depth="1" pos="5,-23" text_key="xuiSkillUnlocks" pivot="left" justify="center" width="493" />
+			</rect>
+			<rect depth="1" pos="572,0" width="75" height="40">
+				<sprite depth="0" name="backgroundMain" sprite="menu_empty3px" height="46" color="[black]" type="sliced" fillcenter="false" />
+				<label depth="1" pos="5,-23" text_key="xuiSkillBuy" pivot="left" justify="center" width="65" />
+			</rect>
+		</rect>
+		<grid rows="5" cols="1" pos="0,-46" width="644" cell_width="644" cell_height="73" repeat_content="true"> <!--was cell_height="80"-->
+			<skill_perk_level width="646" height="73" /> <!--was 80-->
+		</grid>
+	</set>	
+	<!--end Learn-by-use code -->
+</configs>
