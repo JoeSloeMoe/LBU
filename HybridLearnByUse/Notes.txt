@@ -67,6 +67,6 @@ Please acknowledge Khaine's work if you reuse the code.
    - Linux pathing compatability fix
 
 1.0.9 4th May 2024
-   - Full review of DemolitionExpert leveling code. Fixed leveling discrepencies between Molotoves, Grenades, Timed Charges, Explosive Arrows and Bolts
-   - Slightly reduced Boomstick leveling progression.
+   - Full review of DemolitionExpert levelling code. Fixed levelling discrepancies between Molotovs, Grenades, Timed Charges, Explosive Arrows and Bolts
+   - Slightly reduced Boomstick levelling progression.
    
