@@ -62,6 +62,78 @@
 			So the max-level is written out wherever it is used. To change max-level you will need to edit every reference to '50' 
 			in progression.xml. 
 			-->
+			
+			<!--DONT EDIT BELOW THIS LINE: all increment vars are intialised here using the above config values-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeadEye_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_DeadEye_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_Demolition_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SpearMaster_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_SpearMaster_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Salvage_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">				
+				<requirement name="CVarCompare" cvar="lbu_Salvage_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Boomstick_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_Boomstick_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_PummelPete_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_PummelPete_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<!--pummel pete also has a stamina bonus increase to intialise-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_PP_StamIncrement" operation="set" value="0.3">
+				<requirement name="CVarCompare" cvar="lbu_PP_StamIncrement" operation="LT" value="0.3"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SkullCrusher_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_SkullCrusher_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<!--skull scrusher also has a stamina bonus increase to intialise-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SC_StamIncrement" operation="set" value="0.3">
+				<requirement name="CVarCompare" cvar="lbu_SC_StamIncrement" operation="LT" value="0.3"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Miner69er_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_Miner69er_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Brawler_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_Brawler_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<!--brawler also has a stamina bonus increase to intialise-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Brawler_StamIncrement" operation="set" value="0.3">
+				<requirement name="CVarCompare" cvar="lbu_Brawler_StamIncrement" operation="LT" value="0.3"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_MachineGunner_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_MachineGunner_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Archery_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_Archery_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Gunslinger_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_Gunslinger_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_DeepCuts_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_DeepCuts_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<!--deep cuts also has a stamina bonus increase to intialise-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DCuts_StamIncrement" operation="set" value="0.3">
+				<requirement name="CVarCompare" cvar="lbu_DCuts_StamIncrement" operation="LT" value="0.3"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HiddenStrike_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_HiddenStrike_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Electrocutioner_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_Electrocutioner_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<!--electrocutioner also has a stamina bonus increase to intialise-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Elec_StamIncrement" operation="set" value="0.3">
+				<requirement name="CVarCompare" cvar="lbu_Elec_StamIncrement" operation="LT" value="0.3"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Robotics_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_Robotics_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<!--END perk increment vars intialisation-->
+			
 		</effect_group>   
 	</append>
 	<!-- end initialise all Learn By Use config variables-->
