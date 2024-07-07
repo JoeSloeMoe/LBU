@@ -70,3 +70,13 @@ Please acknowledge Khaine's work if you reuse the code.
    - Full review of DemolitionExpert levelling code. Fixed levelling discrepancies between Molotovs, Grenades, Timed Charges, Explosive Arrows and Bolts
    - Slightly reduced Boomstick levelling progression.
    
+1.1.0
+   - Points invested in the default Perk give 20% more lbu_perk progression xp for each point.
+	 e.g Default for lbu_archery is each archery kill gives 24 progression xp. With 2 points in the Archery Perk (perkArchery) the progression xp is 28.8 (40% increase).
+   - Config additions:
+        >lbu_Kill_Bonus: when true points in a default Perk will give extra progression xp per level.
+		>lbu_Kill_Bonus_Percent: the amount of additional xp given per level invested in the Perk.
+		>lbu_XP_Multiplier: A multiplier for ALL progression xp gained. Increase or dercease if overall progression for Learn By Use skills is too slow/fast
+
+
+   
