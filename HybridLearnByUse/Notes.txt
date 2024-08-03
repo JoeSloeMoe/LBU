@@ -99,7 +99,7 @@ This modlet comes from the Survival No Trader mod.
    - The more Experience using a tool or weapon you have the more you know how to maintain it.
      Each level of a LBU perk decreases associated tool/weapon degradation rate by 1% (total 50%).
 	 Doesnt apply to the Hidden Strike or Demolition perks.	(Configurable)
-   - Changed the layout of the Perk List Window. Moved the Search Field above the Perk Tabs. The row for the Perk tabs can now hold up to 6 additional tabs for compatability with other mods that add tabs.
+   - Changed the layout of the Perk List Window. Moved the Search Field above the Perk Tabs. The row for the Perk tabs can now hold up to 6 additional tabs for compatibility with other mods that add tabs.
    - Fixed bug that affected Perk Tree bonuses for Harvest/Damage amounts. 
 	
    
