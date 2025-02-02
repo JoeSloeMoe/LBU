@@ -102,4 +102,5 @@ This modlet comes from the Survival No Trader mod.
    - Changed the layout of the Perk List Window. Moved the Search Field above the Perk Tabs. The row for the Perk tabs can now hold up to 6 additional tabs for compatibility with other mods that add tabs.
    - Fixed bug that affected Perk Tree bonuses for Harvest/Damage amounts. 
 	
-   
+1.1.3 1st Feb 2025
+   - Added config variables to adjust the progression speed of all Learn By Use Perks individually

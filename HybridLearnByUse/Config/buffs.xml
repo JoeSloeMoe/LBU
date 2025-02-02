@@ -11,6 +11,25 @@
 			<!--Change this var if you are not leveling the lbu perks fast or slow enough for your play style. -->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0. Higher number==Quicker Progress-->
 
+			<!--Change these to increase or decrease individual lbu_perk progression speed to suit your play style-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeadEye_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0. Higher number==Quicker Progress-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Miner69er_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Salvage_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SpearMaster_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Boomstick_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_PummelPete_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SkullCrusher_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Brawler_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_MachineGunner_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Archery_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Gunslinger_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeepCuts_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Electrocutioner_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Robotics_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HiddenStrike_Kill_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+		
+			
 			<!-- The learn by use levelling curve (the amount of xp needed per level) is a basic compound interest curve
 				There are 3 variables for compound interest: 1) the initial deposit (lbu_DefaultInitialIncrement), 2) the interest per year (per lbu level),
 						3) the number of years (50 levels - kindof hard set, requires editing in the individual perk code below to change). 
@@ -123,7 +142,28 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Robotics_Kill_XP_Base" operation="set" value="16"/> <!--default: 24-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HiddenStrike_Kill_XP_Base" operation="set" value="26"/> <!--default: 26-->
 			
-			<!--multiply all of the above vars by the XP weight/percent increase (lbu_XP_Multiplier) from the config settings-->
+			<!--multiply each of the above vars by their respective INDIVIDUAL XP weight/percent increase (lbu_<PERKNAME>_Multiplier) from the config settings-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeadEye_Kill_XP_Base" operation="multiply" value="@lbu_DeadEye_Kill_XP_Multiplier"/> <!--default: 1.0. Higher number==Quicker Progress-->
+			<!--there are 2 demolition xp types/values, one for grenades and a different one for molotovs because of how the game treats them-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_Kill_GXP_Base" operation="multiply" value="@lbu_Demolition_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_Kill_MXP_Base" operation="multiply" value="@lbu_Demolition_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Miner69er_Kill_XP_Base" operation="multiply" value="@lbu_Miner69er_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Salvage_Kill_XP_Base" operation="multiply" value="@lbu_Salvage_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SpearMaster_Kill_XP_Base" operation="multiply" value="@lbu_SpearMaster_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Boomstick_Kill_XP_Base" operation="multiply" value="@lbu_Boomstick_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_PummelPete_Kill_XP_Base" operation="multiply" value="@lbu_PummelPete_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SkullCrusher_Kill_XP_Base" operation="multiply" value="@lbu_SkullCrusher_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Brawler_Kill_XP_Base" operation="multiply" value="@lbu_Brawler_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_MachineGunner_Kill_XP_Base" operation="multiply" value="@lbu_MachineGunner_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Archery_Kill_XP_Base" operation="multiply" value="@lbu_Archery_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Gunslinger_Kill_XP_Base" operation="multiply" value="@lbu_Gunslinger_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeepCuts_Kill_XP_Base" operation="multiply" value="@lbu_DeepCuts_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Electrocutioner_Kill_XP_Base" operation="multiply" value="@lbu_Electrocutioner_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Robotics_Kill_XP_Base" operation="multiply" value="@lbu_Robotics_Kill_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HiddenStrike_Kill_XP_Base" operation="multiply" value="@lbu_HiddenStrike_Kill_XP_Multiplier"/> 
+		
+		
+			<!--multiply all of the above vars by the OVERALL XP weight/percent increase (lbu_XP_Multiplier) from the config settings-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeadEye_Kill_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/>
 			<!--there are 2 demolition xp types/values, one for grenades and a different one for molotovs because of how the game treats them-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_Kill_GXP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
