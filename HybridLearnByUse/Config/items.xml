@@ -1,14 +1,215 @@
 <configs>
 	<!--Learn by use code-->
-	<!--add a tag (lbu_demo) to the molotoc so that it can be properly identified in progression.xml:lbu_Demolition perk to allocate the correct xp per hit.
+	<!--lbu_Physician Perk code -->
+	<!--The code for the lbu_Physician Perk is implemented in buffs.xml:buffLBUPhysician, progression.xml:lbu_Physician and items.xml(see comment "lbu_Physician Perk code" -->
+	<append xpath="/items/item[@name='medicalBandage']">
+		<effect_group tiered="false">
+			<!--update the xp counter for lbu_Physician-->
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="1"/>
+			<triggered_effect trigger="onSelfSecondaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="1"/>
+		</effect_group>
+	</append>
+
+	<!--aloe cream-->
+	<!--healing speed when healing others is coded in the item itself (bandage, aloecream etc) not the games perkPhysician perk code, 
+		so adjust the items healing speed code here see also buffs.xml:buffLBUPhysician for setting the lbu_physicianHealingSpeed variable-->
+	<!-- used on other, regular health per tick based on perkPhysician -->
+	<!--remove the current code-->
+	<remove xpath="/items/item[@name='medicalAloeCream']/effect_group/triggered_effect[@trigger='onSelfSecondaryActionEnd' and @target='other' and @cvar='medRegHealthIncSpeed' and @operation='set' ]"/>
+	<append xpath="/items/item[@name='medicalAloeCream']">
+		<!--add removed code back with the changed to take the learn by use physician perk level into account-->
+		<effect_group tiered="false">				
+			<triggered_effect trigger="onSelfSecondaryActionEnd" action="ModifyCVar" target="other" cvar="medRegHealthIncSpeed" operation="set" value="@$lbu_physicianHealingSpeed"/>		
+		</effect_group>
+		<!--increase use counter when item used for lbu_Physician leveling-->
+		<effect_group tiered="false">
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="1"/>
+			<triggered_effect trigger="onSelfSecondaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="1"/>
+		</effect_group>
+	</append>
+	<!--END aloe cream-->
+	
+	<!--medical first aid bandage-->
+	<!--healing speed when healing others is coded in the item itself (bandage, aloecream etc) not the games perkPhysician perk code, 
+		so adjust the items healing speed code here see also buffs.xml:buffLBUPhysician for setting the lbu_physicianHealingSpeed variable-->
+	<!-- used on other, regular health per tick based on perkPhysician -->
+	<!--remove the current code-->
+	<remove xpath="/items/item[@name='medicalFirstAidBandage']/effect_group/triggered_effect[@trigger='onSelfSecondaryActionEnd' and @target='other' and @cvar='medRegHealthIncSpeed' and @operation='set' ]"/>
+
+	<append xpath="/items/item[@name='medicalFirstAidBandage']">
+		<!--add removed code back with the changed to take the learn by use physician perk level into account-->
+		<effect_group tiered="false">				
+			<triggered_effect trigger="onSelfSecondaryActionEnd" action="ModifyCVar" target="other" cvar="medRegHealthIncSpeed" operation="set" value="@$lbu_physicianHealingSpeed"/>		
+		</effect_group>
+		<!--increase use counter when item used for lbu_Physician leveling-->
+		<effect_group tiered="false">
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="2"/>
+			<triggered_effect trigger="onSelfSecondaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="2"/>
+		</effect_group> 
+	</append>	
+	<!--END medical first aid bandage-->
+	
+	<!--medical first aid kit-->
+	<!--medical first aid bandage-->
+	<!--healing speed when healing others is coded in the item itself (bandage, aloecream etc) not the games perkPhysician perk code, 
+		so adjust the items healing speed code here see also buffs.xml:buffLBUPhysician for setting the lbu_physicianHealingSpeed variable-->
+	<!-- used on other, regular health per tick based on perkPhysician -->
+	<!--remove the current code-->
+	<remove xpath="/items/item[@name='medicalFirstAidBandage']/effect_group/triggered_effect[@trigger='onSelfSecondaryActionEnd' and @target='other' and @cvar='medRegHealthIncSpeed' and @operation='set' ]"/>
+	<append xpath="/items/item[@name='medicalFirstAidKit']">
+		<!--add removed code back with the changed to take the learn by use physician perk level into account-->
+		<effect_group tiered="false">				
+			<triggered_effect trigger="onSelfSecondaryActionEnd" action="ModifyCVar" target="other" cvar="medRegHealthIncSpeed" operation="set" value="@$lbu_physicianHealingSpeed"/>		
+		</effect_group>
+		<!--increase use counter when item used for lbu_Physician leveling-->
+		<effect_group tiered="false">
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="3"/>
+			<triggered_effect trigger="onSelfSecondaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="3"/>
+		</effect_group>
+	</append>	
+	<!--END medical first aid bandage-->
+		
+	<append xpath="/items/item[@name='resourceSewingKit']">
+		<effect_group tiered="false">
+			<!--update the xp counter for lbu_Physician-->
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="1"/>
+		</effect_group>
+	</append>
+	
+	<!--
+		Medical splints and casts can heal sprains If
+			lbu_Physician is at max level
+			Player hasnt invested in the game's perkPhysician skill (player can already heal with splints if perkPhysician >=1)
+			lbu_PhysicianBonus is set to 1 in the config settings
+	-->
+	<append xpath="/items/item[@name='medicalSplint']">
+		<!--update the xp counter for lbu_Physician-->
+		<effect_group tiered="false">
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="1"/>
+			<triggered_effect trigger="onSelfSecondaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="2"/>
+		</effect_group>
+		<effect_group name="Primary Action" tiered="false">
+		<!--lbu_Physician gives splint and cast healing of sprains on max level (if player has not already got it)-->
+			<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="GTE" value="50"/>
+			<requirement name="ProgressionLevel" progression_name="perkPhysician" operation="LT" value="1"/>
+			<!--only use Heal Bonus if lbu_PhysicianBonus is set in config settings-->
+			<requirement name="CVarCompare" cvar="lbu_PhysicianBonus" operation="GTE" value="1"/>
+			<requirement name="HasBuff" buff="buffLegSprained"/>
+				<triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffLegSprained"/>
+		</effect_group>
+		<effect_group name="Primary Action" tiered="false">
+		<!--lbu_Physician gives splint and cast healing of sprains on max level (if player has not already got it)-->
+			<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="GTE" value="50"/>
+			<requirement name="ProgressionLevel" progression_name="perkPhysician" operation="LT" value="1"/>
+			<!--only use Heal Bonus if lbu_PhysicianBonus is set in config settings-->
+			<requirement name="CVarCompare" cvar="lbu_PhysicianBonus" operation="GTE" value="1"/>
+			<requirement name="HasBuff" buff="buffArmSprained"/>
+				<triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffArmSprained"/>
+		</effect_group>	
+		
+		<!--do the same for when used on 'other' player-->
+		<effect_group name="Secondary Action" tiered="false">
+		<!--lbu_Physician gives splint and cast healing of sprains on max level (if player has not already got it)-->
+			<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="GTE" value="50"/>
+			<requirement name="ProgressionLevel" progression_name="perkPhysician" operation="LT" value="1"/>
+			<!--only use Heal Bonus if lbu_PhysicianBonus is set in config settings-->
+			<requirement name="CVarCompare" cvar="lbu_PhysicianBonus" operation="GTE" value="1"/>
+			<requirement name="HasBuff" target="other" buff="buffLegSprained"/>
+				<triggered_effect trigger="onSelfSecondaryActionEnd" action="RemoveBuff" target="other" buff="buffLegSprained"/>
+		</effect_group>	
+		<effect_group name="Secondary Action" tiered="false">
+		<!--lbu_Physician gives splint and cast healing of sprains on max level (if player has not already got it)-->
+			<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="GTE" value="50"/>
+			<requirement name="ProgressionLevel" progression_name="perkPhysician" operation="LT" value="1"/>
+			<!--only use Heal Bonus if lbu_PhysicianBonus is set in config settings-->
+			<requirement name="CVarCompare" cvar="lbu_PhysicianBonus" operation="GTE" value="1"/>
+			<requirement name="HasBuff" target="other" buff="buffArmSprained"/>
+				<triggered_effect trigger="onSelfSecondaryActionEnd" action="RemoveBuff" target="other" buff="buffArmSprained"/>
+		</effect_group>	
+	
+	</append>	
+	<!--see medicalSplint above for comments-->
+	<append xpath="/items/item[@name='medicalPlasterCast']">
+		<effect_group tiered="false">
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="2"/>
+			<triggered_effect trigger="onSelfSecondaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="2"/>
+		</effect_group>
+		<effect_group tiered="false">
+			<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="GTE" value="50"/>
+			<requirement name="ProgressionLevel" progression_name="perkPhysician" operation="LT" value="1"/>
+			<requirement name="CVarCompare" cvar="lbu_PhysicianBonus" operation="GTE" value="1"/>
+			<requirement name="HasBuff" buff="buffLegSprained"/>
+				<triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffLegSprained"/>
+		</effect_group>	
+		<effect_group tiered="false">
+			<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="GTE" value="50"/>
+			<requirement name="ProgressionLevel" progression_name="perkPhysician" operation="LT" value="1"/>
+			<requirement name="CVarCompare" cvar="lbu_PhysicianBonus" operation="GTE" value="1"/>
+			<requirement name="HasBuff" buff="buffArmSprained"/>
+				<triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffArmSprained"/>
+		</effect_group>	
+		
+		<!--do the same for when used on 'other' player-->
+		<effect_group tiered="false">
+			<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="GTE" value="50"/>
+			<requirement name="ProgressionLevel" progression_name="perkPhysician" operation="LT" value="1"/>
+			<requirement name="CVarCompare" cvar="lbu_PhysicianBonus" operation="GTE" value="1"/>
+			<requirement name="HasBuff" target="other" buff="buffLegSprained"/>
+				<triggered_effect trigger="onSelfSecondaryActionEnd" action="RemoveBuff" target="other" buff="buffLegSprained"/>
+		</effect_group>	
+		<effect_group tiered="false">
+			<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="GTE" value="50"/>
+			<requirement name="ProgressionLevel" progression_name="perkPhysician" operation="LT" value="1"/>
+			<requirement name="CVarCompare" cvar="lbu_PhysicianBonus" operation="GTE" value="1"/>
+			<requirement name="HasBuff" target="other" buff="buffArmSprained"/>
+				<triggered_effect trigger="onSelfSecondaryActionEnd" action="RemoveBuff" target="other" buff="buffArmSprained"/>
+		</effect_group>	
+	
+	</append>
+	
+	<append xpath="/items/item[@name='foodHoney']">
+		<effect_group tiered="false">
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="1"/>
+		</effect_group>
+	</append>
+	<append xpath="/items/item[@name='drugHerbalAntibiotics']">
+		<effect_group tiered="false">
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="2"/>
+		</effect_group>
+	</append>	
+	<append xpath="/items/item[@name='drugAntibiotics']">
+		<effect_group tiered="false">
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="3"/>
+		</effect_group>
+	</append>		
+	
+	<append xpath="/items/item[@name='drugPainkillers']">
+		<effect_group tiered="false">
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="2"/>
+		</effect_group>
+	</append>
+	<append xpath="/items/item[@name='drugVitamins']">
+		<effect_group tiered="false">
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="2"/>
+		</effect_group>
+	</append>	
+	<append xpath="/items/item[@name='drugSteroids']">
+		<effect_group tiered="false">
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="lbu_PhysicianUseCounter" operation="add" value="2"/>
+		</effect_group>
+	</append>	
+	<!--food and health bars are set in buffs.xml see "lBU Physician Perk supprt code"-->
+	<!--end lbu_Physician Perk code -->
+	
+	<!--add a tag (lbu_demo) to the molotov so that it can be properly identified in progression.xml:lbu_Demolition perk to allocate the correct xp per hit.
 	The tag is added to treat it differently than grenades. The grenade explosion gets xp for all effected zombies, while the moly fire only get xp for 
 	the zombie that was hit by the molotov, all other zombie on fire are ignored-->
-	<set xpath ="/items/item[@name='thrownAmmoMolotovCocktail']/property[@name='Tags']/@value">lbu_DemoMolotov,ammo,weapon,attPerception,perkDemolitionsExpert,explosivesSkill</set> 
+	<append xpath="/items/item[@name='thrownAmmoMolotovCocktail']/property[@name='Tags']/@value">,lbu_DemoMolotov</append> 
 	
 	<!--Reset the tags for ammoCrossbowBoltExploding. The tags added are exactly the same as it already has in its definition. 
 		perkDemolitionsExpert doesnt return true for requirements statements if the tags are not re-added. (not sure why)
 		e.g. <requirement name="ItemHasTags" tags="perkDemolitionsExpert"/> : returns false for ammoCrossbowBoltExploding even though it has the tag perkDemolitionsExpert in the default code definition-->
 	<set xpath ="/items/item[@name='ammoCrossbowBoltExploding']/property[@name='Tags']/@value">ammo,ranged,attAgility,perkArchery,perkPenetrator,perkDemolitionsExpert</set> 
-	<!--end learn by use code-->
+	<!--END Learn by use code-->
 	
 </configs>

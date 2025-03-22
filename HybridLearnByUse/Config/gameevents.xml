@@ -24,6 +24,14 @@
 				<property name="text" value="Max Skill Level!" />
 			</action>
 		</action_sequence>
+		
+		<!--display the text indicating that splints and casts can now heal sprains.
+			Called from buffs:buffLBUPhysician when max level reached-->
+		<action_sequence name="lbu_action_display_physicianBonus">
+			<action class="BeltTooltip">
+				<property name="text" value="Physician: Splints and Casts can now heal Sprains!" />
+			</action>
+		</action_sequence>
 		<!--END Learn By Use Event code-->
 	</append>
 </configs>

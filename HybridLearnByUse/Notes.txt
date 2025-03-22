@@ -8,20 +8,22 @@ Perk Tree as normal.
 Recommend starting a new game.
 
 Currently applies to the tools and weapons for the following Perks:
-Perception: DeadEye, Demolition Expert, SpearMaster, Salvage
+Perception: DeadEye, Demolition Expert, SpearMaster, Lucky Looter, Salvage
 Strength: Boomstick, PummelPete, SkullCrusher, Miner69r/Motherload.
 Fortitude: Brawler, MachineGunner
 Agility: Archery, Gunslinger, DeepCuts, Hidden Strike
-Intellect: Electrocutioner, Robotics
+Intellect: Electrocutioner, Robotics, Physician
 
 Mod Functionality (configurable in buffs.xml):
 - Receive a bonus skill point when you max out each Perk Skill (level 50) 
+- For the Learn By Use Physician Skill, at max level receive a bonus skill point and Splints & Casts will heal sprains.
 - Each Point invested in the default Perk give 20% more lbu_perk progression xp on kills. 
   e.g The Default for lbu_archery is each archery kill gives 24 progression xp. With 2 
   points in the Archery Perk (perkArchery) the progression xp is 28.8 (40% increase) per kill. 
 - The more Experience using a tool or weapon you have the more you know how to maintain it.
   Each level of a LBU perk decreases associated tool/weapon degradation rate by 1% (total 50%).
   Doesnt apply to the Hidden Strike or Demolition perks.
+
 
 WHY ARE THERE ONLY 50 LEVELS?
 The mod is using 100 levels, it only calculates and displays every second level, so you see 50 in the UI.
@@ -104,3 +106,11 @@ This modlet comes from the Survival No Trader mod.
 	
 1.1.3 1st Feb 2025
    - Added config variables to adjust the progression speed of all Learn By Use Perks individually
+   
+1.1.4 March 2025
+   - Added Lucky Looter skill
+   - Added Physician skill 
+   - Code refactoring in preparation for V1.3 release.
+   
+   Notes:
+   At max level the Learn By Use Physician Skill buffs Splints and Casts to heal sprains (configurable).
