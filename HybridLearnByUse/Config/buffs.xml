@@ -131,7 +131,7 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_Kill_GXP_Base" operation="set" value="4"/> <!--grenades and other default: 4-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_Kill_MXP_Base" operation="set" value="30"/> <!--molotovs default: 30-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Miner69er_Kill_XP_Base" operation="set" value="10"/> <!--default: 10-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_LuckyLooter_LOOT_XP_Base" operation="set" value="16"/> <!--default: 16-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_LuckyLooter_LOOT_XP_Base" operation="set" value="14"/> <!--default: 14-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Salvage_Kill_XP_Base" operation="set" value="20"/> <!--default: 20-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SpearMaster_Kill_XP_Base" operation="set" value="18"/> <!--default: 18-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Boomstick_Kill_XP_Base" operation="set" value="12"/> <!--default: 12-->
@@ -144,7 +144,7 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeepCuts_Kill_XP_Base" operation="set" value="18"/> <!--default: 18-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Electrocutioner_Kill_XP_Base" operation="set" value="18"/> <!--default: 18-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Robotics_Kill_XP_Base" operation="set" value="16"/> <!--default: 24-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Physician_Use_XP_Base" operation="set" value="204"/> <!--default: 204 high because number of medical items used is far less than the number of bullets sprayed, rocks bashed etc-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Physician_Use_XP_Base" operation="set" value="184"/> <!--default: 184 high because number of medical items used is far less than the number of bullets sprayed, rocks bashed etc-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HiddenStrike_Kill_XP_Base" operation="set" value="26"/> <!--default: 26-->
 			
 			<!--multiply each of the above vars by their respective INDIVIDUAL XP weight/percent increase (lbu_<PERKNAME>_Multiplier) from the config settings-->
