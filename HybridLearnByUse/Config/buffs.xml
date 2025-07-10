@@ -1,5 +1,55 @@
 <configs>
-	
+	<!--debugging buffs-->
+	<append xpath="/buffs">	
+		<buff name="buffDebug1" name_key="buffDebug1" description_key="buffDebug1" remove_on_death="false">
+			<stack_type value="ignore"/>
+			<duration value="0"/>
+			<display_value value=".buffDebug1Display"/>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar=".buffDebug1Display" operation="set" value="0"/>
+			</effect_group>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar=".buffDebug1Display" operation="set" value="@buffDebug1Var"/>
+			</effect_group>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar=".buffDebug1Display" operation="set" value="0"/>
+			</effect_group>
+
+		</buff>
+		<buff name="buffDebug2" name_key="buffDebug2" description_key="buffDebug2" remove_on_death="false">
+			<stack_type value="ignore"/>
+			<duration value="0"/>
+			<display_value value=".buffDebug2Display"/>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar=".buffDebug2Display" operation="set" value="0"/>
+			</effect_group>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar=".buffDebug2Display" operation="set" value="@buffDebug2Var"/>
+			</effect_group>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar=".buffDebug2Display" operation="set" value="0"/>
+			</effect_group>
+
+		</buff>
+		
+		<buff name="buffDebug3" name_key="buffDebug3" description_key="buffDebug3" remove_on_death="false">
+			<stack_type value="ignore"/>
+			<duration value="0"/>
+			<display_value value=".buffDebug3Display"/>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar=".buffDebug3Display" operation="set" value="0"/>
+			</effect_group>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar=".buffDebug3Display" operation="set" value="@buffDebug3Var"/>
+			</effect_group>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar=".buffDebug3Display" operation="set" value="0"/>
+			</effect_group>
+
+		</buff>
+	</append>
+	<!--END debugging buffs-->
+
 	<!-- initialise all Learn By Use config variables-->
 	<append xpath="/buffs/buff[@name='buffStatusCheck01']">
 		<effect_group>
@@ -25,6 +75,8 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeepCuts_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Electrocutioner_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Robotics_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Bartering_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DaringAdv_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Physician_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HiddenStrike_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
 			<!-- END Set XP Multipliers -->
@@ -129,9 +181,9 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeadEye_Kill_XP_Base" operation="set" value="24"/> <!--default: 24-->
 			<!--there are 2 demolition xp types/values, one for grenades and a different one for molotovs because of how the game treats them-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_Kill_GXP_Base" operation="set" value="4"/> <!--grenades and other default: 4-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_Kill_MXP_Base" operation="set" value="30"/> <!--molotovs default: 30-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Miner69er_Kill_XP_Base" operation="set" value="10"/> <!--default: 10-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_LuckyLooter_LOOT_XP_Base" operation="set" value="14"/> <!--default: 14-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_Kill_MXP_Base" operation="set" value="4"/> <!--molotovs default: 4-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Miner69er_Kill_XP_Base" operation="set" value="12"/> <!--default: 12-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_LuckyLooter_LOOT_XP_Base" operation="set" value="10"/> <!--default: 10-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Salvage_Kill_XP_Base" operation="set" value="20"/> <!--default: 20-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SpearMaster_Kill_XP_Base" operation="set" value="18"/> <!--default: 18-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Boomstick_Kill_XP_Base" operation="set" value="12"/> <!--default: 12-->
@@ -143,7 +195,10 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Gunslinger_Kill_XP_Base" operation="set" value="16"/> <!--default: 16-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeepCuts_Kill_XP_Base" operation="set" value="18"/> <!--default: 18-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Electrocutioner_Kill_XP_Base" operation="set" value="18"/> <!--default: 18-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Robotics_Kill_XP_Base" operation="set" value="16"/> <!--default: 24-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Robotics_Kill_XP_Base" operation="set" value="16"/> <!--default: 16-->
+			<!--lbu_Bartering_XP_Base & lbu_DaringAdv_XP_Base are multipliers see buffLbuBartering & buffLbuDaringAdv--> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Bartering_XP_Base" operation="set" value="6"/> <!--default: 6-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DaringAdv_XP_Base" operation="set" value="5"/> <!--default: 5-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Physician_Use_XP_Base" operation="set" value="184"/> <!--default: 184 high because number of medical items used is far less than the number of bullets sprayed, rocks bashed etc-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HiddenStrike_Kill_XP_Base" operation="set" value="26"/> <!--default: 26-->
 			
@@ -166,6 +221,8 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeepCuts_Kill_XP_Base" operation="multiply" value="@lbu_DeepCuts_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Electrocutioner_Kill_XP_Base" operation="multiply" value="@lbu_Electrocutioner_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Robotics_Kill_XP_Base" operation="multiply" value="@lbu_Robotics_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Bartering_XP_Base" operation="multiply" value="@lbu_Bartering_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DaringAdv_XP_Base" operation="multiply" value="@lbu_DaringAdv_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Physician_Use_XP_Base" operation="multiply" value="@lbu_Physician_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HiddenStrike_Kill_XP_Base" operation="multiply" value="@lbu_HiddenStrike_XP_Multiplier"/> 
 		
@@ -189,6 +246,8 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeepCuts_Kill_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Electrocutioner_Kill_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/>
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Robotics_Kill_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Bartering_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DaringAdv_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Physician_Use_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HiddenStrike_Kill_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
 			
@@ -197,21 +256,22 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeadEye_DMG_XP" operation="set" value="12"/> <!--default: 12-->
 			<!--there are 2 demolition xp types/values, one for grenades and a different one for molotovs because of how the game treats them-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_DMG_GXP" operation="set" value="4"/> <!--grenades and other default: 4-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_DMG_MXP" operation="set" value="26"/> <!--molotovs default: 26-->
+			<!--not used-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_DMG_MXP" operation="set" value="4"/> <!--molotovs default: 4-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Miner69er_DMG_XP" operation="set" value="3"/> <!--default: 3-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Salvage_DMG_XP" operation="set" value="12"/> <!--default: 12-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Salvage_DMG_XP" operation="set" value="10"/> <!--default: 10-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SpearMaster_DMG_XP" operation="set" value="6"/> <!--default: 6-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Boomstick_DMG_XP" operation="set" value="1"/> <!--default: 1-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_PummelPete_DMG_XP" operation="set" value="6"/> <!--default: 6-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SkullCrusher_DMG_XP" operation="set" value="8"/> <!--default: 8-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Brawler_DMG_XP" operation="set" value="6"/> <!--default: 6-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_MachineGunner_DMG_XP" operation="set" value="5"/> <!--default: 5-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Archery_DMG_XP" operation="set" value="14"/> <!--default: 14-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Archery_DMG_XP" operation="set" value="15"/> <!--default: 15-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Gunslinger_DMG_XP" operation="set" value="6"/> <!--default: 6-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeepCuts_DMG_XP" operation="set" value="6"/> <!--default: 6-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Electrocutioner_DMG_XP" operation="set" value="6"/> <!--default: 6-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Robotics_DMG_XP" operation="set" value="8"/> <!--default: 8-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HiddenStrike_DMG_XP" operation="set" value="15"/> <!--default: 15-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HiddenStrike_DMG_XP" operation="set" value="26"/> <!--default: 26-->
 			
 			<!--multiply each of the above DAMAGE vars by their respective INDIVIDUAL XP weight/percent increase (lbu_<PERKNAME>_Multiplier) from the config settings-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeadEye_DMG_XP" operation="multiply" value="@lbu_DeadEye_XP_Multiplier"/> <!--default: 1.0. Higher number==Quicker Progress-->
@@ -331,6 +391,12 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Robotics_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
 				<requirement name="CVarCompare" cvar="lbu_Robotics_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Bartering_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_Bartering_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DaringAdv_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_DaringAdv_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Physician_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
 				<requirement name="CVarCompare" cvar="lbu_Physician_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 			</triggered_effect>
@@ -343,29 +409,79 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffLBUPhysician">
 				<requirement name="!HasBuff" buff="buffLBUPhysician"/>			
 			</triggered_effect>
+			<!-- buffLbuBartering tracks selling items and increases buying and selling xp-->
+			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffLbuBartering">
+				<requirement name="!HasBuff" buff="buffLbuBartering"/>			
+			</triggered_effect>
+			<!-- buffLbuDaringAdv tracks selling items and Daring adventure xp-->
+			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffLbuDaringAdv">
+				<requirement name="!HasBuff" buff="buffLbuDaringAdv"/>			
+			</triggered_effect>
+			<!--buffDemolitionMolotovs tracks the damage count caused by molotovs and manages xp for molys for the lBU Demolitions skill-->
+			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffDemolitionMolotovs">
+				<requirement name="!HasBuff" buff="buffDemolitionMolotovs"/>			
+			</triggered_effect>
+			<!--buffGameStageMonitor tracks Gamestage for use by buffLuckyLooterXPMonitor below-->
+			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffGameStageMonitor">
+				<requirement name="!HasBuff" buff="buffLuckyLooterXPMonitor"/>			
+			</triggered_effect> 
+			<!--buffLuckyLooterXPMonitor tracks the in-games _XPFromLoot variable. Converts increases into LBU Lucky Looter XP-->
+			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffLuckyLooterXPMonitor">
+				<requirement name="!HasBuff" buff="buffLuckyLooterXPMonitor"/>			
+			</triggered_effect> 
 			
 			<!-- buffPerkLevelChanged keeps track of the players points in the various Perks that have a corresponding lbu_Perk.
 				 Used to give bonus lbu_Perl leveling xp on kills or 'destroys' in the case of miner69.
-				 The buff is repeatedly called in a loop every 30 ticks-->
+				 The buff is repeatedly called in a loop every 40 ticks, once per second-->
 			<!--buff only works onStack so fire it 2x -->
-			<triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffPerkLevelChanged"/>
-			<triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffPerkLevelChanged"/>
-			<!-- Check if Perk Level has changed. If it has, update the xp kill bonus for that Perk. 
-				 Only need to do this every few updates not every on so use a local variable to skip some cycles-->
-			<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffPerkLevelChanged">
-				<requirement name="CVarCompare" cvar="$lbu_PerkLevelCounter" operation="GTE" value="30"/></triggered_effect>
-			<!--increment local counter-->
-			<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_PerkLevelCounter" operation="add" value="1"/>	
-			<!--reset counter if needed-->
-			<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_PerkLevelCounter" operation="set" value="0">
-				<requirement name="CVarCompare" cvar="$lbu_PerkLevelCounter" operation="GTE" value="31"/></triggered_effect>	
-			
+			<!--buff only works onStack so fire it 2x -->
+			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffPerkLevelChanged"/>
+			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffPerkLevelChanged"/>
+			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffPerkLevelTracker">
+				<requirement name="!HasBuff" buff="buffPerkLevelTracker"/>			
+			</triggered_effect>
 		</effect_group>
+
+		<!--debug buffs
+		<effect_group>
+			<requirement name="!HasBuff" buff="buffDebug1" />
+				<triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffDebug1"/>
+			<requirement name="!HasBuff" buff="buffDebug2" />
+				<triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffDebug2"/>
+			<requirement name="!HasBuff" buff="buffDebug3" />
+				<triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffDebug3"/>
+		</effect_group>
+		END debug buffs-->
 	</append>
-	
 		
+
 	<!--code for Learn By Use functionality-->
 	<append xpath="/buffs">
+		<!-- buffPerkLevelChanged keeps track of the players points in the various Perks that have a corresponding lbu_Perk.
+					 Used to give bonus lbu_Perl leveling xp on kills or 'destroys' in the case of miner69.
+					 The buff is repeatedly called in a loop every 400 ticks-->
+		<buff name="buffPerkLevelTracker" hidden="true" remove_on_death="false" >
+		
+			<stack_type value="ignore"/>
+			<duration value="0"/>			
+			<update_rate value=".1"/>
+			<effect_group>
+				<!--buff only works onStack so fire it 2x -->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$lbu_PerkLevelCounter" operation="set" value="1"/>	
+			</effect_group>
+			<effect_group>
+				<!-- Check if Perk Level has changed. If it has, update the xp kill bonus for that Perk. 
+					 Only need to do this every few updates not every on so use a local variable to skip some cycles-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffPerkLevelChanged">
+					<requirement name="CVarCompare" cvar="$lbu_PerkLevelCounter" operation="GTE" value="400"/></triggered_effect>
+						
+				<!--increment local counter-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_PerkLevelCounter" operation="add" value="1"/>	
+				<!--reset counter if needed-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_PerkLevelCounter" operation="set" value="0">
+					<requirement name="CVarCompare" cvar="$lbu_PerkLevelCounter" operation="GTE" value="401"/></triggered_effect>	
+			</effect_group>
+		</buff>
 	
 		<!--this buff gives out an extra Skill Point if  LearnByUse:lbu_DefaultGiveSkillPoint > 0.
 			If LearnByUse:lbu_DefaultGiveSkillPoint == 0) just play a sound and display 'level max' msg.
@@ -418,16 +534,23 @@
 					<requirement name="ProgressionLevel" progression_name="lbu_Electrocutioner" operation="LT" value="@lbu_Electrocutioner_Lvl"/> 	</triggered_effect>
 				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Electrocutioner_Lvl" operation="add" value="1">		
 					<requirement name="ProgressionLevel" progression_name="lbu_Electrocutioner" operation="GT" value="@lbu_Electrocutioner_Lvl"/> </triggered_effect>			
+				
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="lbu_Bartering" level="1">
+					<requirement name="ProgressionLevel" progression_name="lbu_Bartering" operation="LT" value="@lbu_Bartering_Lvl"/> 	</triggered_effect>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Bartering_Lvl" operation="add" value="1">		
+					<requirement name="ProgressionLevel" progression_name="lbu_Bartering" operation="GT" value="@lbu_Bartering_Lvl"/> </triggered_effect>							
+					
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="lbu_DaringAdv" level="1">
+					<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="LT" value="@lbu_DaringAdv_Lvl"/> 	</triggered_effect>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_DaringAdv_Lvl" operation="add" value="1">		
+					<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="GT" value="@lbu_DaringAdv_Lvl"/> </triggered_effect>			
+				
+				
 				<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="lbu_Physician" level="1">
 					<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="LT" value="@lbu_Physician_Lvl"/> 	</triggered_effect>
 				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Physician_Lvl" operation="add" value="1">		
 					<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="GT" value="@lbu_Physician_Lvl"/> </triggered_effect>			
-				
-				<!--when perk levels have changed for the physician perk, recalculate the healing speed variable.
-					See buffs:buffLBUPhysician for more details.
-					This sets a trigger to recalculate the healing rate-->
-				<!--reset the trigger-->
-				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="perkPhysicianLevelTrack" operation="set" value="1"/>
+			
 			</effect_group>
 			
 			<!--AGILITY-->
@@ -527,10 +650,20 @@
 				<requirement name="ProgressionLevel" progression_name="lbu_HiddenStrike" operation="EQ" value="@lbu_HiddenStrike_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_Electrocutioner" operation="EQ" value="@lbu_Electrocutioner_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_Robotics" operation="EQ" value="@lbu_Robotics_Lvl"/> 
+				<requirement name="ProgressionLevel" progression_name="lbu_Bartering" operation="EQ" value="@lbu_Bartering_Lvl"/> 
+				<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="EQ" value="@lbu_DaringAdv_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="EQ" value="@lbu_Robotics_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_LuckyLooter" operation="EQ" value="@lbu_Robotics_Lvl"/> 
 					<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffVerifyLBU_ProgressLevels"/>
 					<triggered_effect trigger="onSelfBuffUpdate" action="ShowToolbeltMessage" message="LEARN BY USE: Progress levels verified!"/>
+					<!--when perk levels have changed for the Bartering perk, recalculate the buying and selling vars.
+					See buffs:buffLbuBartering for more details.
+					This sets a trigger to recalculate the bartering rates-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="perkBarteringLevelTrack" operation="set" value="1"/>
+					<!--when perk levels have changed for the physician perk, recalculate the healing speed variable.
+						See buffs:buffLBUPhysician for more details.
+						This sets a trigger to recalculate the healing rate-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="perkPhysicianLevelTrack" operation="set" value="1"/>
 			</effect_group>
 		</buff>
 
@@ -935,6 +1068,62 @@
 						<requirement name="CVarCompare" cvar="lbu_Kill_Bonus" operation="GTE" value="1"/></triggered_effect> <!--only add bonus if turned on in the config-->
 					<!--END perkRoboticsPerk to lbu_Robotics level set-->
 					
+					<!--START perkBetterBarter to lbu_Bartering level set-->
+					<!--See DeadEye above for code comments-->
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="0"/>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="1">
+						<requirement name="ProgressionLevel" progression_name="perkBetterBarter" operation="Equals" value="1"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="2">
+						<requirement name="ProgressionLevel" progression_name="perkBetterBarter" operation="Equals" value="2"/></triggered_effect>	
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="3">
+						<requirement name="ProgressionLevel" progression_name="perkBetterBarter" operation="Equals" value="3"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="4">
+						<requirement name="ProgressionLevel" progression_name="perkBetterBarter" operation="Equals" value="4"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="5">
+						<requirement name="ProgressionLevel" progression_name="perkBetterBarter" operation="Equals" value="5"/></triggered_effect>	
+					
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="lbu_Bartering_Use_XP" operation="set" value="@lbu_Bartering_XP_Base"/>  
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_Kill_Bonus_Total" operation="set" value="0"> <!--0 if player has no points-->
+						<requirement name="CVarCompare" cvar="$lbu_PerkLevel" operation="LTE" value="0"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_Kill_Bonus_Total" operation="set" value="@lbu_Bartering_XP_Base"> <!--see buffs for lbu_DeadEye_Kill_XP decription and intialisation-->
+						<requirement name="CVarCompare" cvar="$lbu_PerkLevel" operation="GTE" value="1"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_Kill_Bonus_Total" operation="multiply" value="@lbu_Kill_Bonus_Percent"> <!--see buffs for lbu_Kill_Bonus_Percent decription and intialisation-->
+						<requirement name="CVarCompare" cvar="$lbu_PerkLevel" operation="GTE" value="1"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_Kill_Bonus_Total" operation="multiply" value="@$lbu_PerkLevel"> <!--levels multiplier, number player points in Perk-->
+						<requirement name="CVarCompare" cvar="$lbu_PerkLevel" operation="GTE" value="1"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="lbu_Bartering_Use_XP" operation="add" value="@$lbu_Kill_Bonus_Total"> 
+						<requirement name="CVarCompare" cvar="lbu_Kill_Bonus" operation="GTE" value="1"/></triggered_effect> <!--only add bonus if turned on in the config-->
+					
+					<!--END perkBetterBarter to lbu_Bartering level set-->
+					
+					<!--START perkDaringAdventurer to lbu_DaringAdv level set-->
+					<!--See DeadEye above for code comments-->
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="0"/>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="1">
+						<requirement name="ProgressionLevel" progression_name="perkDaringAdventurer" operation="Equals" value="1"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="2">
+						<requirement name="ProgressionLevel" progression_name="perkDaringAdventurer" operation="Equals" value="2"/></triggered_effect>	
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="3">
+						<requirement name="ProgressionLevel" progression_name="perkDaringAdventurer" operation="Equals" value="3"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="4">
+						<requirement name="ProgressionLevel" progression_name="perkDaringAdventurer" operation="Equals" value="4"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="5">
+						<requirement name="ProgressionLevel" progression_name="perkDaringAdventurer" operation="Equals" value="5"/></triggered_effect>	
+					
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="lbu_DaringAdv_Use_XP" operation="set" value="@lbu_DaringAdv_XP_Base"/>  
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_Kill_Bonus_Total" operation="set" value="0"> <!--0 if player has no points-->
+						<requirement name="CVarCompare" cvar="$lbu_PerkLevel" operation="LTE" value="0"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_Kill_Bonus_Total" operation="set" value="@lbu_DaringAdv_XP_Base"> <!--see buffs for lbu_DeadEye_Kill_XP decription and intialisation-->
+						<requirement name="CVarCompare" cvar="$lbu_PerkLevel" operation="GTE" value="1"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_Kill_Bonus_Total" operation="multiply" value="@lbu_Kill_Bonus_Percent"> <!--see buffs for lbu_Kill_Bonus_Percent decription and intialisation-->
+						<requirement name="CVarCompare" cvar="$lbu_PerkLevel" operation="GTE" value="1"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_Kill_Bonus_Total" operation="multiply" value="@$lbu_PerkLevel"> <!--levels multiplier, number player points in Perk-->
+						<requirement name="CVarCompare" cvar="$lbu_PerkLevel" operation="GTE" value="1"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="lbu_DaringAdv_Use_XP" operation="add" value="@$lbu_Kill_Bonus_Total"> 
+						<requirement name="CVarCompare" cvar="lbu_Kill_Bonus" operation="GTE" value="1"/></triggered_effect> <!--only add bonus if turned on in the config-->
+					
+					<!--END perkDaringAdventurer to lbu_DaringAdv level set-->
+					
 					<!--START perkPhysician to lbu_Physician level set-->
 					<!--See DeadEye above for code comments-->
 					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="0"/>
@@ -1134,6 +1323,156 @@
 			</effect_group>
 		</buff>
 		
+		<!--this buff performs the Bartering xp calculations it uses the games _xpFromSelling variable to 
+			determine the change over time and uses the amount changed to detemine the learn by use xp to allocate-->
+		<buff name="buffLbuBartering" hidden="true" remove_on_death="false">
+			<stack_type value="ignore"/>
+			<duration value="0"/>
+			<update_rate value=".05"/> <!--Once a second update (at 20 ticks per second = 20*0.05 = 1 tick per second)-->
+			<!--uses a local var to loop around, only calculates changes every 60 updates (30 seconds)-->
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$barterloopCounter" operation="set" value="0"/>
+				<!--run the check on the bartering levels when each game starts to initialise-->
+				<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="perkBarteringLevelTrack" operation="set" value="1"/>
+			</effect_group>
+			<effect_group>
+				<requirement name="CVarCompare" cvar="$barterloopCounter" operation="Equals" value="60"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPSelling" operation="set" value="@_xpFromSelling"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$previousAmountSold" operation="set" value="@$game_XPSelling">
+						<requirement name="CVarCompare" cvar="$previousAmountSold" operation="GT" value="@$game_XPSelling"/></triggered_effect>
+			</effect_group>
+			<effect_group>
+				<requirement name="CVarCompare" cvar="$barterloopCounter" operation="Equals" value="60"/>
+				<requirement name="CVarCompare" cvar="$previousAmountSold" operation="LT" value="@$game_XPSelling"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPSelling" operation="subtract" value="@$previousAmountSold"/>
+					
+					<!--game_XPSelling now has the change since the last reading-->
+					<!--the xp earned in-game for selling is almost 1 to 1 for the learn by use growth curve. In order to provide the ability
+						to modify the amount of lbu xp earned, the in-game earned xp is divided by 12 then multiplied by the modifier value (default 6).
+						THis gives slightly more balanced lbu xp for selling but it can also be increased by investing in perk points like the other perks.
+						To  get max 50 the player would sell about 150000 in-game-xp worth of stuff, which equals roughly about 85,000 learn-by-use xp
+							So (150000/12)* lbu_Bartering_Use_XP(6) = +-75,000. This is approx. lbu_Bartering_Use_XP can be modified in game through perks-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPSelling" operation="divide" value="12"/>			
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPSelling" operation="multiply" value="@lbu_Bartering_Use_XP"/>	
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Bartering_XP" operation="add" value="@$game_XPSelling" />
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$previousAmountSold" operation="set" value="@_xpFromSelling"/>
+			</effect_group>	
+			
+			<effect_group>
+				<!--Increase ProgressLevel if xp greater than value for next level-->
+				<requirement name="CVarCompare" cvar="$barterloopCounter" operation="Equals" value="60"/>
+				<requirement name="CVarCompare" cvar="lbu_Bartering_XP" operation="GTE" value="@lbu_Bartering_XPIncrement"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_Bartering" operation="LT" value="50"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Bartering_XPIncrement" operation="multiply" value="@lbu_DefaultIncrementIncrease"> 
+						<!--taper off level xp increase at level 47 (xxx_XPIncrement about 4000). xxx_XPIncrement will grow to 4700  without the cap-->
+						<requirement name="ProgressionLevel" progression_name="lbu_Bartering" operation="LTE" value="@lbu_DefaultLevelCap"/>
+					</triggered_effect>   
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Bartering_XP" operation="set" value="0"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="lbu_Bartering" level="1"/>
+					<!--Upadate BCK var in line with ProgressionLevel progress-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Bartering_Lvl" operation="add" value="1"/> 
+					<triggered_effect trigger="onSelfBuffUpdate" action="ShowToolbeltMessage" message="Bartering Skill Increased!"/>
+					<!--if max level then give free Skill Point-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="CallGameEvent" event="lbu_action_give_points">
+						<requirement name="ProgressionLevel" progression_name="lbu_Bartering" operation="EQ" value="50"/>
+					</triggered_effect>
+					<!--when the perk levels up, trigger a recalculation of the buying and selling rates-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="perkBarteringLevelTrack" operation="set" value="1"/>
+			</effect_group>
+			<effect_group>	
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$barterloopCounter" operation="add" value="1"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$barterloopCounter" operation="set" value="0">
+					<requirement name="CVarCompare" cvar="$barterloopCounter" operation="GTE" value="61"/></triggered_effect>
+			</effect_group>
+			<!--the effects. see progression:lbu_Bartering. The buysing and seeling modificaitons are done here due
+				to how the ui display base_add (shitty), so fool the ui into displaying as a percentage in progression:lbu_Bartering
+				and do the actual calculation here.
+				The range for bartering is 0.01 to 0.125 over 50 levels so each level is worth 0.0025, rounded to 0.003 for the calc-->
+			<effect_group>
+				<requirement name="CVarCompare" cvar="perkPhysicianLevelTrack" operation="GTE" value="1"/>					
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_BarterPerkLevel" operation="set" value="@lbu_Bartering_Lvl"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_BarterPerkLevel" operation="multiply" value="0.003"/>
+					<!--reset the trigger-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="perkPhysicianLevelTrack" operation="set" value="0"/>
+			</effect_group>
+			<effect_group>
+				<passive_effect name="BarteringBuying" operation="base_add" value="@lbu_BarterPerkLevel"/>
+				<passive_effect name="BarteringSelling" operation="base_add" value="@lbu_BarterPerkLevel"/>
+			</effect_group>
+		</buff>
+		
+		<!--this buff performs the Daring adventure xp calculations it uses the games _xpFromQuest variable to 
+			determine the change over time and uses the amount changed to detemine the learn by use xp to allocate-->
+		<buff name="buffLbuDaringAdv" hidden="true" remove_on_death="false">
+			<stack_type value="ignore"/>
+			<duration value="0"/>
+			
+			<update_rate value=".05"/> <!--Once a second update (at 20 ticks per second = 20*0.05 = 1 tick per second)-->
+			<!--uses a local var to loop around, only calculates changes every 60 updates (30 seconds)-->
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$daringAdvloopCounter" operation="set" value="0"/>
+			</effect_group>
+			<effect_group>
+				<requirement name="CVarCompare" cvar="$daringAdvloopCounter" operation="Equals" value="60"/>			
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPQuest" operation="set" value="@_xpFromQuest"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$previousQuestAmount" operation="set" value="@$game_XPQuest">
+						<requirement name="CVarCompare" cvar="$previousQuestAmount" operation="GT" value="@$game_XPQuest"/></triggered_effect>
+			</effect_group>
+			<effect_group>
+				<requirement name="CVarCompare" cvar="$daringAdvloopCounter" operation="Equals" value="60"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="LT" value="50"/>
+				<requirement name="CVarCompare" cvar="$previousQuestAmount" operation="LT" value="@$game_XPQuest"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPQuest" operation="subtract" value="@$previousQuestAmount"/>
+					
+					<!--game_XPQuest now has the change since the last reading-->
+					
+					<!--if the amount of change is >=30,000, then subtract 11,250.
+						This puts a cap on quest reward xp growth as the level 6 quests get 30,000xp
+						The xp is capped at 18,750 which is about the end tier 5 quest reward.
+						So subtract (30,000-18,750)=11,250 from anything over 30,000.
+						Level 6 tier will then reward the same as level 5, so the player doesnt end up with 
+						2 or 3 new lbu_DaringAdv perk levels every time they hand in a level 6 quest-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPQuest" operation="subtract" value="11250">
+						<requirement name="CVarCompare" cvar="$game_XPQuest" operation="GTE" value="30000"/></triggered_effect>
+						
+					<!--the xp earned in-game to reach level 6 questing is about 440,000, which equals roughly about 85,000 learn-by-use xp
+						In order to provide the ability to modify the amount of lbu xp earned, the in-game earned xp is divided by 8 then multiplied by the modifier value (default 6).
+						So (440000/30)* lbu_DaringAdv_Use_XP(5) = +-73,000. This is approx. (leaves space for challenges and the player investing in the DaringAdventure Perk, which increases the rate of progress) -->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPQuest" operation="divide" value="30"/> <!--default 30-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPQuest" operation="multiply" value="@lbu_DaringAdv_Use_XP"/>	
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_DaringAdv_XP" operation="add" value="@$game_XPQuest" />
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$previousQuestAmount" operation="set" value="@_xpFromQuest"/>
+			</effect_group>	
+			
+			<effect_group>
+				<!--Increase ProgressLevel if xp greater than value for next level-->
+				<requirement name="CVarCompare" cvar="$daringAdvloopCounter" operation="Equals" value="60"/>
+				<requirement name="CVarCompare" cvar="lbu_DaringAdv_XP" operation="GTE" value="@lbu_DaringAdv_XPIncrement"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="LT" value="50"/>
+					<!--Daring Adv rolls the xp over when leveling because the amount per use is high vs other perks.-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_DaringAdv_XP" operation="subtract" value="@lbu_DaringAdv_XPIncrement"/>	
+					
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_DaringAdv_XPIncrement" operation="multiply" value="@lbu_DefaultIncrementIncrease"> 
+						<!--taper off level xp increase at level 47 (xxx_XPIncrement about 4000). xxx_XPIncrement will grow to 4700  without the cap-->
+						<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="LTE" value="@lbu_DefaultLevelCap"/>
+					</triggered_effect>   
+					<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="lbu_DaringAdv" level="1"/>
+					<!--Upadate BCK var in line with ProgressionLevel progress-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_DaringAdv_Lvl" operation="add" value="1"/> 
+					<triggered_effect trigger="onSelfBuffUpdate" action="ShowToolbeltMessage" message="Daring Adventure Skill Increased!"/>
+					<!--if max level then give free Skill Point-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="CallGameEvent" event="lbu_action_give_points">
+						<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="EQ" value="50"/>
+					</triggered_effect>
+			</effect_group>
+			<effect_group>	
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$daringAdvloopCounter" operation="add" value="1"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$daringAdvloopCounter" operation="set" value="0">
+					<requirement name="CVarCompare" cvar="$daringAdvloopCounter" operation="GTE" value="61"/></triggered_effect>
+			</effect_group>
+
+		</buff>
+		
 		<!--this buff performs the effects for the Physician LBU Perk - see progressions.xml
 			The code is different from other Perks because there is no trigger for healing
 			Instead, medical items are modified to update a counter when used. This buff tracks that counter and modifies 
@@ -1146,9 +1485,15 @@
 		<buff name="buffLBUPhysician" hidden="true" remove_on_death="false" >
 			<stack_type value="ignore"/>
 			<duration value="0"/>			
+			<update_rate value=".05"/> <!--Once a second update-->
+			<!--uses a local var to loop around, only calculates changes every 60 updates (30 seconds)-->
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$physicianloopCounter" operation="set" value="0"/>
+			</effect_group>
 			
 			<!--medical items -->
 			<effect_group>
+				<requirement name="CVarCompare" cvar="$physicianloopCounter" operation="GTE" value="60"/>
 				<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="LT" value="50"/>
 				<requirement name="CVarCompare" cvar="lbu_PhysicianUseCounter" operation="GT" value="0"/>
 					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Physician_XP" operation="add" value="@lbu_Physician_Use_XP" />
@@ -1157,6 +1502,7 @@
 				
 			<!--Increase ProgressLevel if xp greater than value for next level-->
 			<effect_group>
+				<requirement name="CVarCompare" cvar="$physicianloopCounter" operation="GTE" value="60"/>
 				<requirement name="CVarCompare" cvar="lbu_Physician_XP" operation="GTE" value="@lbu_Physician_XPIncrement"/>
 				<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="LT" value="50"/>
 					<!--Physician rolls the xp over when leveling because the amount per use is high vs other perks.
@@ -1219,6 +1565,7 @@
 			</effect_group>
 			<effect_group>
 				<!--has the perkLevel changed pr triggered for a reset-->
+				<requirement name="CVarCompare" cvar="$physicianloopCounter" operation="GTE" value="60"/>
 				<requirement name="CVarCompare" cvar="perkPhysicianLevelTrack" operation="GTE" value="1"/>
 					<!--medicRegHealthIncreaseSpeed is modified per level of perkPhysician as 2,2.5,3,4,4: levels 4 & 5 are the same
 																		 half of that is: 1,1.25,1.5,2,2 (or 1 to 2 over 5 levels)-->
@@ -1243,14 +1590,359 @@
 					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="perkPhysicianLevelTrack" operation="set" value="0"/>
 					
 			</effect_group>
+			
+			<effect_group>	
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$physicianloopCounter" operation="add" value="1"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$physicianloopCounter" operation="set" value="0">
+					<requirement name="CVarCompare" cvar="$physicianloopCounter" operation="GTE" value="61"/></triggered_effect>
+			</effect_group>
 				
 		</buff>
 		
+		<!--this buff provides support for the buffDemolitionMolotovs buff below.
+			It acts as an interface between any zombies getting burned from molotovs and the 
+			calculation of how much demolition xp to generate and manage level roll over.
+			THis buff it applied to the player when the molotov breaks/impacts.
+			It will listen for a short period and count the number of Zombies that get caught on fire.
+			
+			Each Zombie or Animal set on fire by the molotov will update the molotovBurnCount 
+			see items:comment[lbu_Demolition code for Molotovs]
+				buffs:buffDemolitionMolotovs, buffDemolitionMolotovsHitCounter 
+			See also progression:lbu_Demolition
+			After a short period this buff will update the main buffDemolitionMolotovs buff with 
+			an xp update to add to learn-by-use demolition xp and then shut down.-->
+		<buff name="buffDemolitionMolotovsHitCounter" hidden="true" >
+			<stack_type value="ignore"/>
+			<duration value="0"/>	
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$molyCountdown" operation="set" value="3"/>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$molotovBurnCount" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$molyCountdown"/>
+			</effect_group>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$molyCountdown" operation="subtract" value="1"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffDemolitionMolotovsHitCounter">
+					<requirement name="CVarCompare" cvar="$molyCountdown" operation="LTE" value="0"/>
+				</triggered_effect>
+			</effect_group>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="$molotovHits" operation="add" value="@$molotovBurnCount"/>
+				<triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="$molotovBurnCount" operation="set" value="0"/>
+			</effect_group>
+		</buff>
+		<!--this buff is the other side to buffDemolitionMolotovsHitCounter above, its attaached to all zombies/animals 
+			in the radius of the molotov. It sends the message that buffDemolitionMolotovsHitCounter receives and counts-->
+		<buff name="buffDemolitionMolotovTriggerNotification" hidden="true" >
+			<stack_type value="ignore"/>
+			<duration value="0"/>	
+			<!-- only stick around for $molySendTimer ticks, using a countdown because the entity may not
+				be on fire when the buff is applied to needs to hang around for a few ticks and check if is on fire-->
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$molySendTimer" operation="set" value="4"/>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$molySendTimer"/>
+			</effect_group>
+			<effect_group>
+				<requirement name="HasBuff" buff="buffIsOnFire"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" target="positionAOE" target_tags="player" range="30" cvar="$molotovBurnCount" operation="add" value="1"/>
+					<!--only send once then remove buff-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffDemolitionMolotovTriggerNotification"/>
+			</effect_group>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$molySendTimer" operation="subtract" value="1"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffDemolitionMolotovTriggerNotification">
+					<requirement name="CVarCompare" cvar="$molySendTimer" operation="LTE" value="0"/>
+				</triggered_effect>
+			</effect_group>
+		</buff>
+		
+		<!--see buffs:buffDemolitionMolotovsHitCounter above for more info.
+		This buff monitors and updates the learn by use Demolitions xp for Molotovs-->
+		<buff name="buffDemolitionMolotovs" hidden="true" remove_on_death="false" >
+			<stack_type value="ignore"/>
+			<duration value="0"/>			
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$molotovHits" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$molotovBurnCount" operation="set" value="0"/>
+				
+				<triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$molotovHits"/>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$molotovBurnCount"/>
+			</effect_group>
+			<!--update the xp based on the hit count-->
+			<effect_group>
+				<requirement name="CVarCompare" cvar="$molotovHits" operation="GTE" value="1"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_Moly_temp_xp" operation="set" value="@lbu_Demolition_Kill_MXP"/> 
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_Moly_temp_xp" operation="multiply" value="@$molotovHits"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Demolition_XP" operation="add" value="@$lbu_Moly_temp_xp"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$molotovHits" operation="set" value="0"/>
+			</effect_group>	
+			<!--Increase ProgressLevel if xp greater than value for next level-->
+			<effect_group>
+				<requirement name="CVarCompare" cvar="lbu_Demolition_XP" operation="GTE" value="@lbu_Demolition_XPIncrement"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_Demolition" operation="LT" value="50"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Demolition_XPIncrement" operation="multiply" value="@lbu_DefaultIncrementIncrease"> 
+						<!--taper off level xp increase at level 47 (xxx_XPIncrement about 4000). xxx_XPIncrement will grow to 4700  without the cap-->
+						<requirement name="ProgressionLevel" progression_name="lbu_Demolition" operation="LTE" value="@lbu_DefaultLevelCap"/>
+					</triggered_effect>     
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Demolition_XP" operation="set" value="0"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="lbu_Demolition" level="1"/> 
+					<!--Upadate BCK var in line with ProgressionLevel progress-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Demolition_Lvl" operation="add" value="1"/> 
+					<triggered_effect trigger="onSelfBuffUpdate" action="ShowToolbeltMessage" message="Demolitions Skill Increased!"/>
+					<!--if max level then give free Skill Point-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffLBU_GiveProgressSkillPoint">
+						<requirement name="ProgressionLevel" progression_name="lbu_Demolition" operation="EQ" value="50"/>
+					</triggered_effect>
+			</effect_group>
+		</buff>
+		
+		<!--this buff calculates current GameStage. The GameStage calc is used in buffLuckyLooterXPMonitor
+			to determine the amount of Learn By Use Lucky Looter xp to give the player. The current Gamestage
+			is what is given to the player as xp for looting. So to determine the number of looting occurrences
+			the _xpFromLoot value must be normalised using the GameStage calc.
+			e.g. If the gamestage is 30 and the player loots 2 containers, the value in _XPFromLoot will be 60.
+			See buffLuckyLooterXPMonitor below as well.
+			
+			GameStage Calculation is:
+			((( [Player Level] + [Adjusted Days Alive] ) * [Difficulty Factor] (1.2) ) * ( [Difficulty] + [Gamestage_Modifier] )) + [Gamestage_Bonus]
+	
+			Where:
+				Adjusted Days Alive = (number days since last death)-(2*daysAliveChangeWhenKilled)
+									  *daysAliveChangeWhenKilled is a 7DTD variable and defined in gamestages.xml
+									  *Adjusted Days Alive = (AdjustedDaysAlive > PlayerLevel) ? PlayerLevel : AdjustedDaysAlive; 
+				Difficulty Factor = 1 * 1.2 == 1.2						
+				Difficulty = 1
+				(Gamestage_Modifier & Gamestage_Bonus values are from the games biomes.xml file)
+				Gamestage_Modifier = Pine Forest 0, Burnt Forest 0.5, Desert 0.5, Snow 1, Wasteland 1.5
+
+				Gamestage_Bonus = Pine Forest 0, Burnt Forest 12, Desert 12, Snow 24, Wasteland 36 
+								(these number are derived through testing, docs list them as 0,10,10,20,30 but the above modified numbers track the Gamestage perfectly)
+			
+			Final:
+				(( [Player Level] + [AdjustedDaysAlive] ) * 1.2 ) * ( 1 + [Gamestage_Modifier] )) + [Gamestage_Bonus]
+				NOTE: The ( [Player Level] + [AdjustedDaysAlive] ) * 1.2 ) is calculated here in buff buffGameStageMonitor
+					  The [( 1 + [Gamestage_Modifier] )) + [Gamestage_Bonus]] part is calculated in buffLuckyLooterXPMonitor
+					
+			The buffGameStageMonitor buff needs to know:
+			    when each day starts, count the Days
+				1 Day starts at the first midnight i.e player has been alive for 1 day so far
+				Day count resets on death.
+				Player Level
+				THe calculation of which biome the player is currently in, is done in buffLuckyLooterXPMonitor when the XP is applied
+				as it can change much more frequently than player level or days alive.
+			-->
+		<!--the buffGameStageMonitorSupport tracks player deaths for buffGameStageMonitor.
+			buffGameStageMonitor uses a modified update rate, updating 1/sec instead of 20/s
+			Monitoring the players death uses onSelfRespawn not onSelfBuffUpdate and deosnt use
+			adjusted update rates. So the players death is monitored in this support buff.
+			The vars used in this buff are global vars and intialised in buffGameStageMonitor below-->
+		<buff name="buffGameStageMonitorSupport" hidden="true" remove_on_death="false" >
+			<stack_type value="ignore"/>
+			<duration value="0"/>	
+			<!--Death tracking code-->
+			<effect_group>
+				<triggered_effect trigger="onSelfRespawn" action="ModifyCVar" cvar="stats_DaysAlive" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfRespawn" action="ModifyCVar" cvar="stats_PlayerDeaths" operation="add" value="1"/>
+				<!--adjusted days alive precalculation-->
+				<triggered_effect trigger="onSelfRespawn" action="ModifyCVar" cvar="stats_DaysAlive_PreCalc" operation="set" value="@stats_PlayerDeaths"/>
+				<triggered_effect trigger="onSelfRespawn" action="ModifyCVar" cvar="stats_DaysAlive_PreCalc" operation="multiply" value="@daysAliveChangeWhenKilled"/>	
+			</effect_group>
+			<!--END Death tracking code-->
+		</buff>	
+		
+		<buff name="buffGameStageMonitor" hidden="true" remove_on_death="false" >
+			<stack_type value="ignore"/>
+			<duration value="0"/>			
+			<update_rate value=".05"/> <!--One a second update (at 20 ticks per second = 20*0.05 = 1 tick per second)-->
+			<!--<display_value value=".buffGameStageMonitor"/>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar=".buffGameStageMonitor" operation="set" value="@stats_GameStage"/>
+			</effect_group>-->
+			<!-- initialisation-->
+			<effect_group>
+				<!--load the support buff if its not already laoded-->
+				<triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffGameStageMonitorSupport">
+						<requirement name="!HasBuff" buff="buffGameStageMonitorSupport"/></triggered_effect>
+				<!--glabal variables initialisation-->
+				<!--player level (immutable)-->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="stats_PlayerLevel" operation="set" value="0"/>
+				<!--the number of days a player has gone without death (immutable)-->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="stats_DaysAlive" operation="set" value="0"/>
+				<!--number of player deaths (immutable)-->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="stats_PlayerDeaths" operation="set" value="0"/>
+				<!--the current day e.g. the 17th day (immutable)-->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="stats_CurrentDay" operation="set" value="1"/>
+				<!--the gamestage without biome effects (immutable)-->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="stats_GameStage" operation="set" value="0"/>
+				<!--the gamestage with biome effects (immutable)-->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="stats_BiomeGameStage" operation="set" value="0"/>
+				
+				<!--the amount the current biome is modifying the gamestage by (0, 0.5, 1, 1.5 etc.) (immutable)-->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="stats_BiomeModifier" operation="set" value="0"/>
+				<!--the bonus the current biome is adding to the gamestage (0, 10, 20, 30 etc.) (immutable)-->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="stats_BiomeBonus" operation="set" value="0"/>
+				
+				<!--END glabal variables initialisation-->
+				
+				<!--other temp vars-->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$stats_DayFlag" operation="set" value="1"/> <!--similar to IsDay & IsNight but is 7am-10pm for the gamestage calc-->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$stats_GameStageTemp" operation="set" value="0"/>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="stats_DaysAlive_PreCalc" operation="set" value="0"/>
+				
+			</effect_group>
+			
+			<!--Day tracking code-->
+			<!--check for day turnover, the game's gamestage 'day change' ticks over at 7am, 
+				I would have thought that it would be 6am but its 7am in testing-->
+			<effect_group>
+				<requirement name="TimeOfDay" operation="EQ" value="0700"/>
+				<requirement name="CVarCompare" cvar="$stats_DayFlag" operation="LT" value="1"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$stats_DayFlag" operation="set" value="1"/>
+					<!--increment number of days alive-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_DaysAlive" operation="add" value="1"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_CurrentDay" operation="add" value="1"/>
+			</effect_group>
+			<!--flip the day flag back at the end of the day-->
+			<effect_group>
+				<requirement name="TimeOfDay" operation="EQ" value="2200"/>
+				<requirement name="CVarCompare" cvar="$stats_DayFlag" operation="GTE" value="1"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$stats_DayFlag" operation="set" value="0"/>
+			</effect_group>
+			<!--END Day tracking code-->
+			
+			<!--Player level tracking code-->
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_PlayerLevel" operation="add" value="1">
+					<requirement name="PlayerLevel" operation="GT" value="@stats_PlayerLevel"/></triggered_effect>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_PlayerLevel" operation="subtract" value="1">
+					<requirement name="PlayerLevel" operation="LT" value="@stats_PlayerLevel"/></triggered_effect>
+			</effect_group>
+			<!--END Player level tracking code-->
+			
+			<effect_group> 
+				
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$stats_GameStageTemp" operation="set" value="@stats_DaysAlive"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$stats_GameStageTemp" operation="subtract" value="@stats_DaysAlive_PreCalc"/>
+				<!--capped at players current level-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$stats_GameStageTemp" operation="set" value="@stats_PlayerLevel">
+					<requirement name="CVarCompare" cvar="$stats_GameStageTemp" operation="GT" value="@stats_PlayerLevel"/></triggered_effect>
+				<!--END adjusted days alive-->
+				
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$stats_GameStageTemp" operation="add" value="@stats_PlayerLevel"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$stats_GameStageTemp" operation="multiply" value="1.2"/>
+				
+				<!--set the GameStage with the final calculation-->
+				<!--this is the raw gamestage - the gamestage without Biome modifications-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_GameStage" operation="set" value="@$stats_GameStageTemp"/>
+			</effect_group>
+
+			<!--calculate gamestage with biome adjustments-->
+			<effect_group>
+				<!--Calculate Gamestage_Modifier and Gamestage_Bonus from the current biome-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_BiomeModifier" operation="set" value="0.5"/> <!--burnt forest & desert-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_BiomeBonus" operation="set" value="12"/>
+				<!--pine forest-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_BiomeModifier" operation="set" value="0">
+						<requirement name="InBiome" biome="3"/></triggered_effect>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_BiomeBonus" operation="set" value="0" >
+						<requirement name="InBiome" biome="3"/></triggered_effect>					
+				<!--snow-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_BiomeModifier" operation="set" value="1">
+						<requirement name="InBiome" biome="1"/></triggered_effect>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_BiomeBonus" operation="set" value="24" >
+						<requirement name="InBiome" biome="1"/></triggered_effect>						
+				<!--wasteland-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_BiomeModifier" operation="set" value="1.5">
+						<requirement name="InBiome" biome="8"/></triggered_effect>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_BiomeBonus" operation="set" value="36" >
+						<requirement name="InBiome" biome="8"/></triggered_effect>
+						
+				<!--calculate current gamestage modifier ( 1 + [Gamestage_Modifier] )-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$stats_GameStageTemp" operation="set" value="@stats_BiomeModifier"/> 
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$stats_GameStageTemp" operation="add" value="1"/>
+				<!--((( [Player Level] + [Adjusted Days Alive] ) * [Difficulty Factor] (1.2) ) * ( [Difficulty] + [Gamestage_Modifier] )) + [Gamestage_Bonus]-->
+				<!-- OR (Gamestage_Modifier * stats_GameStage) + stats_BiomeBonus -->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$stats_GameStageTemp" operation="multiply" value="@stats_GameStage"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$stats_GameStageTemp" operation="add" value="@stats_BiomeBonus"/>
+				<!--<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="buffDebug2Var" operation="set" value="@stats_BiomeModifier"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="buffDebug3Var" operation="set" value="@stats_BiomeBonus"/>-->
+					
+				<!--set the Biomed GameStage with the final calculation-->
+				<!--this is the final gamestage - the gamestage with Biome modifications-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="stats_BiomeGameStage" operation="set" value="@$stats_GameStageTemp"/>
+				<!--<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="buffDebug1Var" operation="set" value="@$stats_GameStageTemp"/>-->
+				
+			</effect_group>
+
+			
+		</buff>	
+		
+		<!--This buff monitors looting xp for the learn by use Lucky Looter skill.
+			Tracks changes to the global _xpFromLoot varable.
+			It updates any changes to learn by use lucky looter xp-->
+		<buff name="buffLuckyLooterXPMonitor" hidden="true" remove_on_death="false" >
+			<stack_type value="ignore"/>
+			<duration value="0"/>			
+			<update_rate value=".1"/> <!--2 times a sec (at 20 ticks per sec = 20*0.1 = 2 updates per second)-->
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPFomLoot" operation="set" value="@_xpFromLoot"/>
+			</effect_group>
+
+			<!--update the xp based on the hit count-->
+			<effect_group>
+				<!--_xpFromLoot resets each player level so if it is less that the current lbu_XPFomLoot it has been reset, 
+					so set them equal again. -->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_XPFomLoot" operation="set" value="@$game_XPFomLoot">
+					<requirement name="CVarCompare" cvar="lbu_XPFomLoot" operation="GT" value="@$game_XPFomLoot"/></triggered_effect>
+			</effect_group>	
+			
+			<effect_group>	
+				<requirement name="CVarCompare" cvar="lbu_XPFomLoot" operation="LT" value="@$game_XPFomLoot"/>
+					<!--there has been an increase in loot xp-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPFomLoot" operation="subtract" value="@lbu_XPFomLoot"/>
+					
+					<!--$game_XPFomLoot now has the increase of in-game loot xp since last update-->
+					<!--to convert to learn-by-use XP
+						Normalise the $game_XPFomLoot using stats_BiomeGameStage (divide the games _XPFromLoot by the current gamestage to get looting incident count)
+						(each in-game looting xp gain amount is the same as the current gamestage - its how the game scales looting xp)
+					-->		
+					<!--normalise-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPFomLoot" operation="divide" value="@stats_BiomeGameStage"/>
+					<!--minimum is 1-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPFomLoot" operation="set" value="1">
+						<requirement name="CVarCompare" cvar="$game_XPFomLoot" operation="LT" value="1"/></triggered_effect>
+					
+					<!--$game_XPFomLoot now contains the number of times the player looted containers-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$game_XPFomLoot" operation="multiply" value="@lbu_LuckyLooter_LOOT_XP"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_LuckyLooter_XP" operation="add" value="@$game_XPFomLoot"/>
+					<!--set local loot xp and _xpFomLoot equal-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_XPFomLoot" operation="set" value="@_xpFromLoot"/>
+					
+			</effect_group>	
+			<!--Increase ProgressLevel if xp greater than value for next level-->
+			<effect_group>
+				<requirement name="CVarCompare" cvar="lbu_LuckyLooter_XP" operation="GTE" value="@lbu_LuckyLooter_XPIncrement"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_LuckyLooter" operation="LT" value="50"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_LuckyLooter_XPIncrement" operation="multiply" value="@lbu_DefaultIncrementIncrease"> 
+						<!--taper off level xp increase at level 47 (xxx_XPIncrement about 4000). xxx_XPIncrement will grow to 4700  without the cap-->
+						<requirement name="onSelfBuffUpdate" progression_name="lbu_LuckyLooter" operation="LTE" value="@lbu_DefaultLevelCap"/>
+					</triggered_effect>	
+					
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_LuckyLooter_XP" operation="set" value="0"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="lbu_LuckyLooter" level="1"/> 
+					<!--Upadate BCK var in line with ProgressionLevel progress-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_LuckyLooter_Lvl" operation="add" value="1"/> 
+					<triggered_effect trigger="onSelfBuffUpdate" action="ShowToolbeltMessage" message="Lucky Looter Skill increased!"/>
+					<!--if max level then give free Skill Point-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffLBU_GiveProgressSkillPoint">
+						<requirement name="ProgressionLevel" progression_name="lbu_LuckyLooter" operation="EQ" value="50"/>
+					</triggered_effect>
+			</effect_group>
+		</buff>
 		<!--END PERK code for Learn By Use functionality-->
 		
 	</append>
 	
-	<!--lBU Physician Perk supprt code-->
+	<!--lBU Physician Perk support code-->
 	<!--insert code to update the lbu_PhysicianUseCounter used by the buffLBUPhysician buff define above.
 	THis will increase the counter by 1 each time the game's buffHealFood is called (not when its stacked)-->
 	<append xpath="/buffs/buff[@name='buffHealFood']">
@@ -1300,4 +1992,24 @@
 		
 	</append>
 	<!--END lBU Physician Perk support code-->
+	
+	<!--lbu demolition perk support code for molotovs.
+		When a zombie is on fire it send out an 'am on fire' notification to the player who is listening 
+		using the buffs:buffDemolitionMolotovs
+		see also items:comment[lbu_Demolition code for Molotovs]-->  
+	<append xpath="/buffs/buff[@name='zombieBuffStatusCheck01']">
+		<effect_group>
+			<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="molotovTokenKey" operation="set" value="99"/>
+		</effect_group>
+		
+		<effect_group>
+			<requirement name="CVarCompare" cvar="$molotovTokenKey" operation="GTE" value="100"/>
+			<requirement name="HasBuff" buff="buffIsOnFire"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" target="positionAOE" target_tags="player" range="30" cvar="$molotovBurnCount" operation="add" value="1"/>
+				<!--only send one call, so reset token to 0-->
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$molotovTokenKey" operation="set" value="0"/>
+		</effect_group>
+	</append>		
+	<!--lbu demolition perk support code for molotovs-->
+	
 </configs>

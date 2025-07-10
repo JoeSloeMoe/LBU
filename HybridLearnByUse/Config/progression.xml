@@ -18,6 +18,9 @@
 	</insertBefore>
 
 	<append xpath="/progression/skills">
+		<skill name="lbu_GeneralSkills" parent="LearnByUse" name_key="General_Perks" desc_key="attGeneralName" icon="ui_game_symbol_modded">
+			<effect_group/>
+		</skill>
 		<skill name="lbu_PerceptionSkills" parent="LearnByUse" name_key="attPerceptionName" desc_key="attPerceptionName" icon="ui_game_symbol_stealth">
 			<effect_group/>
 		</skill>
@@ -92,6 +95,10 @@
 		
 		<!-- begin Demolitions Learn By Use (lbu)-->
 		<!--Note that demolition has to have code for both timed charges and grenades/rockets.
+			Molotovs are handled in buffs:buffDemolitionMolotovs and also see 
+				items:[lbu_Demolition code for Molotovs]
+				buffs:buffDemolitionMolotovs, buffDemolitionMolotovsHitCounter and
+				buffs:[lbu demolition perk support code for molotov]
 			They use different triggers so some of the code is repeated twice, once for each trigger ( onSelfExplosionMissEntity, onSelfExplosionDamagedOther).
 			Had to use onSelfExplosionMissEntity as the trigger for timed charges as no other trigger worked. So any use of explosives gives some exp whether it hits a zombie or not
 			*Molotovs WONT continue to trigger the effect (perk level xp gain due to damaging zombies) when a zombie is burning. 
@@ -120,6 +127,7 @@
 			<!--apply any level xp gain for damage or kill triggers (this DOES NOT apply to molotovs)-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkDemolitionsExpert"/>
+				<!--molotovs are handles separately in buffs:[lbu demolition perk support code]-->
 				<requirement name="!ItemHasTags" tags="lbu_DemoMolotov"/>
 				<requirement name="ProgressionLevel" progression_name="lbu_Demolition" operation="LT" value="50"/>
 					<!--cater for timed charge use (or any explosion use that doesnt hit a zombie really)-->
@@ -129,21 +137,16 @@
 					<triggered_effect trigger="onSelfExplosionDamagedOther" action="ModifyCVar" cvar="lbu_Demolition_XP" operation="add" value="@lbu_Demolition_DMG_GXP">
 						<requirement name="StatCompareCurrent" target="other" stat="health" operation="GT" value="0"/>
 					</triggered_effect>		
+					
+			</effect_group>
+			
+			<!--apply any level xp gain kill triggers-->
+			<effect_group>
+				<requirement name="ItemHasTags" tags="perkDemolitionsExpert"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_Demolition" operation="LT" value="50"/>
 					<!--point for killing-->
 					<triggered_effect trigger="onSelfKilledOther" action="ModifyCVar" cvar="lbu_Demolition_XP" operation="add" value="@lbu_Demolition_Kill_GXP"/> 
 			
-			</effect_group>
-			<!--apply any level xp gain for damage or kill triggers (this ONLY applies to molotovs)-->
-			<effect_group>
-				<!--<requirement name="ItemHasTags" tags="perkDemolitionsExpert"/>-->
-				<requirement name="ItemHasTags" tags="lbu_DemoMolotov"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_Demolition" operation="LT" value="50"/>
-					<!--Molotovs only give one trigger regardless of number of zombies hit-->
-					<triggered_effect trigger="onSelfExplosionDamagedOther" action="ModifyCVar" cvar="lbu_Demolition_XP" operation="add" value="@lbu_Demolition_DMG_MXP">
-						<requirement name="StatCompareCurrent" target="other" stat="health" operation="GT" value="0"/>
-					</triggered_effect>	
-					<triggered_effect trigger="onSelfExplosionMissEntity" action="ModifyCVar" cvar="lbu_Demolition_XP" operation="add" value="26"/>
-					<triggered_effect trigger="onSelfKilledOther" action="ModifyCVar" cvar="lbu_Demolition_XP" operation="add" value="@lbu_Demolition_Kill_MXP"/>
 			</effect_group>
 			
 			<!--Increase ProgressLevel if xp greater than value for next level-->
@@ -248,7 +251,7 @@
 		<!-- end Spear Master Learn By Use (lbu)-->
 		
 		<!-- begin Lucky Looter Learn By Use (lbu)-->
-		<perk name="lbu_LuckyLooter" max_level="50" parent="lbu_PerceptionSkills" base_skill_point_cost="0" name_key="lbu_LuckyLooterName" desc_key="lbu_LuckyLooterDesc" long_desc_key="lbu_LuckyLooterDesc" icon="ui_game_symbol_shopping_cart">
+		<perk name="lbu_LuckyLooter" max_level="50" parent="lbu_GeneralSkills" base_skill_point_cost="0" name_key="lbu_LuckyLooterName" desc_key="lbu_LuckyLooterDesc" long_desc_key="lbu_LuckyLooterDesc" icon="ui_game_symbol_shopping_cart">
 		
 			<!--BCK verify ProgressionLevel, backup var should always be equal to ProgessionLevel-->
 			<effect_group>
@@ -264,31 +267,7 @@
 				<passive_effect name="ScavengingTime" operation="perc_subtract" value="0.01,0.4" level="1,50" />
 			</effect_group>
 	
-			<!--apply any level xp gain for damage or kill triggers-->
-			<effect_group>
-				<requirement name="ProgressionLevel" progression_name="lbu_LuckyLooter" operation="LT" value="50"/>
-					<triggered_effect trigger="onSelfLootContainer" action="ModifyCVar" cvar="lbu_LuckyLooter_XP" operation="add" value="@lbu_LuckyLooter_LOOT_XP" />
-			</effect_group>
-
-			<!--Increase ProgressLevel if xp greater than value for next level-->
-			<effect_group>
-				<requirement name="CVarCompare" cvar="lbu_LuckyLooter_XP" operation="GTE" value="@lbu_LuckyLooter_XPIncrement"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_LuckyLooter" operation="LT" value="50"/>
-					<triggered_effect trigger="onSelfLootContainer" action="ModifyCVar" cvar="lbu_LuckyLooter_XPIncrement" operation="multiply" value="@lbu_DefaultIncrementIncrease"> 
-						<!--taper off level xp increase at level 47 (xxx_XPIncrement about 4000). xxx_XPIncrement will grow to 4700  without the cap-->
-						<requirement name="ProgressionLevel" progression_name="lbu_LuckyLooter" operation="LTE" value="@lbu_DefaultLevelCap"/>
-					</triggered_effect>	
-					
-					<triggered_effect trigger="onSelfLootContainer" action="ModifyCVar" cvar="lbu_LuckyLooter_XP" operation="set" value="0"/>
-					<triggered_effect trigger="onSelfLootContainer" action="AddProgressionLevel" progression_name="lbu_LuckyLooter" level="1"/> 
-					<!--Upadate BCK var in line with ProgressionLevel progress-->
-					<triggered_effect trigger="onSelfLootContainer" action="ModifyCVar" cvar="lbu_LuckyLooter_Lvl" operation="add" value="1"/> 
-					<triggered_effect trigger="onSelfLootContainer" action="ShowToolbeltMessage" message="Lucky Looter Skill increased!"/>
-					<!--if max level then give free Skill Point-->
-					<triggered_effect trigger="onSelfLootContainer" action="AddBuff" buff="buffLBU_GiveProgressSkillPoint">
-						<requirement name="ProgressionLevel" progression_name="lbu_LuckyLooter" operation="EQ" value="50"/>
-					</triggered_effect>
-			</effect_group>
+			<!--see buffs:buffLuckyLooterXPMonitor for the xp and level changes for lucky looter-->
 		</perk>
 		<!-- end Luck Looter Learn By Use (lbu)-->
 		
@@ -572,8 +551,28 @@
 			</effect_group>
 			
 			<!--apply any level xp gain for harvest trigger-->
+			<!--There are 2 separate code segments for updating the xp.
+				The first is for stone axes. The scond is for everything else.
+				THis is to balance the damage as hit frequency of stone axes in 
+				early game vs steel axes in late game-->
+			<!--stone axe code-->
+			<effect_group>
+				<requirement name="ItemHasTags" tags="perkMiner69r,perkMotherLode,perkTheHuntsman" has_all_tags="true"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_Miner69er" operation="LT" value="50"/>
+					<triggered_effect trigger="onSelfHarvestBlock" action="ModifyCVar" cvar="$stoneAxeXP" operation="set" value="@lbu_Miner69er_DMG_XP"/> 	
+					<!--remove 1 dmg xp for stone axes per hit or destroy-->
+					<triggered_effect trigger="onSelfHarvestBlock" action="ModifyCVar" cvar="$stoneAxeXP" operation="add" value="-1"/> 		
+					<triggered_effect trigger="onSelfHarvestBlock" action="ModifyCVar" cvar="lbu_Miner69er_XP" operation="add" value="@$stoneAxeXP"/> 
+					<!-- add additional damage for destruction, also uses the DMG variable not the KILL var-->
+					<triggered_effect trigger="onSelfDestroyedBlock" action="ModifyCVar" cvar="$stoneAxeXP" operation="set" value="@lbu_Miner69er_DMG_XP"/> 
+					<!--only half xp for stone axes-->
+					<triggered_effect trigger="onSelfDestroyedBlock" action="ModifyCVar" cvar="$stoneAxeXP" operation="add" value="-1"/> 		
+					<triggered_effect trigger="onSelfDestroyedBlock" action="ModifyCVar" cvar="lbu_Miner69er_XP" operation="add" value="@$stoneAxeXP"/> 
+			</effect_group>
+			<!--everything else-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkMiner69r,perkMotherLode"/>
+				<requirement name="!ItemHasTags" tags="perkTheHuntsman"/>
 				<requirement name="ProgressionLevel" progression_name="lbu_Miner69er" operation="LT" value="50"/>
 					<triggered_effect trigger="onSelfHarvestBlock" action="ModifyCVar" cvar="lbu_Miner69er_XP" operation="add" value="@lbu_Miner69er_DMG_XP"/> 
 					<!-- add additional damage for destruction-->
@@ -985,7 +984,10 @@
 		</perk>
 		<!-- end Electrocutioner Learn By Use (lbu)-->
 		
-				<!-- begin Robotics Learn By Use (lbu)-->
+		<!--START Multiplayer Turret Note : delete the following to remove Turrets from Learn by Use
+			ALSO delte the lines between lbu_MULTIPLAYERTURRETS_START and lbu_MULTIPLAYERTURRETS_END in Localization.txt-->
+		<!-- begin Robotics Learn By Use (lbu)
+			Note see also items.xml:gunBotT2JunkTurret append code for ranged turret logic-->
 		<perk name="lbu_Robotics" max_level="50" parent="lbu_IntellectSkills" base_skill_point_cost="0" name_key="lbu_RoboticsName" desc_key="lbu_RoboticsDesc" long_desc_key="lbu_RoboticsDesc" icon="ui_game_symbol_electric_turret">
 		
 			<!--BCK verify ProgressionLevel, backup var should always be equal to ProgessionLevel-->
@@ -1041,7 +1043,61 @@
 					</triggered_effect>
 			</effect_group>
 		</perk>
+		<!--Modify existing perkTurrets - halving stat increases per level-->
+		<set xpath="progression/perks/perk[@name='perkTurrets']/effect_group/passive_effect[@name='ReloadSpeedMultiplier' and @operation='perc_add']/@value">0.05,0.1</set>
+		<set xpath="progression/perks/perk[@name='perkTurrets']/effect_group/passive_effect[@name='MagazineSize' and @operation='base_add']/@value">5,25</set>
+		<set xpath="progression/perks/perk[@name='perkTurrets']/effect_group/passive_effect[@name='EntityDamage' and @operation='perc_add']/@value">.05,.1,.15,.2,.2</set>	
+		<set xpath="progression/perks/perk[@name='perkTurrets']/effect_group/passive_effect[@name='BlockDamage' and @operation='perc_add']/@value">.05,.1,.15,.2,.2</set>	
+		
+		<set xpath="progression/perks/perk[@name='perkTurrets']/effect_group/passive_effect[@name='RoundsPerMinute' and @operation='perc_add' and @tags='turretMelee']/@value">.07,.12,.19,.25,.25</set>	
+		<set xpath="progression/perks/perk[@name='perkTurrets']/effect_group/passive_effect[@name='RoundsPerMinute' and @operation='perc_add' and @tags='turretRanged']/@value">.15,.53,0.6,0.75,0.75</set>	
+	
 		<!-- end Robotics Learn By Use (lbu)-->
+		<!--END Multiplayer Turret Note : delete the above to remove Turrets from Learn by Use-->
+		
+		<!-- begin Bartering Learn By Use (lbu)
+			See also buffs:buffBartering for xp calculations-->
+		<perk name="lbu_Bartering" max_level="50" parent="lbu_IntellectSkills" base_skill_point_cost="0" name_key="lbu_BarteringName" desc_key="lbu_BarteringDesc" long_desc_key="lbu_BarteringDesc" icon="ui_game_symbol_barter">
+		
+			<!--BCK verify ProgressionLevel, backup var should always be equal to ProgessionLevel-->
+			<effect_group>
+				<requirement name="!HasBuff" buff="buffVerifyLBU_ProgressLevels"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_Bartering" operation="NotEquals" value="@lbu_Bartering_lvl"/> 
+					<triggered_effect trigger="onSelfDamagedOther" action="AddBuff" buff="buffVerifyLBU_ProgressLevels"/>				
+			</effect_group>
+			<effect_group>
+				<!--this effect never happens but its used to provide some text to the ui display as the display doesnt show base_add properly
+					(which is what the game uses in perkBetterBarter) the actual effect of increasing buying and selling is implemented in buffs.xml:buffLbuBartering. 
+				-->
+				<passive_effect name="BarteringBuying" operation="perc_add" level="1,50" value="0.01,0.12">
+					<requirement name="ProgressionLevel" progression_name="lbu_Bartering" operation="GT" value="110"/> <!--never fires but shows heal speed increase-->
+				</passive_effect>
+				<passive_effect name="BarteringSelling" operation="perc_add" level="1,50"  value="0.01,0.125">
+					<requirement name="ProgressionLevel" progression_name="lbu_Bartering" operation="GT" value="110"/> <!--never fires but shows heal speed increase-->
+				</passive_effect>
+				
+			</effect_group>			
+		</perk>
+		<!-- end Bartering Learn By Use (lbu)-->
+		
+		<!-- begin Daring adventureLearn By Use (lbu)
+			See also buffs:buffLbuDaringAdv for xp calculations-->
+		<perk name="lbu_DaringAdv" max_level="50" parent="lbu_IntellectSkills" base_skill_point_cost="0" name_key="lbu_DaringAdvName" desc_key="lbu_DaringAdvDesc" long_desc_key="lbu_DaringAdvDesc" icon="ui_game_symbol_adventure">
+		
+			<!--BCK verify ProgressionLevel, backup var should always be equal to ProgessionLevel-->
+			<effect_group>
+				<requirement name="!HasBuff" buff="buffVerifyLBU_ProgressLevels"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="NotEquals" value="@lbu_DaringAdv_lvl"/> 
+					<triggered_effect trigger="onSelfDamagedOther" action="AddBuff" buff="buffVerifyLBU_ProgressLevels"/>				
+			</effect_group>
+			
+			<effect_group>
+				<passive_effect name="TraderStage" operation="base_add" level="1,50" value="0.01,12"/>
+				<passive_effect name="QuestBonusItemReward" operation="perc_add" level="1,50" value=".01,.125"/> <!-- Bonus Dukes -->
+			</effect_group>
+			
+		</perk>
+		<!-- end Daring adventure Learn By Use (lbu)-->
 		
 		<!-- begin Physician Learn By Use (lbu)-->
 		<!--The code for the lbu_Physician Perk is implemented in buffs.xml:buffLBUPhysician, progression.xml:lbu_Physician and items.xml(see comment "lbu_Physician Perk code" -->
@@ -1059,7 +1115,7 @@
 					actual effect of increasing healing rate implemented in buffs.xml:buffLBUPhysician. 
 					EntityHeal doesnt fire as its not hooked up-->
 				<passive_effect name="EntityHeal" operation="perc_add" level="1,50" value="0.01,0.50" tags="medical">
-					<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="GT" value="100"/> <!--never fires but shows heal speed increase-->
+					<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="GT" value="110"/> <!--never fires but shows heal speed increase-->
 				</passive_effect> 
 				
 				<!-- Increase medicRegHealthIncreaseSpeed with each level of the perk 
@@ -1141,8 +1197,8 @@
 					
 	
 	<!--Modify existing SkullCrusher perk to halve stat increases per level-->
-	<set xpath="progression/perks/perk[@name='perkSkullCrusher']/effect_group/passive_effect[@name='BlockDamage' and @operation='perc_add']/@value">.2,1</set>
-	<set xpath="progression/perks/perk[@name='perkSkullCrusher']/effect_group/passive_effect[@name='EntityDamage' and @operation='perc_add']/@value">.1,0.5</set>
+	<set xpath="progression/perks/perk[@name='perkSkullCrusher']/effect_group/passive_effect[@name='BlockDamage' and @operation='perc_add']/@value">.1,0.5</set>
+	<set xpath="progression/perks/perk[@name='perkSkullCrusher']/effect_group/passive_effect[@name='EntityDamage' and @operation='perc_add']/@value">.05,0.25</set>
 	<!--this should cover both primary and secondary actions-->
 	<set xpath="progression/perks/perk[@name='perkSkullCrusher']/effect_group/passive_effect[@name='StaminaLoss' and @operation='perc_add']/@value">-.04,-.07,-.1,-.13,-.13</set>
 
@@ -1172,8 +1228,8 @@
 	<set xpath="progression/perks/perk[@name='perkGunslinger']/effect_group/passive_effect[@name='ReloadSpeedMultiplier' and @operation='perc_add']/@value">0,0.15</set>	
 				
 	<!--Modify existing perkDeepCuts - halving stat increases per level-->
-	<set xpath="progression/perks/perk[@name='perkDeepCuts']/effect_group/passive_effect[@name='BlockDamage' and @operation='perc_add']/@value">.2,1</set>
-	<set xpath="progression/perks/perk[@name='perkDeepCuts']/effect_group/passive_effect[@name='EntityDamage' and @operation='perc_add']/@value">.1,.5</set>
+	<set xpath="progression/perks/perk[@name='perkDeepCuts']/effect_group/passive_effect[@name='BlockDamage' and @operation='perc_add']/@value">.1,0.5</set>
+	<set xpath="progression/perks/perk[@name='perkDeepCuts']/effect_group/passive_effect[@name='EntityDamage' and @operation='perc_add']/@value">.05,.</set>
 	<!--this should cover both primary and secondary actions-->
 	<set xpath="progression/perks/perk[@name='perkDeepCuts']/effect_group/passive_effect[@name='StaminaLoss' and @operation='perc_add']/@value">-.04,-.07,-.1,-.13,-.13</set>
 
@@ -1182,27 +1238,74 @@
 	<set xpath="progression/perks/perk[@name='perkHiddenStrike']/effect_group/passive_effect[@name='EntityDamage' and @operation='perc_add']/@value">0.25,0.5,0.75,1,1.25,1.5</set>
 	
 	<!--Modify existing perkElectrocutioner - halving stat increases per level-->
-	<set xpath="progression/perks/perk[@name='perkElectrocutioner']/effect_group/passive_effect[@name='BlockDamage' and @operation='perc_add']/@value">.2,1</set>
-	<set xpath="progression/perks/perk[@name='perkElectrocutioner']/effect_group/passive_effect[@name='EntityDamage' and @operation='perc_add']/@value">.1,.5</set>
+	<set xpath="progression/perks/perk[@name='perkElectrocutioner']/effect_group/passive_effect[@name='BlockDamage' and @operation='perc_add']/@value">.1,0.5</set>
+	<set xpath="progression/perks/perk[@name='perkElectrocutioner']/effect_group/passive_effect[@name='EntityDamage' and @operation='perc_add']/@value">.05,.25</set>
 	<!--this should cover both primary and secondary actions-->
 	<set xpath="progression/perks/perk[@name='perkElectrocutioner']/effect_group/passive_effect[@name='StaminaLoss' and @operation='perc_add']/@value">-.04,-.07,-.1,-.13,-.13</set>
 			
-	<!--Modify existing perkTurrets - halving stat increases per level-->
-	<set xpath="progression/perks/perk[@name='perkTurrets']/effect_group/passive_effect[@name='ReloadSpeedMultiplier' and @operation='perc_add']/@value">0.05,0.1</set>
-	<set xpath="progression/perks/perk[@name='perkTurrets']/effect_group/passive_effect[@name='MagazineSize' and @operation='base_add']/@value">5,25</set>
-	<set xpath="progression/perks/perk[@name='perkTurrets']/effect_group/passive_effect[@name='EntityDamage' and @operation='perc_add']/@value">.05,.1,.15,.2,.2</set>	
-	<set xpath="progression/perks/perk[@name='perkTurrets']/effect_group/passive_effect[@name='BlockDamage' and @operation='perc_add']/@value">.05,.1,.15,.2,.2</set>	
 	
-	<set xpath="progression/perks/perk[@name='perkTurrets']/effect_group/passive_effect[@name='RoundsPerMinute' and @operation='perc_add' and @tags='turretMelee']/@value">.07,.12,.19,.25,.25</set>	
-	<set xpath="progression/perks/perk[@name='perkTurrets']/effect_group/passive_effect[@name='RoundsPerMinute' and @operation='perc_add' and @tags='turretRanged']/@value">.15,.53,0.6,0.75,0.75</set>	
-	<!--END Change existing Perks to half their values -->	
-
+	<!--better barter-->
+	<set xpath="progression/perks/perk[@name='perkBetterBarter']/effect_group/passive_effect[@name='BarteringBuying']/@value">.025,.05,.075,0.1,0.13</set>	
+	<set xpath="progression/perks/perk[@name='perkBetterBarter']/effect_group/passive_effect[@name='BarteringSelling']/@value">.025,.05,.075,0.1,0.13</set>	
+	
 	<!--Modify existing perkPhysician - halving stat increases per level-->
 	<set xpath="progression/perks/perk[@name='perkPhysician']/effect_group/passive_effect[@name='PlayerExpGain' and @operation='perc_add']/@value">0.5,1,2.5,2.5,2.5</set>
 	<!--see buffs:buffLBUPhysician for details on the following 2 lines-->
 	<set xpath="progression/perks/perk[@name='perkPhysician']/effect_group/triggered_effect[@trigger='onSelfProgressionUpdate' and @operation='set']/@cvar">perkPhysicianLevelTrack</set>
 	<set xpath="progression/perks/perk[@name='perkPhysician']/effect_group/triggered_effect[@trigger='onSelfProgressionUpdate' and @operation='set']/@value">1</set>
-				
+	
+		<!--better barter - the following 2 lines of code dont work because its coded from the Survival No Trader mod. 
+		The mod overwrites betterbarter as it doesnt use mods
+		So the whole of the perk's code is redone to change the passive effect.
+		The code is unchanged except for the passive effect
+	<set xpath="progression/perks/perk[@name='perkBetterBarter']/effect_group/passive_effect[@name='BarteringBuying']/@value">.025,.05,.075,0.1,0.125</set>	
+	<set xpath="progression/perks/perk[@name='perkBetterBarter']/effect_group/passive_effect[@name='BarteringSelling']/@value">.025,.05,.075,0.1,0.125</set>	
+	-->
+	<set xpath="progression/perks/perk[@name='perkBetterBarter']">
+		<level_requirements level="1"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="1" desc_key="reqIntellectLevel01"/></level_requirements>
+		<level_requirements level="2"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="3" desc_key="reqIntellectLevel03"/></level_requirements>
+		<level_requirements level="3"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="5" desc_key="reqIntellectLevel05"/></level_requirements>
+		<level_requirements level="4"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="7" desc_key="reqIntellectLevel07"/></level_requirements>
+		<level_requirements level="5"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="10" desc_key="reqIntellectLevel10"/></level_requirements>
+
+		<effect_group>
+			<passive_effect name="BarteringBuying" operation="base_add" level="1,2,3,4,5" value=".025,.05,.075,0.1,0.13"/>
+			<passive_effect name="BarteringSelling" operation="base_add" level="1,2,3,4,5" value=".025,.05,.075,0.1,0.13"/>
+
+			<effect_description level="1" desc_key="perkBetterBarterRank1Desc" long_desc_key="perkBetterBarterRank1LongDesc"/>
+			<effect_description level="2" desc_key="perkBetterBarterRank2Desc" long_desc_key="perkBetterBarterRank2LongDesc"/>
+			<effect_description level="3" desc_key="perkBetterBarterRank3Desc" long_desc_key="perkBetterBarterRank3LongDesc"/>
+			<effect_description level="4" desc_key="perkBetterBarterRank4Desc" long_desc_key="perkBetterBarterRank4LongDesc"/>
+			<effect_description level="5" desc_key="perkBetterBarterRank5Desc" long_desc_key="perkBetterBarterRank5LongDesc"/>
+		</effect_group>
+	</set>
+	<!--END better barter-->
+	<!--Daring Adventure - the following line of code doesnt work because its coded from the Survival No Trader mod. 
+		The mod overwrites betterbarter as it doesnt use mods
+		So the whole of the perk's code is redone to change the passive effect.
+		The code is unchanged except for the passive effect
+	<set xpath="progression/perks/perk[@name='perkDaringAdventurer']/effect_group/passive_effect[@name='QuestBonusItemReward']/@value">.025,.12</set>	
+	-->
+	<set xpath="progression/perks/perk[@name='perkDaringAdventurer']">
+		<level_requirements level="1"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="1" desc_key="reqIntellectLevel01"/></level_requirements>
+		<level_requirements level="2"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="4" desc_key="reqIntellectLevel04"/></level_requirements>
+		<level_requirements level="3"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="7" desc_key="reqIntellectLevel07"/></level_requirements>
+		<level_requirements level="4"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="10" desc_key="reqIntellectLevel10"/></level_requirements>
+
+		<effect_group>
+			<passive_effect name="TraderStage" operation="base_add" level="1,5" value="2.5,12.5"/>
+			<passive_effect name="QuestBonusItemReward" operation="perc_add" level="1,5" value=".025,.13"/> <!-- Bonus Dukes -->
+			<passive_effect name="QuestRewardChoiceCount" operation="base_add" level="5" value="1"/>
+
+			<effect_description level="1" desc_key="perkDaringAdventurerRank1Desc" long_desc_key="perkDaringAdventurerRank1LongDesc"/>
+			<effect_description level="2" desc_key="perkDaringAdventurerRank2Desc" long_desc_key="perkDaringAdventurerRank2LongDesc"/>
+			<effect_description level="3" desc_key="perkDaringAdventurerRank3Desc" long_desc_key="perkDaringAdventurerRank3LongDesc"/>
+			<effect_description level="4" desc_key="perkDaringAdventurerRank4Desc" long_desc_key="perkDaringAdventurerRank4LongDesc"/>
+		</effect_group>
+	</set>
+	<!--END Daring Adventure-->
+	<!--END Change existing Perks to half their values -->	
+	
 	<!--end Learn-By-Use ALL code -->
 
 </configs>

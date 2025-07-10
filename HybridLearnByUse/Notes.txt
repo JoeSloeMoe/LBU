@@ -8,11 +8,12 @@ Perk Tree as normal.
 Recommend starting a new game.
 
 Currently applies to the tools and weapons for the following Perks:
+General: Lucky Looter
 Perception: DeadEye, Demolition Expert, SpearMaster, Lucky Looter, Salvage
 Strength: Boomstick, PummelPete, SkullCrusher, Miner69r/Motherload.
 Fortitude: Brawler, MachineGunner
 Agility: Archery, Gunslinger, DeepCuts, Hidden Strike
-Intellect: Electrocutioner, Robotics, Physician
+Intellect: Electrocutioner, Robotics, Physician, Bartering, Daring Adventure
 
 Mod Functionality (configurable in buffs.xml):
 - Receive a bonus skill point when you max out each Perk Skill (level 50) 
@@ -33,8 +34,13 @@ Config variables:
 There are several Global Config variables to control the Learn-By-Use functionality. 
 See buffs.xml, look for the line: "<!--PLAYER CONFIG VARIABLES..." for the variables and further information.
 
+Multiplayer Notes:
+ - Special thanks for Aramus for multiplayer testing.
+ - Fully tested
+ - Ranged Turrets do not work in multiplayer. Please see the comment line [START Multiplayer Turret Notes] in progression.xml to remove Turrets from Learn-By-Use if needed for multiplayer.
+
 License:
-The code is free to use license. It is based on the Action Skill levelling algorithm from 
+The code is free to use license and commented as such. It is based on the Action Skill levelling algorithm from 
 Khaine in the Darkness Falls mod (//community.7daystodie.com/topic/4941-darkness-falls-they-mostly-come-out-at-night/). 
 Please acknowledge Khaine's coal-face work if you reuse the code.
 
@@ -110,7 +116,21 @@ This modlet comes from the Survival No Trader mod.
 1.1.4 March 2025
    - Added Lucky Looter skill
    - Added Physician skill 
-   - Code refactoring in preparation for V1.3 release.
+   - Code refactoring in preparation for 7DTD V1.3 release.
    
    Notes:
    At max level the Learn By Use Physician Skill buffs Splints and Casts to heal sprains (configurable).
+   TeleportToSpecial
+   
+ 1.1.5 9th April 2025 test release
+  - modified Molotov code
+  - modified Looting code
+  
+ 2.0.1 9th July 2025
+  - 7DTD 2.0 compatible release
+  - Added Better Barter
+  - Added Daring Adventurer
+  - Fixed Molotovs in multiplayer
+  - Fixed Lucky Looter in multiplayer
+  - Minor adjustments for balancing
+  - Added additional descriptive text

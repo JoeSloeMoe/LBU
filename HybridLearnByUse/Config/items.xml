@@ -1,5 +1,28 @@
 <configs>
 	<!--Learn by use code-->
+	<!--lbu_Demolition code for Molotovs-->
+	<append xpath="/items/item[@name='thrownAmmoMolotovCocktail']">
+		<effect_group  tiered="false" >
+			<triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffDemolitionMolotovsHitCounter" />	
+			<!--set the player molotov thrown token.
+				The player will update demolition xp for a limited time when this is set.
+				Once set, a player's buff will listen to receive notification from any zombies set on fire.
+				It will stop listening after a short period of time. This is how the player can count how many zombies 
+				are set alight with a molotov-->
+			<triggered_effect trigger="onProjectileImpact" action="AddBuff" target="self" buff="buffDemolitionMolotovsHitCounter"/>
+			<!--set the molotov thrown token for any zombie that the molotov set on fire.
+				Each zombie will then return a call using positionAOE to players. The player who threw the molotov will have a buff running to listen for the call (see above).
+				The player then updates their learn by use demolition xp based on the number of response calls from zombies (or animals etc).
+				THis seem to be the only way to count the number of hits a molotov gets.
+				See also buffs:buffDemolitionMolotovs, buffDemolitionMolotovsHitCounter and
+						See also progression:lbu_Demolition for other demolition code for grenades etc.-->
+			<triggered_effect trigger="onProjectileImpact" action="AddBuff" target="positionAOE" target_tags="zombie,animal" range="2.7"  buff="buffDemolitionMolotovTriggerNotification">
+				<requirement name="CVarCompare" target="other" cvar="_underwater" operation="LT" value="0.3"/>
+			</triggered_effect>
+		</effect_group>
+	</append>
+	<!--END lbu_Demolition code for Molotovs-->
+	
 	<!--lbu_Physician Perk code -->
 	<!--The code for the lbu_Physician Perk is implemented in buffs.xml:buffLBUPhysician, progression.xml:lbu_Physician and items.xml(see comment "lbu_Physician Perk code" -->
 	<append xpath="/items/item[@name='medicalBandage']">
