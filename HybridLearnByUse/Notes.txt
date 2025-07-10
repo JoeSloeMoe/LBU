@@ -9,7 +9,7 @@ Recommend starting a new game.
 
 Currently applies to the tools and weapons for the following Perks:
 General: Lucky Looter
-Perception: DeadEye, Demolition Expert, SpearMaster, Lucky Looter, Salvage
+Perception: DeadEye, Demolition Expert, SpearMaster, Salvage
 Strength: Boomstick, PummelPete, SkullCrusher, Miner69r/Motherload.
 Fortitude: Brawler, MachineGunner
 Agility: Archery, Gunslinger, DeepCuts, Hidden Strike
