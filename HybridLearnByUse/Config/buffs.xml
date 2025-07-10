@@ -413,7 +413,7 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffLbuBartering">
 				<requirement name="!HasBuff" buff="buffLbuBartering"/>			
 			</triggered_effect>
-			<!-- buffLbuDaringAdv tracks selling items and Daring adventure xp-->
+			<!-- buffLbuDaringAdv tracks questing and Daring adventure xp-->
 			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffLbuDaringAdv">
 				<requirement name="!HasBuff" buff="buffLbuDaringAdv"/>			
 			</triggered_effect>
