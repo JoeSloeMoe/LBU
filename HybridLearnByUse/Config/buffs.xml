@@ -50,7 +50,7 @@
 	</append>
 	<!--END debugging buffs-->
 
-	<!-- initialise all Learn By Use config variables-->
+	<!--PLAYER CONFIG VARIABLES... initialise all Learn By Use config variables-->
 	<append xpath="/buffs/buff[@name='buffStatusCheck01']">
 		<effect_group>
 			<!-- Start Set XP Multipliers: percent increase/decrease in leveling XP. Default is 1, a value of 1.2 will increase leveling xp for both Damage and Kills by 20%, 
