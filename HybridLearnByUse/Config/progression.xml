@@ -11,29 +11,29 @@
 			  Code that deals with the backup and restore is marked with BCK in the comments of the code-->
 
 	<insertBefore xpath="/progression/attributes/attribute[@name='attPerception']">
-		<attribute name="LearnByUse" name_key="LearnByUseName" desc_key="LearnByUseDesc" min_level="0" max_level="0" base_skill_point_cost="0"  icon="ui_game_symbol_perk">
+		<attribute name="attLearnByUse" name_key="attLearnByUseName" desc_key="attLearnByUseDesc" min_level="0" max_level="0" base_skill_point_cost="0"  icon="ui_game_symbol_perk">
 			<effect_group>   
 			</effect_group>   	
 		</attribute>
 	</insertBefore>
 
 	<append xpath="/progression/skills">
-		<skill name="lbu_GeneralSkills" parent="LearnByUse" name_key="General_Perks" desc_key="attGeneralName" icon="ui_game_symbol_modded">
+		<skill name="lbu_GeneralSkills" parent="attLearnByUse" name_key="General_Perks" desc_key="attGeneralName" icon="ui_game_symbol_modded">
 			<effect_group/>
 		</skill>
-		<skill name="lbu_PerceptionSkills" parent="LearnByUse" name_key="attPerceptionName" desc_key="attPerceptionName" icon="ui_game_symbol_stealth">
+		<skill name="lbu_PerceptionSkills" parent="attLearnByUse" name_key="attPerceptionName" desc_key="attPerceptionName" icon="ui_game_symbol_stealth">
 			<effect_group/>
 		</skill>
-		<skill name="lbu_StrengthSkills" parent="LearnByUse" name_key="attStrengthName" desc_key="attStrengthName" icon="ui_game_symbol_muscle">
+		<skill name="lbu_StrengthSkills" parent="attLearnByUse" name_key="attStrengthName" desc_key="attStrengthName" icon="ui_game_symbol_muscle">
 			<effect_group/>
 		</skill>
-		<skill name="lbu_FortitudeSkills" parent="LearnByUse" name_key="attFortitudeName" desc_key="attFortitudeName" icon="ui_game_symbol_add">
+		<skill name="lbu_FortitudeSkills" parent="attLearnByUse" name_key="attFortitudeName" desc_key="attFortitudeName" icon="ui_game_symbol_add">
 			<effect_group/>
 		</skill>
-		<skill name="lbu_AgilitySkills" parent="LearnByUse" name_key="attAgilityName" desc_key="attAgilityName" icon="ui_game_symbol_agility">
+		<skill name="lbu_AgilitySkills" parent="attLearnByUse" name_key="attAgilityName" desc_key="attAgilityName" icon="ui_game_symbol_agility">
 			<effect_group/>
 		</skill>
-		<skill name="lbu_IntellectSkills" parent="LearnByUse" name_key="attIntellectName" desc_key="attIntellectName" icon="ui_game_symbol_intellect">
+		<skill name="lbu_IntellectSkills" parent="attLearnByUse" name_key="attIntellectName" desc_key="attIntellectName" icon="ui_game_symbol_intellect">
 			<effect_group/>
 		</skill>
 	</append>
@@ -1288,9 +1288,10 @@
 	-->
 	<set xpath="progression/perks/perk[@name='perkDaringAdventurer']">
 		<level_requirements level="1"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="1" desc_key="reqIntellectLevel01"/></level_requirements>
-		<level_requirements level="2"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="4" desc_key="reqIntellectLevel04"/></level_requirements>
-		<level_requirements level="3"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="7" desc_key="reqIntellectLevel07"/></level_requirements>
-		<level_requirements level="4"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="10" desc_key="reqIntellectLevel10"/></level_requirements>
+		<level_requirements level="2"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="3" desc_key="reqIntellectLevel04"/></level_requirements>
+		<level_requirements level="3"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="5" desc_key="reqIntellectLevel07"/></level_requirements>
+		<level_requirements level="4"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="7" desc_key="reqIntellectLevel10"/></level_requirements>
+		<level_requirements level="5"><requirement name="ProgressionLevel" progression_name="attIntellect" operation="GTE" value="10" desc_key="reqIntellectLevel10"/></level_requirements>
 
 		<effect_group>
 			<passive_effect name="TraderStage" operation="base_add" level="1,5" value="2.5,12.5"/>
@@ -1301,6 +1302,7 @@
 			<effect_description level="2" desc_key="perkDaringAdventurerRank2Desc" long_desc_key="perkDaringAdventurerRank2LongDesc"/>
 			<effect_description level="3" desc_key="perkDaringAdventurerRank3Desc" long_desc_key="perkDaringAdventurerRank3LongDesc"/>
 			<effect_description level="4" desc_key="perkDaringAdventurerRank4Desc" long_desc_key="perkDaringAdventurerRank4LongDesc"/>
+			<effect_description level="5" desc_key="perkDaringAdventurerRank5Desc" long_desc_key="perkDaringAdventurerRank5LongDesc"/>
 		</effect_group>
 	</set>
 	<!--END Daring Adventure-->

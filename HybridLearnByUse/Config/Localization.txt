@@ -1,7 +1,8 @@
 Key,File,Type,UsedInMainMenu,NoTranslate,english
-LearnByUse,progression,Attribute,,,"Learn By Use"
-LearnByUseDesc,progression,Attribute,,,"Increase half the Mining, Scavenging and Weapons stats (eg. Damage and Stamina) by using tools and weapons, increase the other half of the stats in the Perk Tree as normal. Gain an extra Skill Point at level 50 for each Perk. Each Learn-By-Use perk level decreases the respective weapon/tool Degradation gradually up to 50%. Each point in one of the game's Perks increases the progression speed of the corrresponding Learn By Use perk."
-LearnByUseName,progression,Attribute,,,"Learn By Use"
+attLearnByUse,progression,Attribute,,,"Learn By Use"
+attlearnbyuse,progression,Attribute,,,"Learn By Use"
+attLearnByUseDesc,progression,Attribute,,,"Increase half the Mining, Scavenging and Weapons stats (eg. Damage and Stamina) by using tools and weapons, increase the other half of the stats in the Perk Tree as normal. Gain an extra Skill Point at level 50 for each Perk. Each Learn-By-Use perk level decreases the respective weapon/tool Degradation gradually up to 50%. Each point in one of the game's Perks increases the progression speed of the corresponding Learn By Use perk."
+attLearnByUseName,progression,Attribute,,,"Learn By Use"
 lbu_Miner69erName,progression,Perk,,,"Miner69r & MotherLode Skills"
 lbu_Miner69erDesc,progression,Perk,,,"Learn by Use: [Strength] Use any axe, pick, shovel, chainsaw or auger to upgrade half the Miner69er/MotherLode skill points. Increases are applied cumulatively per Level. There are 2 StaminaLoss values shown below - the second one is for Power Attacks. Degradation rate is decreasing from 100% to 50%."
 lbu_LuckyLooterName,progression,Perk,,,"Lucky Looter Skills"
