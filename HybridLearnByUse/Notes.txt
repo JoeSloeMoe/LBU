@@ -134,3 +134,10 @@ This modlet comes from the Survival No Trader mod.
   - Fixed Lucky Looter in multiplayer
   - Minor adjustments for balancing
   - Added additional descriptive text
+  
+  2.0.2 23rd July 2025
+  - Fixed localization errors
+  - Fixed Daring Adventure, now has 5 levels instead of 4
+  
+  2.0.3 4th Aug 2025
+  - Fixed demolition molotovs and grenades

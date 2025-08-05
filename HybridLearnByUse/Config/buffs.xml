@@ -1667,7 +1667,31 @@
 				<triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$molotovHits"/>
 				<triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$molotovBurnCount"/>
 			</effect_group>
-			<!--update the xp based on the hit count-->
+			<!--apply any level xp gain for damage or kill triggers (this DOES NOT apply to molotovs)-->
+			<effect_group>
+				<requirement name="ItemHasTags" tags="perkDemolitionsExpert"/>
+				<!--molotovs are handles separately in buffs:[lbu demolition perk support code]-->
+				<requirement name="!ItemHasTags" tags="lbu_DemoMolotov"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_Demolition" operation="LT" value="50"/>
+					<!--cater for timed charge use (or any explosion use that doesnt hit a zombie really)-->
+					<triggered_effect trigger="onSelfExplosionMissEntity" action="ModifyCVar" cvar="lbu_Demolition_XP" operation="add" value="18"/>
+					
+					<!--onSelfExplosionDamagedOther is less xp than onSelfExplosionMissEntity per hit because grenades/rockets can hit multiple targets at once-->
+					<triggered_effect trigger="onSelfExplosionDamagedOther" action="ModifyCVar" cvar="lbu_Demolition_XP" operation="add" value="@lbu_Demolition_DMG_GXP">
+						<requirement name="StatCompareCurrent" target="other" stat="health" operation="GT" value="0"/>
+					</triggered_effect>		
+					
+			</effect_group>
+			
+			<!--apply any level xp gain kill triggers-->
+			<effect_group>
+				<requirement name="ItemHasTags" tags="perkDemolitionsExpert"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_Demolition" operation="LT" value="50"/>
+					<!--point for killing-->
+					<triggered_effect trigger="onSelfKilledOther" action="ModifyCVar" cvar="lbu_Demolition_XP" operation="add" value="@lbu_Demolition_Kill_GXP"/> 		
+			</effect_group>
+			
+			<!--update the molotov xp based on the hit count-->
 			<effect_group>
 				<requirement name="CVarCompare" cvar="$molotovHits" operation="GTE" value="1"/>
 					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_Moly_temp_xp" operation="set" value="@lbu_Demolition_Kill_MXP"/> 
@@ -2013,4 +2037,3 @@
 	<!--lbu demolition perk support code for molotovs-->
 	
 </configs>
-
