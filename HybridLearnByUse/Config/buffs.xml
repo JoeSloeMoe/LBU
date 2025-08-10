@@ -131,7 +131,12 @@
 								 properties-per-level info window even though its not being applied, its just how the ui display text works. 
 				-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Degradation" operation="set" value="1"/> <!--default: 1 -->
-
+			
+			<!--harvore mode - all learn by use progress is reset on death
+				1 = reset all progress to 0 on Death
+				0 = normal game play, after death player does not lose progress - this is the default-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HardcoreMode" operation="set" value="0"/> <!--default: 0 -->
+			
 <!--END PLAYER LEARN BY USE CONFIG VARIABLES -->
 <!--END PLAYER CONFIG VARIABLES-->		
 				
@@ -180,7 +185,7 @@
 				xp bonus for kills if the player has points in the corresponding Perk. See lbu_Kill_Bonus_Percent descritpion above-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeadEye_Kill_XP_Base" operation="set" value="24"/> <!--default: 24-->
 			<!--there are 2 demolition xp types/values, one for grenades and a different one for molotovs because of how the game treats them-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_Kill_GXP_Base" operation="set" value="30"/> <!--grenades and other default: 30-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_Kill_GXP_Base" operation="set" value="39"/> <!--grenades and other default: 30-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Demolition_Kill_MXP_Base" operation="set" value="22"/> <!--molotovs default: 22-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Miner69er_Kill_XP_Base" operation="set" value="12"/> <!--default: 12-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_LuckyLooter_LOOT_XP_Base" operation="set" value="10"/> <!--default: 10-->
@@ -441,7 +446,24 @@
 				<requirement name="!HasBuff" buff="buffPerkLevelTracker"/>			
 			</triggered_effect>
 		</effect_group>
-
+		
+		<!--if lbu_HardcoreMode is turned on, reset Learn By Use progress on death-->
+		<effect_group>
+			<requirement name="CVarCompare" cvar="lbu_HardcoreMode" operation="GTE" value="1"/>	
+			<requirement name="!HasBuff" buff="buffHardcoreMode"/>
+				<triggered_effect trigger="onSelfRespawn" action="AddBuff" buff="buffHardcoreMode"/>
+		</effect_group>
+		
+		<!--Death tracking code-->
+		<effect_group>
+			<triggered_effect trigger="onSelfRespawn" action="ModifyCVar" cvar="stats_DaysAlive" operation="set" value="0"/>
+			<triggered_effect trigger="onSelfRespawn" action="ModifyCVar" cvar="stats_PlayerDeaths" operation="add" value="1"/>
+			<!--adjusted days alive precalculation-->
+			<triggered_effect trigger="onSelfRespawn" action="ModifyCVar" cvar="stats_DaysAlive_PreCalc" operation="set" value="@stats_PlayerDeaths"/>
+			<triggered_effect trigger="onSelfRespawn" action="ModifyCVar" cvar="stats_DaysAlive_PreCalc" operation="multiply" value="@daysAliveChangeWhenKilled"/>	
+		</effect_group>
+		<!--END Death tracking code-->
+		
 		<!--debug buffs
 		<effect_group>
 			<requirement name="!HasBuff" buff="buffDebug1" />
@@ -457,6 +479,127 @@
 
 	<!--code for Learn By Use functionality-->
 	<append xpath="/buffs">
+			<!--add the hardcore mode buff. If player sets lbu_HardcoreMode to 1 in config settings this buff will be triggered on respawn after death.
+			THis buff rests all lbu perks back to 0 
+			It also resets the progress curve to lbu_DefaultInitialIncrement-->
+		<buff name="buffHardcoreMode" name_key="buffHardcoreModeName" hidden="true">
+			<stack_type value="ignore"/>
+			<duration value="0"/>
+
+			<!--reset intial increment variables for each lbu perk-->
+			<effect_group>
+				<requirement name="CVarCompare" cvar="lbu_HardcoreMode" operation="GTE" value="1"/>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DeadEye_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>	
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Demolition_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>	
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_SpearMaster_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_LuckyLooter_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>				
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Salvage_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>						
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Boomstick_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_PummelPete_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>					
+					<!--pummel pete also has a stamina bonus increase to intialise-->
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_PP_StamIncrement" operation="set" value="0.3"/>				
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_SkullCrusher_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>					
+					<!--skull scrusher also has a stamina bonus increase to intialise-->
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_SC_StamIncrement" operation="set" value="0.3"/>	
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Miner69er_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>	
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Brawler_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>					
+					<!--brawler also has a stamina bonus increase to intialise-->
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Brawler_StamIncrement" operation="set" value="0.3"/>	
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_MachineGunner_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>		
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Archery_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>	
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Gunslinger_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>		
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DeepCuts_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>					
+					<!--deep cuts also has a stamina bonus increase to intialise-->
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DCuts_StamIncrement" operation="set" value="0.3"/>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_HiddenStrike_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Electrocutioner_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>					
+					<!--electrocutioner also has a stamina bonus increase to intialise-->
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Elec_StamIncrement" operation="set" value="0.3"/>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Robotics_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>	
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Bartering_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>					
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DaringAdv_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>			
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Physician_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
+			</effect_group>
+			
+			<!--reset current progress for each lbu perk-->
+			<effect_group>
+				<requirement name="CVarCompare" cvar="lbu_HardcoreMode" operation="GTE" value="1"/>		
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_DeadEye" level="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Demolition" level="0"/> 
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_SpearMaster" level="0"/> 
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Salvage" level="0"/> 
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Boomstick" level="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_PummelPete" level="0"/>    
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_SkullCrusher" level="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Miner69er" level="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Brawler" level="0"/> 
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_MachineGunner" level="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Archery" level="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Gunslinger" level="0"/>    
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_DeepCuts" level="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_HiddenStrike" level="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Electrocutioner" level="0"/>    
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Robotics" level="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Bartering" level="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_DaringAdv" level="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Physician" level="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_LuckyLooter" level="0"/>   
+			</effect_group>
+			
+			<!--reset BACKUP current progress for each lbu perk. The backupvar is used to reset the progress when a player uses the forgetting elixer-->
+			<effect_group>
+				<requirement name="CVarCompare" cvar="lbu_HardcoreMode" operation="GTE" value="1"/>			
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DeadEye_lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Demolition_lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_SpearMaster_lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Salvage_lvl" operation="set" value="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Boomstick_lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_PummelPete_lvl" operation="set" value="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_SkullCrusher_lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Miner69er_lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Brawler_lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_MachineGunner_lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Archery_lvl" operation="set" value="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Gunslinger_lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DeepCuts_lvl" operation="set" value="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_HiddenStrike_lvl" operation="set" value="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Electrocutioner_lvl" operation="set" value="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Robotics_lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Bartering_lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DaringAdv_lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Physician_lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_LuckyLooter_lvl" operation="set" value="0"/>   
+			</effect_group>			_XP
+			<!--reset the xp levels to 0-->
+			<effect_group>
+				<requirement name="CVarCompare" cvar="lbu_HardcoreMode" operation="GTE" value="1"/>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DeadEye_XP" operation="set" value="0"/>	
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Demolition_XP" operation="set" value="0"/>	
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_SpearMaster_XP" operation="set" value="0"/>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_LuckyLooter_XP" operation="set" value="0"/>				
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Salvage_XP" operation="set" value="0"/>						
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Boomstick_XP" operation="set" value="0"/>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_PummelPete_XP" operation="set" value="0"/>					
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_SkullCrusher_XP" operation="set" value="0"/>					
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Miner69er_XP" operation="set" value="0"/>	
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Brawler_XP" operation="set" value="0"/>					
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_MachineGunner_XP" operation="set" value="0"/>		
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Archery_XP" operation="set" value="0"/>	
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Gunslinger_XP" operation="set" value="0"/>		
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DeepCuts_XP" operation="set" value="0"/>					
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_HiddenStrike_XP" operation="set" value="0"/>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Electrocutioner_XP" operation="set" value="0"/>										
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Robotics_XP" operation="set" value="0"/>	
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Bartering_XP" operation="set" value="0"/>					
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DaringAdv_XP" operation="set" value="0"/>			
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Physician_XP" operation="set" value="0"/>
+			</effect_group>
+			
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffHardcoreMode"/>
+			</effect_group>
+		</buff>
+		
 		<!-- buffPerkLevelChanged keeps track of the players points in the various Perks that have a corresponding lbu_Perk.
 					 Used to give bonus lbu_Perl leveling xp on kills or 'destroys' in the case of miner69.
 					 The buff is repeatedly called in a loop every 400 ticks-->
@@ -2037,5 +2180,3 @@
 	<!--lbu demolition perk support code for molotovs-->
 	
 </configs>
-
-
