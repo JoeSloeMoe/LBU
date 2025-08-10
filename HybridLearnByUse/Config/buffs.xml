@@ -132,7 +132,7 @@
 				-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Degradation" operation="set" value="1"/> <!--default: 1 -->
 			
-			<!--harvore mode - all learn by use progress is reset on death
+			<!--hardcore mode - all learn by use progress is reset on death
 				1 = reset all progress to 0 on Death
 				0 = normal game play, after death player does not lose progress - this is the default-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HardcoreMode" operation="set" value="0"/> <!--default: 0 -->
@@ -2180,3 +2180,4 @@
 	<!--lbu demolition perk support code for molotovs-->
 	
 </configs>
+
