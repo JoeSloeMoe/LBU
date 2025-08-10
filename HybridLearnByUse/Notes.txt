@@ -144,4 +144,5 @@ This modlet comes from the Survival No Trader mod.
 
   2.0.4 10th Aug 2025
   - Added Harcore mode config option. When set, all Learn Ny Use progress is reset to 0 on death.
-  - Ammended OnSelfRespawn code for DaysAlive calculation
+
+  - Amended OnSelfRespawn code for DaysAlive calculation
