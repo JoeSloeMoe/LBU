@@ -132,7 +132,7 @@
 				-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Degradation" operation="set" value="1"/> <!--default: 1 -->
 			
-			<!--hardcore mode - all learn by use progress is reset on death
+			<!--harvore mode - all learn by use progress is reset on death
 				1 = reset all progress to 0 on Death
 				0 = normal game play, after death player does not lose progress - this is the default-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HardcoreMode" operation="set" value="0"/> <!--default: 0 -->
@@ -594,7 +594,11 @@
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DaringAdv_XP" operation="set" value="0"/>			
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Physician_XP" operation="set" value="0"/>
 			</effect_group>
-			
+			<!--recalculate physician healing speeds and bartering-->
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="perkPhysicianLevelTrack" operation="set" value="1"/>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="perkBarteringLevelTrack" operation="set" value="1"/>
+			</effect_group>
 			<effect_group>
 				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffHardcoreMode"/>
 			</effect_group>
@@ -1532,11 +1536,11 @@
 				and do the actual calculation here.
 				The range for bartering is 0.01 to 0.125 over 50 levels so each level is worth 0.0025, rounded to 0.003 for the calc-->
 			<effect_group>
-				<requirement name="CVarCompare" cvar="perkPhysicianLevelTrack" operation="GTE" value="1"/>					
+				<requirement name="CVarCompare" cvar="perkBarteringLevelTrack" operation="GTE" value="1"/>					
 					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_BarterPerkLevel" operation="set" value="@lbu_Bartering_Lvl"/>
 					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_BarterPerkLevel" operation="multiply" value="0.003"/>
 					<!--reset the trigger-->
-					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="perkPhysicianLevelTrack" operation="set" value="0"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="perkBarteringLevelTrack" operation="set" value="0"/>
 			</effect_group>
 			<effect_group>
 				<passive_effect name="BarteringBuying" operation="base_add" value="@lbu_BarterPerkLevel"/>
@@ -2180,4 +2184,3 @@
 	<!--lbu demolition perk support code for molotovs-->
 	
 </configs>
-
