@@ -569,7 +569,7 @@
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DaringAdv_lvl" operation="set" value="0"/>  
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Physician_lvl" operation="set" value="0"/>  
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_LuckyLooter_lvl" operation="set" value="0"/>   
-			</effect_group>			_XP
+			</effect_group>		
 			<!--reset the xp levels to 0-->
 			<effect_group>
 				<requirement name="CVarCompare" cvar="lbu_HardcoreMode" operation="GTE" value="1"/>
@@ -2184,3 +2184,4 @@
 	<!--lbu demolition perk support code for molotovs-->
 	
 </configs>
+
