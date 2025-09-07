@@ -144,5 +144,8 @@ This modlet comes from the Survival No Trader mod.
 
   2.0.4 10th Aug 2025
   - Added Harcore mode config option. When set, all Learn Ny Use progress is reset to 0 on death.
-
   - Amended OnSelfRespawn code for DaysAlive calculation
+  
+  2.0.5 7th Sept 2025
+  - Several minor bug fixes
+  - Fixed leveling issues between shotgun shells and shotgun slugs for BoomStick perk

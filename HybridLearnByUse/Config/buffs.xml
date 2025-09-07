@@ -191,7 +191,7 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_LuckyLooter_LOOT_XP_Base" operation="set" value="10"/> <!--default: 10-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Salvage_Kill_XP_Base" operation="set" value="20"/> <!--default: 20-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SpearMaster_Kill_XP_Base" operation="set" value="18"/> <!--default: 18-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Boomstick_Kill_XP_Base" operation="set" value="12"/> <!--default: 12-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Boomstick_Kill_XP_Base" operation="set" value="24"/> <!--default: 12-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_PummelPete_Kill_XP_Base" operation="set" value="18"/> <!--default: 18-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SkullCrusher_Kill_XP_Base" operation="set" value="20"/> <!--default: 20-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Brawler_Kill_XP_Base" operation="set" value="18"/> <!--default: 18-->
@@ -266,7 +266,7 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Miner69er_DMG_XP" operation="set" value="3"/> <!--default: 3-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Salvage_DMG_XP" operation="set" value="10"/> <!--default: 10-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SpearMaster_DMG_XP" operation="set" value="6"/> <!--default: 6-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Boomstick_DMG_XP" operation="set" value="1"/> <!--default: 1-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Boomstick_DMG_XP" operation="set" value="12"/> <!--default: 1-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_PummelPete_DMG_XP" operation="set" value="6"/> <!--default: 6-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SkullCrusher_DMG_XP" operation="set" value="8"/> <!--default: 8-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Brawler_DMG_XP" operation="set" value="6"/> <!--default: 6-->
@@ -434,7 +434,10 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffLuckyLooterXPMonitor">
 				<requirement name="!HasBuff" buff="buffLuckyLooterXPMonitor"/>			
 			</triggered_effect> 
-			
+			<!--buffBoomstickPellets see buff for descirption-->
+			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffBoomstickPellets">
+				<requirement name="!HasBuff" buff="buffBoomstickPellets"/>			
+			</triggered_effect>
 			<!-- buffPerkLevelChanged keeps track of the players points in the various Perks that have a corresponding lbu_Perk.
 				 Used to give bonus lbu_Perl leveling xp on kills or 'destroys' in the case of miner69.
 				 The buff is repeatedly called in a loop every 40 ticks, once per second-->
@@ -569,7 +572,7 @@
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DaringAdv_lvl" operation="set" value="0"/>  
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Physician_lvl" operation="set" value="0"/>  
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_LuckyLooter_lvl" operation="set" value="0"/>   
-			</effect_group>		
+			</effect_group>			
 			<!--reset the xp levels to 0-->
 			<effect_group>
 				<requirement name="CVarCompare" cvar="lbu_HardcoreMode" operation="GTE" value="1"/>
@@ -630,6 +633,21 @@
 			</effect_group>
 		</buff>
 	
+		<!--this buff reset the lbu_BoomstickPelletCount counter. When a player uses a slug there is a single hit, when the player uses a 
+			shotgun shell there are 10 hits. In order to normalise the amount of xp over different ammo the progression:perkBoomstick code
+			will only apply xp when lbu_BoomstickPelletCount==0. THis code reset that var to 0 so that 10 immediate successive calls are ignored and
+			only the firs is used. Slugs only have a single hit so now slugs and shells only register a single xp hit-->
+		<buff name="buffBoomstickPellets" hidden="true" remove_on_death="false" >
+			<stack_type value="ignore"/>
+			<duration value="0"/>
+			<update_rate value=".1"/>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_BoomstickPelletCount" operation="set" value="0">
+					<requirement name="CVarCompare" cvar="lbu_BoomstickPelletCount" operation="GTE" value="1"/></triggered_effect>
+			</effect_group>
+		</buff>
+		
+		
 		<!--this buff gives out an extra Skill Point if  LearnByUse:lbu_DefaultGiveSkillPoint > 0.
 			If LearnByUse:lbu_DefaultGiveSkillPoint == 0) just play a sound and display 'level max' msg.
 			lbu_DefaultGiveSkillPoint is set in progression.xml and 
@@ -2184,4 +2202,3 @@
 	<!--lbu demolition perk support code for molotovs-->
 	
 </configs>
-

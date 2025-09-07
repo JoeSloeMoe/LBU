@@ -78,7 +78,7 @@
 		so adjust the items healing speed code here see also buffs.xml:buffLBUPhysician for setting the lbu_physicianHealingSpeed variable-->
 	<!-- used on other, regular health per tick based on perkPhysician -->
 	<!--remove the current code-->
-	<remove xpath="/items/item[@name='medicalFirstAidBandage']/effect_group/triggered_effect[@trigger='onSelfSecondaryActionEnd' and @target='other' and @cvar='medRegHealthIncSpeed' and @operation='set' ]"/>
+	<remove xpath="/items/item[@name='medicalFirstAidKit']/effect_group/triggered_effect[@trigger='onSelfSecondaryActionEnd' and @target='other' and @cvar='medRegHealthIncSpeed' and @operation='set' ]"/>
 	<append xpath="/items/item[@name='medicalFirstAidKit']">
 		<!--add removed code back with the changed to take the learn by use physician perk level into account-->
 		<effect_group tiered="false">				

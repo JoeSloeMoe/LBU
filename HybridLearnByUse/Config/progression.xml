@@ -283,6 +283,10 @@
 
 		
 		<!-- begin Boomstick Learn By Use (lbu)-->
+		<!-- NOTE: the buffs:buffBoomstickPellets buff resets the lbu_BoomstickPelletCount counter. When a player uses a slug there is a single hit, when the player uses a 
+			shotgun shell there are 10 hits. In order to normalise the amount of xp over different ammo the progression:perkBoomstick code
+			will only apply xp when lbu_BoomstickPelletCount==0. THis code reset that var to 0 so that 10 immediate successive calls are ignored and
+			only the firs is used. Slugs only have a single hit so now slugs and shells only register a single xp hit-->
 		<perk name="lbu_Boomstick" max_level="50" parent="lbu_StrengthSkills" base_skill_point_cost="0" name_key="lbu_BoomstickName" desc_key="lbu_BoomstickDesc" long_desc_key="lbu_BoomstickDesc" icon="ui_game_symbol_shotgun">
 			
 			<!--BCK verify ProgressionLevel, backup var should always be equal to ProgessionLevel-->
@@ -307,11 +311,14 @@
 			<!--apply any level xp gain for damage or kill triggers-->
 			<effect_group>
 				<requirement name="ItemHasTags" tags="perkBoomstick"/>
-				<requirement name="ProgressionLevel" progression_name="lbu_Boomstick" operation="LT" value="50"/>
-					<!--this gets applied per pellet for shotties-->
+				<requirement name="ProgressionLevel" progression_name="perkBoomstick" operation="LT" value="100"/>
+					<!--this gets applied for a single pellet for shells, see comment at top of this perk-->
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Boomstick_XP" operation="add" value="@lbu_Boomstick_DMG_XP">
 						<requirement name="StatCompareCurrent" target="other" stat="health" operation="GT" value="0"/>
+						<requirement name="CVarCompare" cvar="lbu_BoomstickPelletCount" operation="Equals" value="0"/>
 					</triggered_effect>
+					<!--increment pellet counter, see comment at top of this perk-->
+					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_BoomstickPelletCount" operation="add" value="1"/>	
 					<triggered_effect trigger="onSelfKilledOther" action="ModifyCVar" cvar="lbu_Boomstick_XP" operation="add" value="@lbu_Boomstick_Kill_XP"/> 
 			</effect_group>
 			
@@ -390,7 +397,7 @@
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_PummelPete_Lvl" operation="add" value="1"/> 
 					<!--each level adds 0.3 to Stamina for kills for a total of 15 at level 50 (half of Pummel Pete lvl 5)--> 
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_PP_StamIncrement" operation="add" value="0.3">
-							<requirement name="CVarCompare" cvar="@lbu_PP_StamIncrement" operation="LTE" value="15" />
+							<requirement name="CVarCompare" cvar="lbu_PP_StamIncrement" operation="LTE" value="15" />
 					</triggered_effect>		
 					<triggered_effect trigger="onSelfDamagedOther" action="ShowToolbeltMessage" message="Pummel Pete Skill Increased!"/>
 					<!--if max level then give free Skill Point-->
@@ -450,7 +457,7 @@
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_SkullCrusher_Lvl" operation="add" value="1"/> 
 					<!--Kills return Stamina: +0.3% stamina for each level up to max of 15 at level 50 (half of Skull Crusher lvl 5)--> 
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_SC_StamIncrement" operation="add" value="0.3">
-							<requirement name="CVarCompare" cvar="@lbu_SC_StamIncrement" operation="LTE" value="15" />
+							<requirement name="CVarCompare" cvar="lbu_SC_StamIncrement" operation="LTE" value="15" />
 					</triggered_effect>		
 					<triggered_effect trigger="onSelfDamagedOther" action="ShowToolbeltMessage" message="Skull Crusher Skill Increased!"/>
 					<!--if max level then give free Skill Point-->
@@ -591,7 +598,7 @@
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Brawler_Lvl" operation="add" value="1"/> 
 					<!--Kills return Stamina: +0.3% stamina for each level up to max of 15 at level 50 (half of Brawler Perk lvl 5)--> 
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Brawler_StamIncrement" operation="add" value="0.3">
-							<requirement name="CVarCompare" cvar="@lbu_Brawler_StamIncrement" operation="LTE" value="15" />
+							<requirement name="CVarCompare" cvar="lbu_Brawler_StamIncrement" operation="LTE" value="15" />
 					</triggered_effect>		
 					<triggered_effect trigger="onSelfDamagedOther" action="ShowToolbeltMessage" message="Brawler Skill Increased!"/>
 					<!--if max level then give free Skill Point-->
@@ -673,7 +680,7 @@
 					<passive_effect name="BlockDamage" operation="perc_add" value=".01,0.5" level="1,50" tags="perkArchery"/>
 					<passive_effect name="EntityDamage" operation="perc_add" value=".01,.25" level="1,50" tags="perkArchery"/>
 					<passive_effect name="WeaponHandling" operation="perc_add" value=".01,.25" level="1,50" tags="perkArchery"/>
-					<passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".01,.15" level="1,50" tags="perkArchery"/>
+					<passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".01,.25" level="1,50" tags="perkArchery"/>
 					<passive_effect name="RoundsPerMinute" operation="perc_add" value=".01,.25" level="1,50" tags="bowDrawPenalty"/>
 					<passive_effect name="DegradationPerUse" operation="perc_add" value="-0.01,-0.50" level="1,50" tags="perkArchery">
 						<requirement name="CVarCompare" cvar="lbu_Degradation" operation="GTE" value="1"/>
@@ -818,7 +825,7 @@
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_DeepCuts_Lvl" operation="add" value="1"/> 
 					<!--Kills return Stamina: +0.3% stamina for each level up to max of 15 at level 50 (half of Deap Cuts lvl 5)--> 
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_DCuts_StamIncrement" operation="add" value="0.3">
-							<requirement name="CVarCompare" cvar="@lbu_DCuts_StamIncrement" operation="LTE" value="15" />
+							<requirement name="CVarCompare" cvar="lbu_DCuts_StamIncrement" operation="LTE" value="15" />
 					</triggered_effect>		
 					<triggered_effect trigger="onSelfDamagedOther" action="ShowToolbeltMessage" message="Deap Cuts Skill Increased!"/>
 					<!--if max level then give free Skill Point-->
@@ -907,7 +914,7 @@
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Electrocutioner_Lvl" operation="add" value="1"/> 
 					<!--Kills return Stamina: +0.3% stamina for each level up to max of 15 at level 50 (half of Electrocutioner lvl 5)--> 
 					<triggered_effect trigger="onSelfDamagedOther" action="ModifyCVar" cvar="lbu_Elec_StamIncrement" operation="add" value="0.3">
-							<requirement name="CVarCompare" cvar="@lbu_Elec_StamIncrement" operation="LTE" value="15" />
+							<requirement name="CVarCompare" cvar="lbu_Elec_StamIncrement" operation="LTE" value="15" />
 					</triggered_effect>
 					<triggered_effect trigger="onSelfDamagedOther" action="ShowToolbeltMessage" message="Electrocutioner Skill Increased!"/>
 					<!--if max level then give free Skill Point-->
@@ -1026,7 +1033,7 @@
 			</effect_group>
 			
 			<effect_group>
-				<passive_effect name="TraderStage" operation="base_add" level="1,50" value="0.01,12"/>
+				<passive_effect name="TraderStage" operation="base_add" level="1,50" value="0.01,25"/>
 				<passive_effect name="QuestBonusItemReward" operation="perc_add" level="1,50" value=".01,.125"/> <!-- Bonus Dukes -->
 			</effect_group>
 			
