@@ -149,3 +149,8 @@ This modlet comes from the Survival No Trader mod.
   2.0.5 7th Sept 2025
   - Several minor bug fixes
   - Fixed leveling issues between shotgun shells and shotgun slugs for BoomStick perk
+  
+  2.0.6 18th Oct 2025
+  - Fixed bug where exploding arrows and bolts didn't contribute to Demolisher xp
+  - Learn By Use Perks now show xp needed for next level
+  - Small number of minor bug fixes

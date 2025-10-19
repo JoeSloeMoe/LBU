@@ -233,6 +233,7 @@
 		perkDemolitionsExpert doesnt return true for requirements statements if the tags are not re-added. (not sure why)
 		e.g. <requirement name="ItemHasTags" tags="perkDemolitionsExpert"/> : returns false for ammoCrossbowBoltExploding even though it has the tag perkDemolitionsExpert in the default code definition-->
 	<set xpath ="/items/item[@name='ammoCrossbowBoltExploding']/property[@name='Tags']/@value">ammo,ranged,attAgility,perkArchery,perkPenetrator,perkDemolitionsExpert</set> 
+	<set xpath ="/items/item[@name='ammoArrowExploding']/property[@name='Tags']/@value">ammo,ranged,attAgility,perkArchery,perkPenetrator,perkDemolitionsExpert</set> 
 	<!--END Learn by use code-->
 	
 </configs>

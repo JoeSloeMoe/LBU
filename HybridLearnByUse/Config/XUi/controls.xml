@@ -1,0 +1,9 @@
+<configs>
+	<!--change size of Perk name to fit 'xp to next level' text-->
+	<setattribute  xpath="controls/skill_entry/panel[@controller='SkillEntry']/sprite[@name='groupIcon']" name="pos">3,-3</setattribute><!--6,-3-->
+	<setattribute  xpath="controls/skill_entry/panel[@controller='SkillEntry']/label[@name='groupName']" name="pos">41,-20</setattribute><!--44, -20-->
+	<setattribute  xpath="controls/skill_entry/panel[@controller='SkillEntry']/label[@name='groupName']" name="font_size">25</setattribute><!--26-->
+	<setattribute  xpath="controls/skill_entry/panel[@controller='SkillEntry']/label[@width='125' and @pos='486,-20']" name="font_size">25</setattribute>
+	<setattribute  xpath="controls/skill_entry/panel[@controller='SkillEntry']/label[@width='90' and @pos='593,-20']" name="font_size">25</setattribute>
+	<!--END change size of Perk name to fit 'xp to next level' text-->
+</configs>
