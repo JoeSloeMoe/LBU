@@ -878,7 +878,7 @@
 		
 		<!-- begin Cardio Learn By Use (lbu)
 		See also buffs.xml:buffCardioXPMonitor for the progression increase code-->
-		<perk name="lbu_Cardio" max_level="100" parent="skillFortitudeRecovery" base_skill_point_cost="0" name_key="lbu_CardioName" desc_key="lbu_CardioDesc" long_desc_key="lbu_CardioDesc" icon="ui_game_symbol_cardio">
+		<perk name="lbu_Cardio" max_level="100" parent="lbu_FortitudeSkills" base_skill_point_cost="0" name_key="lbu_CardioName" desc_key="lbu_CardioDesc" long_desc_key="lbu_CardioDesc" icon="ui_game_symbol_cardio">
 
 			<!--BCK verify ProgressionLevel, backup var should always be equal to ProgessionLevel-->
 			<effect_group>
@@ -1624,5 +1624,6 @@
 	<!--END Change existing Perks to half their values -->	
 	
 	<!--end Learn-By-Use ALL code -->
+
 
 </configs>
