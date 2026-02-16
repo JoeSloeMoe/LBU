@@ -1,0 +1,53 @@
+<configs>
+	<!--see items:[Magazine Bundles] for a description of use for these objects-->
+	<!--Magazine Bundles-->
+	<append xpath="/recipes">
+		<recipe name="LBUMagazineRewardBow" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardSpear" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardClub" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardHammer" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardHarvest" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardKnuckes" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardBlade" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardSalvage" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardHandgun" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardShotgun" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardRifle" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardMachineGun" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardExplosive" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardRobotics" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+		<recipe name="LBUMagazineRewardMedical" count="1" craft_time="5">
+				<ingredient name="LBUMagazineReward" count="1"/>
+		</recipe>
+	</append>
+	<!--END Magazine Bundles-->
+	
+</configs>

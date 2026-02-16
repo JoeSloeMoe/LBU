@@ -1,5 +1,237 @@
 <configs>
 	<!--Learn by use code-->
+	<!--Magazine Bundles. When a player completes the first max level for any Learn By Use Perk they receive 
+		2 LBUMagazineReward Reward objects. Each of these are used with Recipes to create a bundle of 5 magazines 
+		of Learn By Use Perks. So when a player reaches their first max Level for a Perk they get 2 LBUMagazineBundles.
+		They then use these rewards to create 2 bundles of 5 magazines. The magazine bundles are only for magazines that
+		have a corresponding Learn By Use Perk. This reward is available in both Learn-By-Use and Hybrid-Learn-By-Use but
+		its more effective in Learn-By-Use and there are no magazines for the Perks that are Learn By Use Perks.
+	-->
+	<append xpath="/items">	
+		<!--the LBUMagazineReward objects (see recipes:[Magazine Bundles]) used to create various magazine bundles-->
+		<!--magazine bundle for special supply drop loot
+			This bundle containes the magazines the player will trade-->
+		<item name="LBUMagazineReward">
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="book"/>
+			<property name="CustomIcon" value="cntBookPile01"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardDesc"/>
+			<property name="HoldType" value="45"/>
+			<property name="Meshfile" value="@:Other/Items/Misc/sackPrefab.prefab"/>
+			<property name="DropMeshfile" value="@:Other/Items/Misc/sack_droppedPrefab.prefab"/>
+			<property name="Material" value="Mpaper"/>
+			<property name="Stacknumber" value="10"/> 
+			<property name="Group" value="Resources"/>
+		</item>	
+		
+		<!--a bundle for each Learn-By-Use Perk magazine type. Currently both Learb-By-Use 
+			and Hybrid-Learn-By-Use cover the following Magazine Perks:
+				bowsSkillMagazine
+				spearsSkillMagazine
+				clubsSkillMagazine
+				sledgehammersSkillMagazine
+				harvestingToolsSkillMagazine
+				knucklesSkillMagazine
+				bladesSkillMagazine
+				salvageToolsSkillMagazine
+				handgunsSkillMagazine
+				shotgunsSkillMagazine
+				riflesSkillMagazine
+				machineGunsSkillMagazine
+				explosivesSkillMagazine
+				roboticsSkillMagazine
+				medicalSkillMagazine
+				
+			See recipes:[Magazine Bundles] for recipes to create the bundles. 
+		--> 
+		<item name="LBUMagazineRewardBow">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookBowHunters"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardBowDesc"/>
+			<property class="Action0">             
+				<property name="Create_item" value="bowsSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>	
+		<item name="LBUMagazineRewardSpear">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookSharpSticks"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardSpearDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="spearsSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>	
+		<item name="LBUMagazineRewardClub">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookBigHitters"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardClubDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="clubsSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>	
+		<item name="LBUMagazineRewardHammer">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookGetHammered"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardHammerDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="sledgehammersSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>	
+		<item name="LBUMagazineRewardHarvest">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookToolsDigest"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardHarvestDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="harvestingToolsSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>	
+		<item name="LBUMagazineRewardKnuckes">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookFuriousFists"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardKnuckesDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="knucklesSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>	
+		<item name="LBUMagazineRewardBlade">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookKnifeGuy"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardBladeDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="bladesSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>	
+
+		<item name="LBUMagazineRewardSalvage">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookScrapping4Fun"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardSalvageDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="salvageToolsSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>	
+		
+		<item name="LBUMagazineRewardHandgun">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookHandgunMagazine"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardHandgunDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="handgunsSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>			
+		<item name="LBUMagazineRewardShotgun">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookShotgunWeekly"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardShotgunDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="shotgunsSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>				
+		<item name="LBUMagazineRewardRifle">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookRifleWorld"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardRifleDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="riflesSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>		
+		<item name="LBUMagazineRewardMachineGun">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookTacticalWarfare"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardMachineGunDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="machineGunsSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>			
+		<item name="LBUMagazineRewardExplosive">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookExplosiveMagazine"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardExplosiveDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="explosivesSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>			
+		<item name="LBUMagazineRewardRobotics">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookTechPlanet"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardRoboticsDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="roboticsSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>				
+		<item name="LBUMagazineRewardMedical">
+			<property name="Extends" value="resourceRockSmallBundle"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="CustomIcon" value="bookMedicalJournal"/>
+			<!--<property name="CustomIconTint" value="143,203,143"/>-->
+			<property name="DescriptionKey" value="LBUMagazineRewardMedicalDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="medicalSkillMagazine"/>
+				<property name="Create_item_count" value="5"/> 
+			</property>
+		</item>			
+		<!--END a bundle for each Learn-By-Use Perk magazine type.-->
+	</append>
+	<!--END Magazine Bundles. -->
+
+
 	<!--lbu_Demolition code for Molotovs-->
 	<append xpath="/items/item[@name='thrownAmmoMolotovCocktail']">
 		<effect_group  tiered="false" >

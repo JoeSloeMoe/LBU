@@ -25,6 +25,9 @@ lbu_BrawlerName,progression,Perk,,,"Brawler [DECEA3]{cvar($lbu_Brawler_LevelXP:0
 lbu_BrawlerDesc,progression,Perk,,,"Learn by Use: [Fortitude] Use your Fists to upgrade half the Brawler skill points. Increases are cumulative per Level. Killing blows grant 1 to 15 stamina over levels 1-50. There are 2 StaminaLoss values shown below - the second one is for Power Attacks. Degradation rate is decreasing from 100% to 50%."
 lbu_MachineGunnerName,progression,Perk,,,"Machine Gunner [DECEA3]{cvar($lbu_MachineGunner_LevelXP:0)}xp To Next Level[-]" 
 lbu_MachineGunnerDesc,progression,Perk,,,"Learn by Use: [Fortitude] Use any Assault Rifle or Machinegun to upgrade half the Machinegunner skill points. Increases are applied cumulatively per Level. Degradation rate is decreasing from 100% to 50%."
+lbu_CardioName,progression,Perk,,,"Cardio [DECEA3]{cvar($lbu_Cardio_LevelXP:0)}xp To Next Level[-]" 
+lbu_CardioDesc,progression,Perk,,,"Train your body in the number one tactic against the zombie menace: Running away from them. General activity such as running and jumping upgrades Cardio skill points. Increases are applied cumulatively per Level."
+
 lbu_ArcheryName,progression,Perk,,,"Archery [DECEA3]{cvar($lbu_Archery_LevelXP:0)}xp To Next Level[-]" 
 lbu_ArcheryDesc,progression,Perk,,,"Learn by Use: [Agility] Use any Bow to upgrade half the Archery skill points. Increases are applied cumulatively per Level. Degradation rate is decreasing from 100% to 50%."
 lbu_GunslingerName,progression,Perk,,,"Gunslinger [DECEA3]{cvar($lbu_Gunslinger_LevelXP:0)}xp To Next Level[-]" 
@@ -46,6 +49,39 @@ perkTurretsRank3LongDesc,progression,perk Int,,,"You have mastered the basics of
 perkTurretsRank4LongDesc,progression,perk Int,,,"You must be from the year 2077. You are creating some futuristic technology. Robotic weapons deal 20% more damage, 60% faster fire rate and reload an extra 20 rounds. Reload robotic weapons 10% faster. Robot active range is 17 meters."
 perkTurretsRank5LongDesc,progression,perk Int,,,You are now a top expert in robotics. Reload robotic weapons 20% faster and reload an extra 25 rounds. Robot active range is 18 meters.\nTwo deployed robots can be active at once.
 lbu_MULTIPLAYERTURRETS_END,progression,Perk,,,"Multiplayer Turret Note, DELETE THE ENTRIES ABOVE THIS LINE"
+
+LBUMagazineReward,items,Item,,,Magazine Choice Reward
+LBUMagazineRewardDesc,items,Item,,,"Reward for max'ing a first Learn-By-Use tier. A Bonus Bundle for the first time a LBU Perk reaches maximum.\n\nFive free Skill Magazines to increase the Crafting Skill of any LBU Perk.\nUse [DECEA3]Recipes[-] to create a choice of Crafting Skill Magazine bundle. Each bundle created has 5 Magazines."
+LBUMagazineRewardBow,items,Item,,,Bundle of 5 Bow Magazines
+LBUMagazineRewardBowDesc,items,Item,,,Bundle of 5 Bow Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardSpear,items,Item,,,Bundle of 5 Spear Magazines
+LBUMagazineRewardSpearDesc,items,Item,,,Bundle of 5 Spear Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardClub,items,Item,,,Bundle of 5 Club Magazines
+LBUMagazineRewardClubDesc,items,Item,,,Bundle of 5 Club Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardHammer,items,Item,,,Bundle of 5 Sledgehammer Magazines
+LBUMagazineRewardHammerDesc,items,Item,,,Bundle of 5 Sledgehammer Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardHarvest,items,Item,,,Bundle of 5 Harvesting Tool Magazines
+LBUMagazineRewardHarvestDesc,items,Item,,,Bundle of 5 Harvesting Tool Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardKnuckes,items,Item,,,Bundle of 5 Knuckles Magazines
+LBUMagazineRewardKnuckesDesc,items,Item,,,Bundle of 5 Knuckles Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardBlade,items,Item,,,Bundle of 5 Blade Magazines
+LBUMagazineRewardBladeDesc,items,Item,,,Bundle of 5 Blade Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardSalvage,items,Item,,,Bundle of 5 Salvage Tool Magazines
+LBUMagazineRewardSalvageDesc,items,Item,,,Bundle of 5 Salvage Tool Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardHandgun,items,Item,,,Bundle of 5 Handgun Magazines
+LBUMagazineRewardHandgunDesc,items,Item,,,Bundle of 5 Handgun Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardShotgun,items,Item,,,Bundle of 5 Shotgun Magazines
+LBUMagazineRewardShotgunDesc,items,Item,,,Bundle of 5 Shotgun Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardRifle,items,Item,,,Bundle of 5 Rifle Magazines
+LBUMagazineRewardRifleDesc,items,Item,,,Bundle of 5 Rifle Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardMachineGun,items,Item,,,Bundle of 5 Machine gun Magazines
+LBUMagazineRewardMachineGunDesc,items,Item,,,Bundle of 5 Machinegun Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardExplosive,items,Item,,,Bundle of 5 Explosives Magazines
+LBUMagazineRewardExplosiveDesc,items,Item,,,Bundle of 5 Explosives Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardRobotics,items,Item,,,Bundle of 5 Robotics Magazines
+LBUMagazineRewardRoboticsDesc,items,Item,,,Bundle of 5 Robotics Magazines. \nUse this item to open and unpack it.
+LBUMagazineRewardMedical,items,Item,,,Bundle of 5 Medical Magazines
+LBUMagazineRewardMedicalDesc,items,Item,,,Bundle of 5 Medical Magazines. \nUse this item to open and unpack it.
 
 lbu_BarteringName,progression,Perk,,,"Better Barter [DECEA3]{cvar($lbu_Bartering_LevelXP:0)}xp To Next Level[-]" 
 lbu_BarteringDesc,progression,Perk,,,"Learn by Use: [Intellect] Trade items with Traders to upgrade half the Bartering skill points. Increase both Buying and Selling."
@@ -126,6 +162,20 @@ perkMachineGunnerRank2LongDesc,progression,perk For,,,"You are no commando, but 
 perkMachineGunnerRank3LongDesc,progression,perk For,,,"All the combat has sharpened your skills and you are now a soldier. Machine guns deal 15% more damage, 8% faster fire rate and reload 10% faster. Commando Adrenaline: Each shot scored with automatic weapons gives you 2 stamina.\nFind more machine guns, parts, and 7.62mm ammo in loot."
 perkMachineGunnerRank4LongDesc,progression,perk For,,,"Your skill now matches the special forces. Machine guns deal 20% more damage, 10% faster fire rate and reload 13% faster. Commando Adrenaline: Each shot scored with automatic weapons gives you 4 stamina.\nFind more machine guns, parts, and 7.62mm ammo in loot."
 perkMachineGunnerRank5LongDesc,progression,perk For,,,"You are now the ultimate machine gunner. Machine guns deal 25% more damage, 13% faster fire rate and reload 15% faster. Commando Adrenaline: Each shot scored with automatic weapons gives you 6 stamina.\nFind more machine guns, parts, and 7.62mm ammo in loot."
+perkRuleOneCardioDesc,progression,perk Agi,,,"Master the use of bows and crossbows.\nCaters for half of the available increases for damage, stamina etc - increase the other half by Learn-By-Use. Each point in this Perk increases the corresponding Learn-By-Use perk xp gain by 20%"
+perkRuleOneCardioNameRank1LongDesc,progression,perk Agi,,,"Many start on the path of the ranger but few can reach it. Bows deal 5% more damage, 5% faster aim, draw and reload with bows.\nFind more bows and parts in loot."
+perkRuleOneCardioNameRank2LongDesc,progression,perk Agi,,,"You still have much to learn, grasshopper. Bows deal 10% more damage, 10% faster aim, draw and reload with bows.\nFind more bows and parts in loot."
+perkRuleOneCardioNameRank3LongDesc,progression,perk Agi,,,"All the rigorous training has turned you into a marksman with Bows. Bows deal 15% more damage, 15% faster aim, draw and reload with bows.\nFind more bows and parts in loot."
+perkArcheryRank4LongDesc,progression,perk Agi,,,"You can split a hair you are so good at archery now. Bows deal 20% more damage, 20% faster aim, draw and reload with bows.\nFind more bows and parts in loot."
+perkArcheryRank5LongDesc,progression,perk Agi,,,"You have mastered archery and are now a ranger. Bows deal 25% more damage, 25% faster aim, draw and reload with bows.\nFind more bows and parts in loot."
+perkRuleOneCardioDesc,progression,perk For,,,Train your body in the number one tactic against the zombie menace: Running away from them. \nCaters for half of the available increases for stamina amount and regen - increase the other half by Learn-By-Use. Each point in this Perk increases the corresponding Learn-By-Use perk xp gain by 20%"
+perkRuleOneCardioNameRank1LongDesc,progression,perk For,,,Just put one foot in front of the other.\nIncrease stamina regen by 5% when sprinting.
+perkRuleOneCardioNameRank2LongDesc,progression,perk For,,,Leave your enemies in the rear view mirror.\nIncrease stamina regen by 10% when sprinting.
+perkRuleOneCardioNameRank3LongDesc,progression,perk For,,,Crush every mile with ease.\nIncrease stamina regen by 15% when sprinting.
+perkRuleOneCardioNameRank4LongDesc,progression,perk For,,,"Outlast, outrun, outlive.\nPermanently add 13 max stamina.
+perkRuleOneCardioNameRank5LongDesc,progression,perk For,,,The ultimate test of endurance is like a walk in the park.\nPermanently adds an additional 13 max stamina.
+
+
 perkArcheryDesc,progression,perk Agi,,,"Master the use of bows and crossbows.\nCaters for half of the available increases for damage, stamina etc - increase the other half by Learn-By-Use. Each point in this Perk increases the corresponding Learn-By-Use perk xp gain by 20%"
 perkArcheryRank1LongDesc,progression,perk Agi,,,"Many start on the path of the ranger but few can reach it. Bows deal 5% more damage, 5% faster aim, draw and reload with bows.\nFind more bows and parts in loot."
 perkArcheryRank2LongDesc,progression,perk Agi,,,"You still have much to learn, grasshopper. Bows deal 10% more damage, 10% faster aim, draw and reload with bows.\nFind more bows and parts in loot."

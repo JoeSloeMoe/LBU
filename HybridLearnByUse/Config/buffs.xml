@@ -70,6 +70,7 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SkullCrusher_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Brawler_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_MachineGunner_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Cardio_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Archery_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Gunslinger_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeepCuts_XP_Multiplier" operation="set" value="1.0"/> <!--default: 1.0-->
@@ -106,6 +107,17 @@
 											This is used in buff.xml:buffLBU_GiveProgressSkillPoint --> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DefaultGiveSkillPoint" operation="set" value="1"/> <!--default: 1 -->
 			
+			<!--player can get a bonus bundle of magazines on the first time they max a Learn-By_use Perk in addition to a free skill point.
+				Default is 2 magazine-recipe items. Each of these items can use recipes to convert to a 5 magazine bundle of choice. (so a total of 10 magazines)
+				The magazine bundles are only for Learn-By_Use Perks that have corresponding magazines (e.g. there is no Vehicle magazine bundle as thats not a LBU perk)
+				See gameevents:lbu_action_give_magazineBundle to change the number of recipe items dropped, 'lbu_GiveBonusMagazineBundle' below just turns it on or off.
+				lbu_GiveBonusMagazineBundle: when the first lbu perk reaches max progress (100 points):
+											1 = give 2 free recipe items that can each be used to create a 5 book magazine bundle of the players choice choice
+											0 = dont the free recipe items 
+											This is used in buff.xml:buffLBU_GiveProgressSkillPoint --> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_GiveBonusMagazineBundle" operation="set" value="1"/> <!--default: 1 -->	
+			
+			
 			<!--lbu_PhysicianBonus: when lbu_Physician is at max level, splints and casts will heal sprains in addition to giving a bonus point (if lbu_DefaultGiveSkillPoint==1 above).
 									This bonus is not effective if the player already has a point into the game's perkPhysician as that does the same thing.
 									Set to 0 to turn this bonus off-->
@@ -132,11 +144,28 @@
 				-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Degradation" operation="set" value="1"/> <!--default: 1 -->
 			
-			<!--harvore mode - all learn by use progress is reset on death
+			<!--Cardio xp can be gained by using stamina (e.g. using melee or cycling) in addition to ruunning, crouch running, jumping etc.
+				lbu_CardioStaminaThreshold is the remaning percentage of player stomana that triggers Cardio gain.
+				lbu_CardioStaminaCycle is how often the game checks to update the Cardio xp gain.
+				E.g. with the defaults once a player reached 50% stamina the code will check every 6 seconds and if the stamain is still below 
+				50% the xp for Cardio will be increased.--> 
+			<!--when the player has 50% stmina left-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_CardioStaminaThreshold" operation="set" value="0.5"/> <!--default: 0.5 50% -->
+			<!--increase the players learn by use Cardio every lbu_CardioStaminaCycle seconds-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_CardioStaminaCycle" operation="set" value="6"/> <!--default: 6 seconds-->
+			
+			
+			<!--hardcore mode - all learn by use progress is reset on death
 				1 = reset all progress to 0 on Death
 				0 = normal game play, after death player does not lose progress - this is the default-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_HardcoreMode" operation="set" value="0"/> <!--default: 0 -->
 			
+			<!--when the Learn By Use Daring Adventurer Perk reaches max level, the player will be have access to the reset trader quests option
+				when talking to a trader.
+				1 = Show option to reset quests at trader when Daring Adventurer hits max level 
+				0 = Turn off, player cannot reset quests -->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_showTraderQuests" operation="set" value="1"/> <!--default: 1 -->
+
 <!--END PLAYER LEARN BY USE CONFIG VARIABLES -->
 <!--END PLAYER CONFIG VARIABLES-->		
 				
@@ -196,6 +225,7 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SkullCrusher_Kill_XP_Base" operation="set" value="20"/> <!--default: 20-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Brawler_Kill_XP_Base" operation="set" value="18"/> <!--default: 18-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_MachineGunner_Kill_XP_Base" operation="set" value="16"/> <!--default: 16-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Cardio_Use_XP_Base" operation="set" value="4.5"/> <!--default: 4.5-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Archery_Kill_XP_Base" operation="set" value="24"/> <!--default: 24-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Gunslinger_Kill_XP_Base" operation="set" value="16"/> <!--default: 16-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeepCuts_Kill_XP_Base" operation="set" value="18"/> <!--default: 18-->
@@ -221,6 +251,7 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SkullCrusher_Kill_XP_Base" operation="multiply" value="@lbu_SkullCrusher_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Brawler_Kill_XP_Base" operation="multiply" value="@lbu_Brawler_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_MachineGunner_Kill_XP_Base" operation="multiply" value="@lbu_MachineGunner_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Cardio_Use_XP_Base" operation="multiply" value="@lbu_Cardio_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Archery_Kill_XP_Base" operation="multiply" value="@lbu_Archery_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Gunslinger_Kill_XP_Base" operation="multiply" value="@lbu_Gunslinger_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeepCuts_Kill_XP_Base" operation="multiply" value="@lbu_DeepCuts_XP_Multiplier"/> 
@@ -246,6 +277,7 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SkullCrusher_Kill_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Brawler_Kill_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_MachineGunner_Kill_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Cardio_Use_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Archery_Kill_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Gunslinger_Kill_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeepCuts_Kill_XP_Base" operation="multiply" value="@lbu_XP_Multiplier"/> 
@@ -370,6 +402,9 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_MachineGunner_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
 				<requirement name="CVarCompare" cvar="lbu_MachineGunner_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 			</triggered_effect>
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Cardio_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
+				<requirement name="CVarCompare" cvar="lbu_Cardio_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
+			</triggered_effect>
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Archery_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement">
 				<requirement name="CVarCompare" cvar="lbu_Archery_XPIncrement" operation="LT" value="@lbu_DefaultInitialIncrement"/>
 			</triggered_effect>
@@ -413,6 +448,10 @@
 			<!-- buffLBUPhysician tracks medical healing using food and medical items-->
 			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffLBUPhysician">
 				<requirement name="!HasBuff" buff="buffLBUPhysician"/>			
+			</triggered_effect>
+			<!-- buffCardioXPMonitor tracks xp an dprogression for Cardio-->
+			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffCardioXPMonitor">
+				<requirement name="!HasBuff" buff="buffCardioXPMonitor"/>			
 			</triggered_effect>
 			<!-- buffLbuBartering tracks selling items and increases buying and selling xp-->
 			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffLbuBartering">
@@ -513,6 +552,7 @@
 					<!--brawler also has a stamina bonus increase to intialise-->
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Brawler_StamIncrement" operation="set" value="0.3"/>	
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_MachineGunner_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>		
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Cardio_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Archery_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>	
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Gunslinger_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>		
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DeepCuts_XPIncrement" operation="set" value="@lbu_DefaultInitialIncrement"/>					
@@ -541,6 +581,7 @@
 					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Miner69er" level="0"/>   
 					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Brawler" level="0"/> 
 					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_MachineGunner" level="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Cardio" level="0"/>   
 					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Archery" level="0"/>  
 					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_Gunslinger" level="0"/>    
 					<triggered_effect trigger="onSelfBuffStart" action="SetProgressionLevel" progression_name="lbu_DeepCuts" level="0"/>   
@@ -556,26 +597,27 @@
 			<!--reset BACKUP current progress for each lbu perk. The backupvar is used to reset the progress when a player uses the forgetting elixer-->
 			<effect_group>
 				<requirement name="CVarCompare" cvar="lbu_HardcoreMode" operation="GTE" value="1"/>			
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DeadEye_lvl" operation="set" value="0"/>  
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Demolition_lvl" operation="set" value="0"/>  
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_SpearMaster_lvl" operation="set" value="0"/>  
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Salvage_lvl" operation="set" value="0"/>   
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Boomstick_lvl" operation="set" value="0"/>  
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_PummelPete_lvl" operation="set" value="0"/>   
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_SkullCrusher_lvl" operation="set" value="0"/>  
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Miner69er_lvl" operation="set" value="0"/>  
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Brawler_lvl" operation="set" value="0"/>  
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_MachineGunner_lvl" operation="set" value="0"/>  
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Archery_lvl" operation="set" value="0"/>   
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Gunslinger_lvl" operation="set" value="0"/>  
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DeepCuts_lvl" operation="set" value="0"/>   
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_HiddenStrike_lvl" operation="set" value="0"/>   
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Electrocutioner_lvl" operation="set" value="0"/>   
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Robotics_lvl" operation="set" value="0"/>  
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Bartering_lvl" operation="set" value="0"/>  
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DaringAdv_lvl" operation="set" value="0"/>  
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Physician_lvl" operation="set" value="0"/>  
-					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_LuckyLooter_lvl" operation="set" value="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DeadEye_Lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Demolition_Lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_SpearMaster_Lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Salvage_Lvl" operation="set" value="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Boomstick_Lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_PummelPete_Lvl" operation="set" value="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_SkullCrusher_Lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Miner69er_Lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Brawler_Lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_MachineGunner_Lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Cardio_Lvl" operation="set" value="0"/>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Archery_Lvl" operation="set" value="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Gunslinger_Lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DeepCuts_Lvl" operation="set" value="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_HiddenStrike_Lvl" operation="set" value="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Electrocutioner_Lvl" operation="set" value="0"/>   
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Robotics_Lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Bartering_Lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DaringAdv_Lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Physician_Lvl" operation="set" value="0"/>  
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_LuckyLooter_Lvl" operation="set" value="0"/>   
 			</effect_group>			
 			<!--reset the xp levels to 0-->
 			<effect_group>
@@ -591,6 +633,7 @@
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Miner69er_XP" operation="set" value="0"/>	
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Brawler_XP" operation="set" value="0"/>					
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_MachineGunner_XP" operation="set" value="0"/>		
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Cardio_XP" operation="set" value="0"/>	
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Archery_XP" operation="set" value="0"/>	
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Gunslinger_XP" operation="set" value="0"/>		
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_DeepCuts_XP" operation="set" value="0"/>					
@@ -674,6 +717,7 @@
 				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$lbu_Miner69er_LevelXP" operation="set" value="@lbu_Miner69er_XPIncrement"/>
 				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$lbu_Brawler_LevelXP" operation="set" value="@lbu_Brawler_XPIncrement"/>
 				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$lbu_MachineGunner_LevelXP" operation="set" value="@lbu_MachineGunner_XPIncrement"/>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$lbu_Cardio_LevelXP" operation="set" value="@lbu_Cardio_XPIncrement"/>
 				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$lbu_Archery_LevelXP" operation="set" value="@lbu_Archery_XPIncrement"/>
 				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$lbu_Gunslinger_LevelXP" operation="set" value="@lbu_Gunslinger_XPIncrement"/>
 				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$lbu_DeepCuts_LevelXP" operation="set" value="@lbu_DeepCuts_XPIncrement"/>
@@ -712,7 +756,13 @@
 					<requirement name="CVarCompare" cvar="lbu_DefaultGiveSkillPoint" operation="EQ" value="0"/>
 				</triggered_effect>
 			</effect_group>
-		
+			<effect_group>
+				<!--if first free LBU skill point then also drop bonus reward if lbu_GiveBonusMagazineBundle set in the config settings-->
+				<requirement name="CVarCompare" cvar="lbu_GiveBonusMagazineBundle" operation="EQ" value="1"/>
+				<requirement name="CVarCompare" cvar="firstLBUPerkMaxLevelReached" operation="LT" value="1"/>
+					<triggered_effect trigger="onSelfBuffStart" action="CallGameEvent" event="lbu_action_give_magazineBundle"/>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="firstLBUPerkMaxLevelReached" operation="set" value="1"/> 
+			</effect_group>
 			<effect_group>
 				<!--remove the buff-->
 				<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffLBU_GiveProgressSkillPoint"/>
@@ -778,6 +828,8 @@
 					<requirement name="ProgressionLevel" progression_name="lbu_Gunslinger" operation="LT" value="@lbu_Gunslinger_Lvl"/> </triggered_effect>		
 				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Gunslinger_Lvl" operation="add" value="1">					
 					<requirement name="ProgressionLevel" progression_name="lbu_Gunslinger" operation="GT" value="@lbu_Gunslinger_Lvl"/> </triggered_effect>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="lbu_Cardio" level="1">
+					<requirement name="ProgressionLevel" progression_name="lbu_Cardio" operation="LT" value="@lbu_Cardio_Lvl"/> </triggered_effect>
 				<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="lbu_Archery" level="1">
 					<requirement name="ProgressionLevel" progression_name="lbu_Archery" operation="LT" value="@lbu_Archery_Lvl"/> </triggered_effect>
 				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Archery_Lvl" operation="add" value="1">					
@@ -794,6 +846,10 @@
 					<requirement name="ProgressionLevel" progression_name="lbu_Brawler" operation="LT" value="@lbu_Brawler_Lvl"/> </triggered_effect>	
 				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Brawler_Lvl" operation="add" value="1">
 					<requirement name="ProgressionLevel" progression_name="lbu_Brawler" operation="GT" value="@lbu_Brawler_Lvl"/> </triggered_effect>	
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="perkRuleOneCardio" level="1">
+					<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="LT" value="@lbu_Cardio_Lvl"/> </triggered_effect>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Cardio_Lvl" operation="add" value="1">					
+					<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="GT" value="@lbu_Cardio_Lvl"/> </triggered_effect>
 			</effect_group>
 			
 			<!--STRENGTH -->
@@ -854,6 +910,7 @@
 				<requirement name="ProgressionLevel" progression_name="lbu_Miner69er" operation="EQ" value="@lbu_Miner69er_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_Brawler" operation="EQ" value="@lbu_Brawler_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_MachineGunner" operation="EQ" value="@lbu_MachineGunner_Lvl"/> 
+				<requirement name="ProgressionLevel" progression_name="lbu_Cardio" operation="EQ" value="@lbu_Cardio_lvl"/>
 				<requirement name="ProgressionLevel" progression_name="lbu_Archery" operation="EQ" value="@lbu_Archery_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_Gunslinger" operation="EQ" value="@lbu_Gunslinger_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_DeepCuts" operation="EQ" value="@lbu_DeepCuts_Lvl"/> 
@@ -1142,6 +1199,33 @@
 					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="lbu_MachineGunner_Kill_XP" operation="add" value="@$lbu_Kill_Bonus_Total"> 
 						<requirement name="CVarCompare" cvar="lbu_Kill_Bonus" operation="GTE" value="1"/></triggered_effect> <!--only add bonus if turned on in the config-->
 					<!--END perkMachineGunner Perk to lbu_MachineGunner level set-->
+					
+					<!--START perkRuleOneCardio Perk to lbu_Cardio level set-->
+					<!--See DeadEye above for code comments-->	
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="0"/>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="1">
+						<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="Equals" value="1"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="2">
+						<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="Equals" value="2"/></triggered_effect>	
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="3">
+						<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="Equals" value="3"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="4">
+						<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="Equals" value="4"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="5">
+						<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="Equals" value="5"/></triggered_effect>	
+						
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Cardio_Use_XP" operation="set" value="@lbu_Cardio_Use_XP_Base"/> 
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$lbu_Kill_Bonus_Total" operation="set" value="0"> <!--0 if player has no points-->
+						<requirement name="CVarCompare" cvar="$lbu_PerkLevel" operation="LTE" value="0"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$lbu_Kill_Bonus_Total" operation="set" value="@lbu_Cardio_Use_XP_Base"> <!--see buffs for lbu_DeadEye_Kill_XP decription and intialisation-->
+						<requirement name="CVarCompare" cvar="$lbu_PerkLevel" operation="GTE" value="1"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$lbu_Kill_Bonus_Total" operation="multiply" value="@lbu_Kill_Bonus_Percent"> <!--see buffs for lbu_Kill_Bonus_Percent decription and intialisation-->
+						<requirement name="CVarCompare" cvar="$lbu_PerkLevel" operation="GTE" value="1"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$lbu_Kill_Bonus_Total" operation="multiply" value="@$lbu_PerkLevel"> <!--levels multiplier, number player points in Perk-->
+						<requirement name="CVarCompare" cvar="$lbu_PerkLevel" operation="GTE" value="1"/></triggered_effect>
+					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Cardio_Use_XP" operation="add" value="@$lbu_Kill_Bonus_Total"> 
+						<requirement name="CVarCompare" cvar="lbu_Kill_Bonus" operation="GTE" value="1"/></triggered_effect> <!--only add bonus if turned on in the config-->
+					<!--END perkRuleOneCardio Perk to lbu_Cardio level set-->
 					
 					<!--START perkArchery Perk to lbu_Archery level set-->
 					<!--See DeadEye above for code comments-->
@@ -1698,6 +1782,12 @@
 					<triggered_effect trigger="onSelfBuffUpdate" action="CallGameEvent" event="lbu_action_give_points">
 						<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="EQ" value="50"/>
 					</triggered_effect>
+					<!--when the Learn By Use Daring Adventurer Perk reaches max level, the player will be have access to the reset trader quests option
+						when talking to a trader if lbu_showTraderQuests set to 1 in the player's config settings.-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_traderQuestsEnabled" operation="add" value="1"> 
+						<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="EQ" value="50"/>
+					</triggered_effect>
+
 			</effect_group>
 			<effect_group>	
 				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$daringAdvloopCounter" operation="add" value="1"/>
@@ -2236,6 +2326,84 @@
 					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$luckylooterHitsTrigger" operation="set" value="0"/>
 			</effect_group>	
 		</buff>
+		
+		<!--This buff monitors xp for the learn by use Cardio skill.
+			Updates the perk progress if needed, tracks display value for 'xp to next level' for Cardio.
+			Has a loop where the code only runs every lbu_CardioStaminaCycle seconds (settable in config settings).
+			This counters a player jumping up and down (or other things) to increase learn by use cardio. As there are 
+			$cardioloopCounter seconds between updates. 
+			Cardio is also increased by using a lot of stamina. If a players stamina dips below lbu_CardioStaminaThreshold percent (settable in config settings)
+			of max stamina then Cardio xp is increased every $cardioloopCounter seconds it remains under lbu_CardioStaminaThreshold percent of the total stamina.
+			-->
+		<buff name="buffCardioXPMonitor" hidden="true" remove_on_death="false"  >
+			<stack_type value="ignore"/>
+			<!--uses a local var to loop around, only calculates changes every few updates-->
+			<effect_group>
+				<!--only check for cardio upadates every $cardioloopCounter seconds. -->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$cardioloopCounter" operation="set" value="0"/>
+				<!--trigerred when the player runs, jumps uses a lot of stamina in cycling or melee-->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$cardioTrigger" operation="set" value="0"/>
+			</effect_group>
+			<!--apply any Cardio level xp gain for run triggers-->
+			<effect_group>
+				<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="LT" value="100"/>
+					<triggered_effect trigger="onSelfRun" action="ModifyCVar" target="self" cvar="$cardioTrigger" operation="set" value="1"/>
+					<triggered_effect trigger="onSelfCrouchRun" action="ModifyCVar" target="self" cvar="$cardioTrigger" operation="set" value="1"/>
+					<triggered_effect trigger="onSelfJump" action="ModifyCVar" target="self" cvar="$cardioTrigger" operation="set" value="1"/>
+					<triggered_effect trigger="onSelfCrouchWalk" action="ModifyCVar" target="self" cvar="$cardioTrigger" operation="set" value="1"/>
+					<triggered_effect trigger="onSelfSwimRun" action="ModifyCVar" target="self" cvar="$cardioTrigger" operation="set" value="1"/>
+			</effect_group>		
+
+			<!--add xp if the players stamina is below a certain threshold every $cardioloopCounter amount of times-->
+			<effect_group>
+				<requirement name="CVarCompare" cvar="$cardioloopCounter" operation="GTE" value="@lbu_CardioStaminaCycle"/>
+				<requirement name="StatComparePercCurrentToMax" stat="Stamina" operation="LT" value="@lbu_CardioStaminaThreshold"/> 
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" target="self" cvar="$cardioTrigger" operation="set" value="1"/>
+					<!-- <requirement name="StatCompareCurrent" stat="Stamina" operation="GTE" value="20.1"/> -->
+			</effect_group>
+			<!--increase xp if trigger was set-->
+			<effect_group>
+				<requirement name="CVarCompare" cvar="$cardioloopCounter" operation="GTE" value="@lbu_CardioStaminaCycle"/>
+				<requirement name="CVarCompare" cvar="$cardioTrigger" operation="GTE" value="1"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" target="self" cvar="lbu_Cardio_XP" operation="add" value="@lbu_Cardio_Use_XP"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" target="self" cvar="$cardioTrigger" operation="set" value="0"/>
+			</effect_group> 
+			
+			<!--Increase ProgressLevel if xp greater than value for next level-->
+			<effect_group>
+				<requirement name="CVarCompare" cvar="$cardioloopCounter" operation="GTE" value="@lbu_CardioStaminaCycle"/>
+				<requirement name="CVarCompare" cvar="lbu_Cardio_XP" operation="GTE" value="@lbu_Cardio_XPIncrement"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_Cardio" operation="LT" value="50"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Cardio_XPIncrement" operation="multiply" value="@lbu_DefaultIncrementIncrease"> 
+						<!--taper off level xp increase at lbu_DefaultLevelCap-->
+						<requirement name="ProgressionLevel" progression_name="lbu_Cardio" operation="LTE" value="@lbu_DefaultLevelCap"/>
+					</triggered_effect>    
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Cardio_XP" operation="set" value="0"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="lbu_Cardio" level="1"/> 
+					<!--Upadate BCK var in line with ProgressionLevel progress-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Cardio_Lvl" operation="add" value="1"/> 
+					<triggered_effect trigger="onSelfBuffUpdate" action="ShowToolbeltMessage" message="Cardio Skill Increased!"/>
+					<!--if max level then give free Skill Point-->
+					<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffLBU_GiveProgressSkillPoint">
+						<requirement name="ProgressionLevel" progression_name="lbu_Cardio" operation="EQ" value="50"/>
+					</triggered_effect>
+			</effect_group>
+			
+			<!--updatethe display var that shows remaining xp to next level see Localization.txt:lbu_CardioName-->
+			<effect_group>
+				<requirement name="CVarCompare" cvar="$cardioloopCounter" operation="GTE" value="@lbu_CardioStaminaCycle"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_Cardio_LevelXP" operation="set" value="@lbu_Cardio_XPIncrement"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_Cardio_LevelXP" operation="subtract" value="@lbu_Cardio_XP"/>
+			</effect_group> 
+			<!--update counter and reset if max -->
+			<effect_group>	
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$cardioloopCounter" operation="add" value="1"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$cardioloopCounter" operation="set" value="0">
+					<requirement name="CVarCompare" cvar="$cardioloopCounter" operation="GT" value="@lbu_CardioStaminaCycle"/></triggered_effect>
+			</effect_group>
+			
+		</buff>
+		
 		<!--END PERK code for Learn By Use functionality-->
 		
 	</append>

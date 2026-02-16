@@ -32,6 +32,22 @@
 				<property name="text" value="Physician: Splints and Casts can now heal Sprains!" />
 			</action>
 		</action_sequence>
+		
+		<!--give the player 2 LBUMagazineReward objects (see items:[Magazine Bundles] comment for more info)-->
+		<action_sequence name="lbu_action_give_magazineBundle">
+			<action class="PlaySound">
+				<property name="sound" value="quest_restore_power_complete" />
+			</action>
+			<action class="AddItems">
+					<property name="added_items" value="LBUMagazineReward" />
+					<!--number of recipe item rewards to drop, each item can create a bundle of 5 magazines-->
+					<property name="added_item_counts" value="2" /> 
+			</action>
+			<action class="BeltTooltip">
+				<property name="text" value="Bonus: Perk Magazine Bundles" />
+			</action>
+		</action_sequence>
+		
 		<!--END Learn By Use Event code-->
 	</append>
 </configs>

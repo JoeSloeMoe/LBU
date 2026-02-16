@@ -876,6 +876,26 @@
 		</perk>
 		<!-- end Machine Gunner Learn By Use (lbu)-->
 		
+		<!-- begin Cardio Learn By Use (lbu)
+		See also buffs.xml:buffCardioXPMonitor for the progression increase code-->
+		<perk name="lbu_Cardio" max_level="100" parent="skillFortitudeRecovery" base_skill_point_cost="0" name_key="lbu_CardioName" desc_key="lbu_CardioDesc" long_desc_key="lbu_CardioDesc" icon="ui_game_symbol_cardio">
+
+			<!--BCK verify ProgressionLevel, backup var should always be equal to ProgessionLevel-->
+			<effect_group>
+				<requirement name="!HasBuff" buff="buffVerifyLBU_ProgressLevels"/>								
+				<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="NotEquals" value="@lbu_Cardio_Lvl"/> 
+					<triggered_effect trigger="onSelfDamagedOther" action="AddBuff" buff="buffVerifyLBU_ProgressLevels"/>
+			</effect_group>
+
+			<!--apply current effect as per level-->
+			<effect_group>
+					<passive_effect name="StaminaChangeOT" operation="perc_add" level="1,80" value=".05,.15" tags="running,swimmingRun"/> 
+					<passive_effect name="StaminaChangeOT" operation="perc_add" level="81,100" value=".15,.15" tags="running,swimmingRun"/> 
+					<passive_effect name="StaminaMax" operation="base_add" level="80,100" value="1,25"/>
+			</effect_group>
+			
+		</perk>
+		
 		<!-- begin Archery Learn By Use (lbu)-->
 		<perk name="lbu_Archery" max_level="50" parent="lbu_AgilitySkills" base_skill_point_cost="0" name_key="lbu_ArcheryName" desc_key="lbu_ArcheryDesc" long_desc_key="lbu_ArcheryDesc" icon="ui_game_symbol_archery">
 			
@@ -1505,6 +1525,10 @@
 	<set xpath="progression/perks/perk[@name='perkMachineGunner']/effect_group/passive_effect[@name='ReloadSpeedMultiplier' and @operation='perc_add']/@value">.05,.15</set>
 	<set xpath="progression/perks/perk[@name='perkMachineGunner']/effect_group/passive_effect[@name='RoundsPerMinute' and @operation='perc_add']/@value">0.03,0.13</set>	
 	
+	<!--Modify existing Cardio perk to halve stat increases per level-->	
+	<set xpath="progression/perks/perk[@name='perkRuleOneCardio']/effect_group/passive_effect[@name='StaminaChangeOT' and @operation='perc_add']/@value">.05,.1,.15,.15,.15</set>
+	<set xpath="progression/perks/perk[@name='perkRuleOneCardio']/effect_group/passive_effect[@name='StaminaMax' and @operation='base_add']/@value">13,25</set>
+
 	<!--Modify existing perkArchery - halving stat increases per level-->
 	<set xpath="progression/perks/perk[@name='perkArchery']/effect_group/passive_effect[@name='BlockDamage' and @operation='perc_add']/@value">.1,0.5</set>
 	<set xpath="progression/perks/perk[@name='perkArchery']/effect_group/passive_effect[@name='EntityDamage' and @operation='perc_add']/@value">.05,.25</set>

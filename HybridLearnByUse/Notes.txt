@@ -154,3 +154,11 @@ This modlet comes from the Survival No Trader mod.
   - Fixed bug where exploding arrows and bolts didn't contribute to Demolisher xp
   - Learn By Use Perks now show xp needed for next level
   - Small number of minor bug fixes
+  
+  2.0.7 15th Feb 2026
+  - Added Cardio Perk
+  - Added Functionality (configurable in buffs.xml "Player Config Settings" 
+         - Get a bonus Magazine Bundle when the first LBU Perk reaches max level. Use the magazine bundle for 10 magazines of any Learn By use Perk to increase the crafting skill for that Perk.  
+         - When LBU Daring Adventurer reaches max level the player can Reset Quests at the Traders.
+  - Fixed issue where Skilled Labourer Perk wasn't increasing learning rate properly.
+  - Couple small bug fixes
