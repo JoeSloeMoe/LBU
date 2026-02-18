@@ -846,10 +846,10 @@
 					<requirement name="ProgressionLevel" progression_name="lbu_Brawler" operation="LT" value="@lbu_Brawler_Lvl"/> </triggered_effect>	
 				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Brawler_Lvl" operation="add" value="1">
 					<requirement name="ProgressionLevel" progression_name="lbu_Brawler" operation="GT" value="@lbu_Brawler_Lvl"/> </triggered_effect>	
-				<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="perkRuleOneCardio" level="1">
-					<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="LT" value="@lbu_Cardio_Lvl"/> </triggered_effect>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddProgressionLevel" progression_name="lbu_Cardio" level="1">
+					<requirement name="ProgressionLevel" progression_name="lbu_Cardio" operation="LT" value="@lbu_Cardio_Lvl"/> </triggered_effect>
 				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_Cardio_Lvl" operation="add" value="1">					
-					<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="GT" value="@lbu_Cardio_Lvl"/> </triggered_effect>
+					<requirement name="ProgressionLevel" progression_name="lbu_Cardio" operation="GT" value="@lbu_Cardio_Lvl"/> </triggered_effect>
 			</effect_group>
 			
 			<!--STRENGTH -->
@@ -2346,7 +2346,7 @@
 			</effect_group>
 			<!--apply any Cardio level xp gain for run triggers-->
 			<effect_group>
-				<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="LT" value="100"/>
+				<requirement name="ProgressionLevel" progression_name="lbu_Cardio" operation="LT" value="100"/>
 					<triggered_effect trigger="onSelfRun" action="ModifyCVar" target="self" cvar="$cardioTrigger" operation="set" value="1"/>
 					<triggered_effect trigger="onSelfCrouchRun" action="ModifyCVar" target="self" cvar="$cardioTrigger" operation="set" value="1"/>
 					<triggered_effect trigger="onSelfJump" action="ModifyCVar" target="self" cvar="$cardioTrigger" operation="set" value="1"/>
@@ -2479,3 +2479,4 @@
 	<!--lbu demolition perk support code for molotovs-->
 	
 </configs>
+
