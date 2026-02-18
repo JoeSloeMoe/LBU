@@ -883,7 +883,7 @@
 			<!--BCK verify ProgressionLevel, backup var should always be equal to ProgessionLevel-->
 			<effect_group>
 				<requirement name="!HasBuff" buff="buffVerifyLBU_ProgressLevels"/>								
-				<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="NotEquals" value="@lbu_Cardio_Lvl"/> 
+				<requirement name="ProgressionLevel" progression_name="lbu_Cardio" operation="NotEquals" value="@lbu_Cardio_Lvl"/> 
 					<triggered_effect trigger="onSelfDamagedOther" action="AddBuff" buff="buffVerifyLBU_ProgressLevels"/>
 			</effect_group>
 
@@ -1627,4 +1627,5 @@
 
 
 </configs>
+
 
