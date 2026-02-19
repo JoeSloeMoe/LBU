@@ -225,7 +225,7 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_SkullCrusher_Kill_XP_Base" operation="set" value="20"/> <!--default: 20-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Brawler_Kill_XP_Base" operation="set" value="18"/> <!--default: 18-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_MachineGunner_Kill_XP_Base" operation="set" value="16"/> <!--default: 16-->
-			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Cardio_Use_XP_Base" operation="set" value="4.5"/> <!--default: 4.5-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Cardio_Use_XP_Base" operation="set" value="5"/> <!--default: 5-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Archery_Kill_XP_Base" operation="set" value="24"/> <!--default: 24-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_Gunslinger_Kill_XP_Base" operation="set" value="16"/> <!--default: 16-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="lbu_DeepCuts_Kill_XP_Base" operation="set" value="18"/> <!--default: 18-->
@@ -2479,4 +2479,5 @@
 	<!--lbu demolition perk support code for molotovs-->
 	
 </configs>
+
 
