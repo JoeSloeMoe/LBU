@@ -1788,7 +1788,7 @@
 						<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="EQ" value="50"/>
 					</triggered_effect>
 					<triggered_effect trigger="onSelfBuffUpdate" action="ShowToolbeltMessage" message="Bonus: Can now Reset Quests at traders!">
-						<requirement name="ProgressionLevel" progression_name="perkDaringAdventurer" operation="EQ" value="100"/>
+						<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="EQ" value="100"/>
 					</triggered_effect>
 			</effect_group>
 			<effect_group>	
@@ -2481,4 +2481,5 @@
 	<!--lbu demolition perk support code for molotovs-->
 	
 </configs>
+
 
