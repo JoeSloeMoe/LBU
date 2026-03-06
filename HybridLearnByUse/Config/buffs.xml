@@ -1213,7 +1213,7 @@
 						<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="Equals" value="4"/></triggered_effect>
 					<triggered_effect trigger="onSelfBuffStack" action="ModifyCVar" cvar="$lbu_PerkLevel" operation="set" value="5">
 						<requirement name="ProgressionLevel" progression_name="perkRuleOneCardio" operation="Equals" value="5"/></triggered_effect>	
-						
+					
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="lbu_Cardio_Use_XP" operation="set" value="@lbu_Cardio_Use_XP_Base"/> 
 					<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$lbu_Kill_Bonus_Total" operation="set" value="0"> <!--0 if player has no points-->
 						<requirement name="CVarCompare" cvar="$lbu_PerkLevel" operation="LTE" value="0"/></triggered_effect>
@@ -1787,7 +1787,9 @@
 					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_traderQuestsEnabled" operation="add" value="1"> 
 						<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="EQ" value="50"/>
 					</triggered_effect>
-
+					<triggered_effect trigger="onSelfBuffUpdate" action="ShowToolbeltMessage" message="Bonus: Can now Reset Quests at traders!">
+						<requirement name="ProgressionLevel" progression_name="perkDaringAdventurer" operation="EQ" value="100"/>
+					</triggered_effect>
 			</effect_group>
 			<effect_group>	
 				<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$daringAdvloopCounter" operation="add" value="1"/>
@@ -2479,5 +2481,4 @@
 	<!--lbu demolition perk support code for molotovs-->
 	
 </configs>
-
 
