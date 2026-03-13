@@ -1704,8 +1704,8 @@
 					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="perkBarteringLevelTrack" operation="set" value="0"/>
 			</effect_group>
 			<effect_group>
-				<passive_effect name="BarteringBuying" operation="base_add" value="@lbu_BarterPerkLevel"/>
-				<passive_effect name="BarteringSelling" operation="base_add" value="@lbu_BarterPerkLevel"/>
+				<passive_effect name="BarteringBuying" operation="perc_add" value="@lbu_BarterPerkLevel"/>
+				<passive_effect name="BarteringSelling" operation="perc_add" value="@lbu_BarterPerkLevel"/>
 			</effect_group>
 			<!--updatethe display var that shows remaining xp to next level see Localization.txt:lbu_BarteringName-->
 			<effect_group>
@@ -2481,5 +2481,6 @@
 	<!--lbu demolition perk support code for molotovs-->
 	
 </configs>
+
 
 
