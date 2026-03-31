@@ -162,3 +162,10 @@ This modlet comes from the Survival No Trader mod.
          - When LBU Daring Adventurer reaches max level the player can Reset Quests at the Traders.
   - Fixed issue where Skilled Labourer Perk wasn't increasing learning rate properly.
   - Couple small bug fixes
+  
+  2.0.8 30th March 2026
+  - Cumulative small bug fix updated
+  - Better Barter now has the proper buy/sell pricing buffs.
+  - Some Perks were still counting down 'remaining xp for next level' even though maxed. (Consmetic)
+  - Optimised monitoring code for several Perks.
+  - Corrected some minor coding bugs.
