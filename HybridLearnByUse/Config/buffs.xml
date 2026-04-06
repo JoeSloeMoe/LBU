@@ -453,10 +453,14 @@
 			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffCardioXPMonitor">
 				<requirement name="!HasBuff" buff="buffCardioXPMonitor"/>			
 			</triggered_effect>
+			
 			<!-- buffLbuBartering tracks selling items and increases buying and selling xp-->
 			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffLbuBartering">
 				<requirement name="!HasBuff" buff="buffLbuBartering"/>			
 			</triggered_effect>
+			<!--run the check on the bartering levels when each game starts to initialise-->
+			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="perkBarteringLevelTrack" operation="set" value="1"/>
+			
 			<!-- buffLbuDaringAdv tracks questing and Daring adventure xp-->
 			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffLbuDaringAdv">
 				<requirement name="!HasBuff" buff="buffLbuDaringAdv"/>			
@@ -1641,8 +1645,6 @@
 			<!--uses a local var to loop around, only calculates changes every 60 updates (30 seconds)-->
 			<effect_group>
 				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$barterloopCounter" operation="set" value="0"/>
-				<!--run the check on the bartering levels when each game starts to initialise-->
-				<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="perkBarteringLevelTrack" operation="set" value="1"/>
 			</effect_group>
 			<effect_group>
 				<requirement name="CVarCompare" cvar="$barterloopCounter" operation="Equals" value="60"/>
@@ -1701,14 +1703,14 @@
 				The range for bartering is 0.01 to 0.125 over 50 levels so each level is worth 0.0025, rounded to 0.003 for the calc-->
 			<effect_group>
 				<requirement name="CVarCompare" cvar="perkBarteringLevelTrack" operation="GTE" value="1"/>					
-					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_BarterPerkLevel" operation="set" value="@lbu_Bartering_Lvl"/>
-					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$lbu_BarterPerkLevel" operation="multiply" value="0.003"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_BarterPerkLevel" operation="set" value="@lbu_Bartering_Lvl"/>
+					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="lbu_BarterPerkLevel" operation="multiply" value="0.003"/>
 					<!--reset the trigger-->
 					<triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="perkBarteringLevelTrack" operation="set" value="0"/>
 			</effect_group>
 			<effect_group>
-				<passive_effect name="BarteringBuying" operation="perc_add" value="@lbu_BarterPerkLevel"/>
-				<passive_effect name="BarteringSelling" operation="perc_add" value="@lbu_BarterPerkLevel"/>
+				<passive_effect name="BarteringBuying" operation="base_add" value="@lbu_BarterPerkLevel"/>
+				<passive_effect name="BarteringSelling" operation="base_add" value="@lbu_BarterPerkLevel"/>
 			</effect_group>
 			<!--updatethe display var that shows remaining xp to next level see Localization.txt:lbu_BarteringName-->
 			<effect_group>
