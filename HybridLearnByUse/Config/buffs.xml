@@ -460,7 +460,7 @@
 			</triggered_effect>
 			<!--run the check on the bartering levels when each game starts to initialise-->
 			<triggered_effect trigger="onSelfEnteredGame" action="ModifyCVar" cvar="perkBarteringLevelTrack" operation="set" value="1"/>
-			
+				
 			<!-- buffLbuDaringAdv tracks questing and Daring adventure xp-->
 			<triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffLbuDaringAdv">
 				<requirement name="!HasBuff" buff="buffLbuDaringAdv"/>			

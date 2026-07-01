@@ -1,0 +1,10 @@
+<configs>
+	<!--change size of Perk name to fit 'xp to next level' text-->
+	<setattribute  xpath="templates/skill_entry/rect/sprite[@name='groupIcon']" name="pos">3,-3</setattribute><!--6,-3-->
+	<setattribute  xpath="templates/skill_entry/rect/label[@name='groupName']" name="pos">41,-20</setattribute><!--44, -20-->
+	<setattribute  xpath="templates/skill_entry/rect/label[@name='groupName']" name="font_size">22</setattribute>
+	<setattribute  xpath="templates/skill_entry/rect/label[@width='125' and @pos='486,-20']" name="font_size">22</setattribute>
+	<setattribute  xpath="templates/skill_entry/rect/label[@width='90' and @pos='593,-20']" name="font_size">22</setattribute>
+	<!--END change size of Perk name to fit 'xp to next level' text-->
+	
+</configs>
