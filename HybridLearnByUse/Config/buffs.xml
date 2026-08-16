@@ -923,8 +923,8 @@
 				<requirement name="ProgressionLevel" progression_name="lbu_Robotics" operation="EQ" value="@lbu_Robotics_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_Bartering" operation="EQ" value="@lbu_Bartering_Lvl"/> 
 				<requirement name="ProgressionLevel" progression_name="lbu_DaringAdv" operation="EQ" value="@lbu_DaringAdv_Lvl"/> 
-				<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="EQ" value="@lbu_Robotics_Lvl"/> 
-				<requirement name="ProgressionLevel" progression_name="lbu_LuckyLooter" operation="EQ" value="@lbu_Robotics_Lvl"/> 
+				<requirement name="ProgressionLevel" progression_name="lbu_Physician" operation="EQ" value="@lbu_Physician_Lvl"/> 
+				<requirement name="ProgressionLevel" progression_name="lbu_LuckyLooter" operation="EQ" value="@lbu_LuckyLooter_Lvl"/> 
 					<triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffVerifyLBU_ProgressLevels"/>
 					<triggered_effect trigger="onSelfBuffUpdate" action="ShowToolbeltMessage" message="LEARN BY USE: Progress levels verified!"/>
 					<!--when perk levels have changed for the Bartering perk, recalculate the buying and selling vars.
